@@ -27,7 +27,13 @@ body {
   font-family: var(--font-sans);
   font-size: 17px;
   line-height: 1.5;
+  -webkit-tap-highlight-color: transparent;
+  overscroll-behavior-y: none;
 }
+
+/* horizontal chip rows: swipe, no visible scrollbar */
+.no-scrollbar { scrollbar-width: none; }
+.no-scrollbar::-webkit-scrollbar { display: none; }
 
 :focus-visible {
   outline: 3px solid #f2a900;

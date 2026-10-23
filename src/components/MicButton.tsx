@@ -4,7 +4,7 @@ import { useRef, useState } from "react";
 import { WavRecorder } from "@/lib/wav";
 import { useSettings } from "@/lib/settings";
 
-export function MicButton({ onText }: { onText: (text: string) => void }) {
+export function MicButton({ onText, big = false }: { onText: (text: string) => void; big?: boolean }) {
   const { settings, t } = useSettings();
   const rec = useRef<WavRecorder | null>(null);
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -45,6 +45,25 @@ export function MicButton({ onText }: { onText: (text: string) => void }) {
     }
   };
 
+  const status = state === "recording" ? t("listening") : state === "sending" ? t("transcribing") : error ?? "";
+  if (big) {
+    return (
+      <div className="flex flex-col items-center gap-3">
+        <button
+          type="button"
+          onClick={state === "recording" ? stop : start}
+          disabled={state === "sending"}
+          aria-pressed={state === "recording"}
+          aria-label={state === "recording" ? t("stop") : t("speak")}
+          className={`flex h-28 w-28 items-center justify-center rounded-full text-5xl shadow-lg transition disabled:opacity-60 ${state === "recording" ? "animate-pulse bg-red-600 text-white ring-8 ring-red-200" : "bg-brand text-brand-ink ring-8 ring-emerald-100"}`}
+        >
+          <span aria-hidden>{state === "recording" ? "■" : "🎤"}</span>
+        </button>
+        <span className="min-h-6 text-base font-medium text-muted" aria-live="polite">{status || t("tap_speak")}</span>
+      </div>
+    );
+  }
+
   return (
     <div className="flex flex-col items-start gap-1">
       <button
@@ -52,13 +71,11 @@ export function MicButton({ onText }: { onText: (text: string) => void }) {
         onClick={state === "recording" ? stop : start}
         disabled={state === "sending"}
         aria-pressed={state === "recording"}
-        className={`rounded-xl px-4 py-3 font-semibold ${state === "recording" ? "animate-pulse bg-red-600 text-white" : "border border-line bg-card"}`}
+        className={`min-h-12 rounded-xl px-4 py-3 font-semibold ${state === "recording" ? "animate-pulse bg-red-600 text-white" : "border border-line bg-card"}`}
       >
         {state === "recording" ? `■ ${t("stop")}` : `🎤 ${t("speak")}`}
       </button>
-      <span className="text-sm text-muted" aria-live="polite">
-        {state === "recording" ? t("listening") : state === "sending" ? t("transcribing") : error ?? ""}
-      </span>
+      <span className="text-sm text-muted" aria-live="polite">{status}</span>
     </div>
   );
 }

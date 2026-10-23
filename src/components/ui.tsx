@@ -11,6 +11,11 @@ const STYLE: Record<VenueVerdict, { cls: string; icon: string }> = {
   fail: { cls: "bg-red-100 text-red-900 border-red-300", icon: "✕" },
 };
 
+// left-edge colour for cards, so the verdict reads at a glance while scrolling
+export const VERDICT_STRIPE: Record<VenueVerdict, string> = {
+  pass: "border-l-emerald-500", partial: "border-l-amber-500", unknown: "border-l-slate-400", risky: "border-l-orange-500", fail: "border-l-red-500",
+};
+
 export function VerdictBadge({ verdict, size = "md" }: { verdict: VenueVerdict | Verdict; size?: "sm" | "md" | "lg" }) {
   const { t } = useSettings();
   const s = STYLE[verdict as VenueVerdict];
@@ -43,7 +48,7 @@ export function PrimaryButton(props: React.ButtonHTMLAttributes<HTMLButtonElemen
   return (
     <button
       {...props}
-      className={`rounded-xl bg-brand px-5 py-3 text-base font-semibold text-brand-ink disabled:opacity-50 ${props.className ?? ""}`}
+      className={`min-h-12 rounded-xl bg-brand px-5 py-3 text-base font-semibold text-brand-ink disabled:opacity-50 ${props.className ?? ""}`}
     />
   );
 }

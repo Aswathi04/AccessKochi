@@ -3,7 +3,7 @@
 // Google's label in its own box, and "Help verify this place".
 import { use, useCallback, useEffect, useState } from "react";
 import { PhotoUpload } from "@/components/PhotoUpload";
-import { Card, ConfidenceTag, DummyBadge, VerdictBadge } from "@/components/ui";
+import { Card, ConfidenceTag, DummyBadge, VERDICT_STRIPE, VerdictBadge } from "@/components/ui";
 import { useSettings } from "@/lib/settings";
 import type { TrackResult, Venue, VenueResult } from "@/lib/types";
 
@@ -47,67 +47,73 @@ export default function VenuePage({ params }: { params: Promise<{ id: string }> 
 
   return (
     <div className="space-y-4">
-      <Card>
-        <div className="flex flex-wrap items-center gap-2">
-          <h1 className="text-2xl font-bold">{venue.name}</h1>
-          {venue.data_origin === "dummy" && <DummyBadge />}
-        </div>
-        {venue.name_ml && <p className="text-muted">{venue.name_ml}</p>}
-        <p className="text-muted">{venue.address}</p>
-        <div className="mt-3"><VerdictBadge verdict={result.verdict} size="lg" /></div>
-        {result.reasons.length > 0 && <ul className="mt-3 space-y-0.5">{result.reasons.map((r) => <li key={r} className="text-red-800">✕ {r}</li>)}</ul>}
-        {result.flags.map((f) => <p key={f.detail} className="mt-1 text-sm text-orange-800">⚑ {f.detail}</p>)}
-        {result.unconfirmed.length > 0 && (
-          <p className="mt-3 rounded-lg bg-amber-50 p-2 text-sm text-amber-900">⚠ {t("unconfirmed")}: {result.unconfirmed.join(", ")}</p>
-        )}
-        <div className="mt-3 flex flex-wrap gap-3 text-sm">
-          <a href={maps} target="_blank" rel="noreferrer" className="font-semibold text-brand underline">Google Maps ↗</a>
-          {venue.phone && <a href={`tel:${venue.phone.replace(/[^\d+]/g, "")}`} className="font-semibold text-brand underline">{t("call")} {venue.phone}</a>}
-        </div>
-      </Card>
+      <button type="button" onClick={() => history.back()} className="min-h-11 text-sm font-semibold text-brand">← {t("back")}</button>
+      <div className="grid gap-4 md:grid-cols-[minmax(0,3fr)_minmax(0,2fr)] md:items-start">
+        <div className="space-y-4">
+          <Card className={`border-l-8 ${VERDICT_STRIPE[result.verdict]}`}>
+            <div className="flex flex-wrap items-center gap-2">
+              <h1 className="text-2xl font-bold leading-tight">{venue.name}</h1>
+              {venue.data_origin === "dummy" && <DummyBadge />}
+            </div>
+            {venue.name_ml && <p className="text-muted">{venue.name_ml}</p>}
+            <p className="text-sm text-muted">{venue.address}</p>
+            <div className="mt-3"><VerdictBadge verdict={result.verdict} size="lg" /></div>
+            {result.reasons.length > 0 && <ul className="mt-3 space-y-0.5">{result.reasons.map((r) => <li key={r} className="text-red-800">✕ {r}</li>)}</ul>}
+            {result.flags.map((f) => <p key={f.detail} className="mt-1 text-sm text-orange-800">⚑ {f.detail}</p>)}
+            {result.unconfirmed.length > 0 && (
+              <p className="mt-3 rounded-xl bg-amber-50 p-3 text-sm text-amber-900">⚠ {t("unconfirmed")}: {result.unconfirmed.join(", ")}</p>
+            )}
+            <div className="mt-4 grid grid-cols-2 gap-2">
+              {venue.phone && (
+                <a href={`tel:${venue.phone.replace(/[^\d+]/g, "")}`} className="flex min-h-12 items-center justify-center rounded-xl bg-brand font-semibold text-brand-ink">📞 {t("call")}</a>
+              )}
+              <a href={maps} target="_blank" rel="noreferrer" className={`flex min-h-12 items-center justify-center rounded-xl border border-line font-semibold text-brand ${venue.phone ? "" : "col-span-2"}`}>🧭 {t("directions")}</a>
+            </div>
+          </Card>
 
-      <Card>
-        <div className="overflow-x-auto">
-          <table className="w-full min-w-[520px] text-left text-sm">
-            <thead>
-              <tr className="border-b border-line text-muted">
-                <th className="py-2 pr-2">{t("feature")}</th><th className="py-2 pr-2">{t("verdict")}</th>
-                <th className="py-2 pr-2">{t("host")}</th><th className="py-2">{t("visitor")}</th>
-              </tr>
-            </thead>
-            <tbody>
-              {result.features.map((f) => (
-                <tr key={f.feature} className="border-b border-line align-top">
-                  <td className="py-2 pr-2 font-medium">
-                    {t(`feature_${f.feature}` as const)}
-                    <div className="text-xs text-muted">{f.level}</div>
-                    {f.conflict && <div className="mt-1 text-xs font-semibold text-orange-700">⚑ {t("conflict")}</div>}
-                  </td>
-                  <td className="py-2 pr-2"><VerdictBadge verdict={f.verdict} size="sm" /></td>
-                  <td className="py-2 pr-2"><TrackCell tr={f.tracks.host} /></td>
-                  <td className="py-2"><TrackCell tr={f.tracks.visitor} /></td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+          <h2 className="pt-2 text-lg font-bold">{t("features_title")}</h2>
+          <ul className="space-y-3">
+            {result.features.map((f) => (
+              <li key={f.feature}>
+                <Card className={`border-l-8 ${VERDICT_STRIPE[f.verdict]}`}>
+                  <div className="flex flex-wrap items-center gap-2">
+                    <h3 className="mr-auto font-semibold">{t(`feature_${f.feature}` as const)}</h3>
+                    <VerdictBadge verdict={f.verdict} size="sm" />
+                  </div>
+                  <p className="text-xs text-muted">{f.level}</p>
+                  {f.conflict && <p className="mt-1 text-sm font-semibold text-orange-700">⚑ {t("conflict")}</p>}
+                  <div className="mt-3 grid grid-cols-2 gap-3 border-t border-line pt-3">
+                    <div><p className="mb-1 text-xs font-semibold uppercase tracking-wide text-muted">{t("host")}</p><TrackCell tr={f.tracks.host} /></div>
+                    <div><p className="mb-1 text-xs font-semibold uppercase tracking-wide text-muted">{t("visitor")}</p><TrackCell tr={f.tracks.visitor} /></div>
+                  </div>
+                </Card>
+              </li>
+            ))}
+          </ul>
         </div>
-      </Card>
 
-      <Card className="bg-slate-50">
-        <h2 className="font-semibold">{t("google_says")} {g.simulated && <span className="text-xs text-muted">(simulated)</span>}</h2>
-        <p className="mb-2 text-xs text-muted">{t("google_note")}</p>
-        <ul className="grid grid-cols-2 gap-1 text-sm">
-          {gRow("Wheelchair entrance", g.wheelchair_entrance)}
-          {gRow("Parking", g.wheelchair_parking)}
-          {gRow("Restroom", g.wheelchair_restroom)}
-          {gRow("Seating", g.wheelchair_seating)}
-        </ul>
-      </Card>
+        <div className="space-y-4">
+          <Card className="bg-slate-50">
+            <h2 className="font-semibold">{t("google_says")} {g.simulated && <span className="text-xs text-muted">(simulated)</span>}</h2>
+            <p className="mb-2 text-xs text-muted">{t("google_note")}</p>
+            <ul className="grid grid-cols-2 gap-1 text-sm">
+              {gRow("Wheelchair entrance", g.wheelchair_entrance)}
+              {gRow("Parking", g.wheelchair_parking)}
+              {gRow("Restroom", g.wheelchair_restroom)}
+              {gRow("Seating", g.wheelchair_seating)}
+            </ul>
+          </Card>
 
-      <Card>
-        <h2 className="mb-3 text-lg font-semibold">{t("help_verify")}</h2>
-        <PhotoUpload venueId={venue.id} onSaved={(r) => { setResult(r); load(); }} />
-      </Card>
+          <Card>
+            <details className="group">
+              <summary className="flex min-h-11 cursor-pointer list-none items-center text-lg font-semibold">
+                📷 {t("help_verify")}<span className="ml-auto text-muted transition group-open:rotate-180" aria-hidden>▾</span>
+              </summary>
+              <div className="mt-3"><PhotoUpload venueId={venue.id} onSaved={(r) => { setResult(r); load(); }} /></div>
+            </details>
+          </Card>
+        </div>
+      </div>
     </div>
   );
 }

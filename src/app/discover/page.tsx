@@ -2,7 +2,7 @@
 // Browse: venues ranked by verdict for this profile, then distance. Failing places hidden unless toggled.
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { Card, DummyBadge, VerdictBadge } from "@/components/ui";
+import { Card, DummyBadge, VERDICT_STRIPE, VerdictBadge } from "@/components/ui";
 import { useSettings } from "@/lib/settings";
 import type { Category, VenueResult } from "@/lib/types";
 
@@ -25,31 +25,31 @@ export default function DiscoverPage() {
 
   const chip = (label: string, on: boolean, onClick: () => void) => (
     <button type="button" onClick={onClick} aria-pressed={on}
-      className={`rounded-full border px-3 py-1 text-sm ${on ? "border-brand bg-brand text-brand-ink" : "border-line bg-card"}`}>{label}</button>
+      className={`min-h-11 shrink-0 rounded-full border px-4 text-sm font-medium ${on ? "border-brand bg-brand text-brand-ink" : "border-line bg-card"}`}>{label}</button>
   );
 
   return (
     <div className="space-y-4">
       <h1 className="text-2xl font-bold">{t("browse_title")}</h1>
-      <div className="flex flex-wrap gap-2">
+      <div className="no-scrollbar -mx-4 flex gap-2 overflow-x-auto px-4 md:mx-0 md:flex-wrap md:px-0">
         {chip(t("all"), cat === null, () => setCat(null))}
         {CATS.map((c) => chip(t(`cat_${c}` as const), cat === c, () => setCat(c)))}
       </div>
-      <label className="flex items-center gap-2 text-sm">
-        <input type="checkbox" className="h-5 w-5" checked={showExcluded} onChange={(e) => setShowExcluded(e.target.checked)} />
+      <label className="flex min-h-12 items-center gap-3 text-sm">
+        <input type="checkbox" className="h-6 w-6 accent-[var(--brand)]" checked={showExcluded} onChange={(e) => setShowExcluded(e.target.checked)} />
         {t("show_excluded")}
       </label>
       {!results ? <p className="text-muted">…</p> : (
-        <ul className="space-y-3">
+        <ul className="grid gap-3 md:grid-cols-2">
           {results.map((r) => (
             <li key={r.venue_id}>
-              <Link href={`/venue/${r.venue_id}`}>
-                <Card className="hover:border-brand">
+              <Link href={`/venue/${r.venue_id}`} className="block h-full">
+                <Card className={`h-full border-l-8 hover:border-brand ${VERDICT_STRIPE[r.verdict]}`}>
                   <div className="flex flex-wrap items-center gap-2">
-                    <h2 className="font-semibold">{r.name}</h2>
+                    <h2 className="mr-auto font-semibold">{r.name}</h2>
                     <VerdictBadge verdict={r.verdict} size="sm" />
                     <DummyBadge />
-                    {r.distance_km != null && <span className="ml-auto text-sm text-muted">{r.distance_km} {t("km")}</span>}
+                    {r.distance_km != null && <span className="text-sm text-muted">{r.distance_km} {t("km")}</span>}
                   </div>
                   {r.reasons[0] && <p className="mt-1 text-sm text-red-800">✕ {r.reasons[0]}</p>}
                   {r.unconfirmed.length > 0 && <p className="mt-1 text-sm text-amber-800">⚠ {r.unconfirmed.slice(0, 3).join(", ")}</p>}

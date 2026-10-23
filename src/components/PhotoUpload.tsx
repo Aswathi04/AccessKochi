@@ -80,7 +80,7 @@ export function PhotoUpload({ venueId, onSaved }: { venueId: string; onSaved: (r
     }
   };
 
-  const sel = "w-full rounded-xl border border-line px-3 py-2";
+  const sel = "mt-1 min-h-12 w-full rounded-xl border border-line bg-card px-3";
   return (
     <div className="space-y-3">
       <div className="grid gap-3 sm:grid-cols-2">
@@ -104,13 +104,13 @@ export function PhotoUpload({ venueId, onSaved }: { venueId: string; onSaved: (r
           <div className="text-sm">
             <p>{t("tilt")}</p>
             <p className="text-xs text-muted">{t("tilt_help")}</p>
-            <button type="button" onClick={readTilt} className="mt-1 rounded-lg border border-line px-3 py-1">{t("tilt_read")}</button>
+            <button type="button" onClick={readTilt} className="mt-1 min-h-11 rounded-lg border border-line px-4">{t("tilt_read")}</button>
             {tilt != null && <span className="ml-2 font-semibold">{tilt}°</span>}
           </div>
         )}
       </div>
 
-      <label className="block rounded-xl border-2 border-dashed border-line p-4 text-center">
+      <label className="block cursor-pointer rounded-xl border-2 border-dashed border-line p-6 text-center">
         <span className="font-medium">📷 {t("take_photo")}</span>
         <input type="file" accept="image/*" capture="environment" className="sr-only"
           onChange={(e) => {
