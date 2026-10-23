@@ -1,0 +1,2497 @@
+[
+  {
+    "google_place_id": null,
+    "data_origin": "dummy",
+    "id": "v01",
+    "name": "Periyar General Hospital",
+    "name_ml": "പെരിയാർ ജനറൽ ആശുപത്രി",
+    "category": "hospital",
+    "area": "Ernakulam North",
+    "address": "Hospital Road, Ernakulam North",
+    "lat": 9.9906,
+    "lng": 76.2876,
+    "phone": "+91 00000 00101 (demo)",
+    "floors": 3,
+    "upper_floor_areas": [
+      {
+        "name": "OP wards",
+        "floor": 1
+      },
+      {
+        "name": "Pharmacy",
+        "floor": 0
+      }
+    ],
+    "google_says": {
+      "wheelchair_entrance": true,
+      "wheelchair_parking": true,
+      "wheelchair_restroom": true,
+      "wheelchair_seating": true,
+      "simulated": true
+    },
+    "features": [
+      {
+        "feature": "entrance",
+        "track": "host",
+        "attributes": {
+          "step_count": 0,
+          "threshold_mm": 0,
+          "door_type": "automatic",
+          "door_width_mm": 1200,
+          "handrail": null
+        },
+        "reading_confidence": "medium",
+        "measurement_method": "reference_object",
+        "source_type": "ai_estimated",
+        "updated_at": "2026-10-20"
+      },
+      {
+        "feature": "entrance",
+        "track": "visitor",
+        "attributes": {
+          "step_count": 0,
+          "threshold_mm": 0,
+          "door_type": "automatic",
+          "door_width_mm": 1200,
+          "handrail": null
+        },
+        "reading_confidence": "medium",
+        "measurement_method": "visual_estimate",
+        "source_type": "ai_estimated",
+        "updated_at": "2026-10-15"
+      },
+      {
+        "feature": "lift",
+        "track": "host",
+        "attributes": {
+          "present": true,
+          "working": true,
+          "last_confirmed": "2026-10-12",
+          "car_w_mm": 1600,
+          "car_d_mm": 1600,
+          "door_mm": 1000
+        },
+        "reading_confidence": "medium",
+        "measurement_method": "reference_object",
+        "source_type": "ai_estimated",
+        "updated_at": "2026-10-20"
+      },
+      {
+        "feature": "lift",
+        "track": "visitor",
+        "attributes": {
+          "present": true,
+          "working": true,
+          "last_confirmed": "2026-10-09"
+        },
+        "reading_confidence": "medium",
+        "measurement_method": "visual_estimate",
+        "source_type": "ai_estimated",
+        "updated_at": "2026-10-09",
+        "note": "Lift verified working 2 weeks ago"
+      },
+      {
+        "feature": "toilet",
+        "track": "host",
+        "attributes": {
+          "accessible": true,
+          "wc_type": "western",
+          "width_mm": 2300,
+          "depth_mm": 2100,
+          "door_mm": 950,
+          "door_swing": "sliding",
+          "grab_bars": "both",
+          "transfer_space": true
+        },
+        "reading_confidence": "medium",
+        "measurement_method": "reference_object",
+        "source_type": "ai_estimated",
+        "updated_at": "2026-10-20"
+      },
+      {
+        "feature": "dropoff_path",
+        "track": "host",
+        "attributes": {
+          "dropoff_at_gate": true,
+          "distance_m": 20,
+          "step_free": true,
+          "surface": "firm",
+          "shaded": true,
+          "monsoon_risk": "low"
+        },
+        "reading_confidence": "medium",
+        "measurement_method": "reference_object",
+        "source_type": "ai_estimated",
+        "updated_at": "2026-10-20"
+      },
+      {
+        "feature": "parking",
+        "track": "host",
+        "attributes": {
+          "accessible_bay": true,
+          "distance_m": 20
+        },
+        "reading_confidence": "medium",
+        "measurement_method": "reference_object",
+        "source_type": "ai_estimated",
+        "updated_at": "2026-10-20"
+      },
+      {
+        "feature": "seating",
+        "track": "host",
+        "attributes": {
+          "rest_interval_m": 20,
+          "queue_seating": true,
+          "armrests": true
+        },
+        "reading_confidence": "medium",
+        "measurement_method": "reference_object",
+        "source_type": "ai_estimated",
+        "updated_at": "2026-10-20"
+      }
+    ]
+  },
+  {
+    "google_place_id": null,
+    "data_origin": "dummy",
+    "id": "v02",
+    "name": "Kakkanad Medical Centre",
+    "category": "hospital",
+    "area": "Kakkanad",
+    "address": "Seaport-Airport Road, Kakkanad",
+    "lat": 10.0159,
+    "lng": 76.3419,
+    "phone": "+91 00000 00102 (demo)",
+    "floors": 2,
+    "upper_floor_areas": [
+      {
+        "name": "Consultation rooms",
+        "floor": 1
+      }
+    ],
+    "google_says": {
+      "wheelchair_entrance": true,
+      "wheelchair_parking": null,
+      "wheelchair_restroom": true,
+      "wheelchair_seating": null,
+      "simulated": true
+    },
+    "features": [
+      {
+        "feature": "entrance",
+        "track": "host",
+        "attributes": {
+          "step_count": 4,
+          "threshold_mm": 0,
+          "door_type": "swing",
+          "door_width_mm": 1000,
+          "handrail": "both"
+        },
+        "reading_confidence": "medium",
+        "measurement_method": "reference_object",
+        "source_type": "ai_estimated",
+        "updated_at": "2026-10-20"
+      },
+      {
+        "feature": "ramp",
+        "track": "host",
+        "attributes": {
+          "present": true,
+          "slope_ratio": 12,
+          "width_mm": 1300,
+          "handrails": "both",
+          "surface": "firm",
+          "blocked": false
+        },
+        "reading_confidence": "medium",
+        "measurement_method": "reference_object",
+        "source_type": "ai_estimated",
+        "updated_at": "2026-10-20"
+      },
+      {
+        "feature": "ramp",
+        "track": "visitor",
+        "attributes": {
+          "present": true,
+          "slope_ratio": 8,
+          "width_mm": 1200,
+          "handrails": "both",
+          "surface": "firm",
+          "blocked": false
+        },
+        "reading_confidence": "high",
+        "measurement_method": "phone_tilt",
+        "source_type": "ai_estimated",
+        "updated_at": "2026-10-17",
+        "note": "Visitor tilt reading: about 1:8"
+      },
+      {
+        "feature": "lift",
+        "track": "host",
+        "attributes": {
+          "present": true,
+          "working": true,
+          "last_confirmed": "2026-10-12",
+          "car_w_mm": 1600,
+          "car_d_mm": 1600,
+          "door_mm": 1000
+        },
+        "reading_confidence": "medium",
+        "measurement_method": "reference_object",
+        "source_type": "ai_estimated",
+        "updated_at": "2026-10-20"
+      },
+      {
+        "feature": "toilet",
+        "track": "host",
+        "attributes": {
+          "accessible": true,
+          "wc_type": "western",
+          "width_mm": 2300,
+          "depth_mm": 2100,
+          "door_mm": 950,
+          "door_swing": "sliding",
+          "grab_bars": "both",
+          "transfer_space": true
+        },
+        "reading_confidence": "medium",
+        "measurement_method": "reference_object",
+        "source_type": "ai_estimated",
+        "updated_at": "2026-10-20"
+      },
+      {
+        "feature": "dropoff_path",
+        "track": "host",
+        "attributes": {
+          "dropoff_at_gate": true,
+          "distance_m": 20,
+          "step_free": true,
+          "surface": "firm",
+          "shaded": true,
+          "monsoon_risk": "low"
+        },
+        "reading_confidence": "medium",
+        "measurement_method": "reference_object",
+        "source_type": "ai_estimated",
+        "updated_at": "2026-10-20"
+      }
+    ]
+  },
+  {
+    "google_place_id": null,
+    "data_origin": "dummy",
+    "id": "v03",
+    "name": "Edappally Family Clinic",
+    "category": "hospital",
+    "area": "Edappally",
+    "address": "NH 66, Edappally",
+    "lat": 10.0261,
+    "lng": 76.3125,
+    "phone": "+91 00000 00103 (demo)",
+    "floors": 1,
+    "upper_floor_areas": [],
+    "google_says": {
+      "wheelchair_entrance": true,
+      "wheelchair_parking": null,
+      "wheelchair_restroom": null,
+      "wheelchair_seating": null,
+      "simulated": true
+    },
+    "features": [
+      {
+        "feature": "entrance",
+        "track": "host",
+        "attributes": {
+          "step_count": 0,
+          "threshold_mm": 5,
+          "door_type": "sliding",
+          "door_width_mm": 1000,
+          "handrail": null
+        },
+        "reading_confidence": "medium",
+        "measurement_method": "reference_object",
+        "source_type": "ai_estimated",
+        "updated_at": "2026-10-20"
+      },
+      {
+        "feature": "dropoff_path",
+        "track": "host",
+        "attributes": {
+          "dropoff_at_gate": true,
+          "distance_m": 20,
+          "step_free": true,
+          "surface": "firm",
+          "shaded": true,
+          "monsoon_risk": "low"
+        },
+        "reading_confidence": "medium",
+        "measurement_method": "reference_object",
+        "source_type": "ai_estimated",
+        "updated_at": "2026-10-20"
+      }
+    ]
+  },
+  {
+    "google_place_id": null,
+    "data_origin": "dummy",
+    "id": "v04",
+    "name": "Kakkanad Grand Convention Centre",
+    "name_ml": "കാക്കനാട് ഗ്രാൻഡ് കൺവെൻഷൻ സെന്റർ",
+    "category": "auditorium",
+    "area": "Kakkanad",
+    "address": "Infopark Road, Kakkanad",
+    "lat": 10.0105,
+    "lng": 76.3505,
+    "phone": "+91 00000 00104 (demo)",
+    "floors": 2,
+    "upper_floor_areas": [
+      {
+        "name": "Dining hall",
+        "floor": 1
+      }
+    ],
+    "popular": true,
+    "google_says": {
+      "wheelchair_entrance": true,
+      "wheelchair_parking": true,
+      "wheelchair_restroom": null,
+      "wheelchair_seating": null,
+      "simulated": true
+    },
+    "features": [
+      {
+        "feature": "entrance",
+        "track": "host",
+        "attributes": {
+          "step_count": 3,
+          "threshold_mm": 0,
+          "door_type": "open",
+          "door_width_mm": 2000,
+          "handrail": "both"
+        },
+        "reading_confidence": "medium",
+        "measurement_method": "reference_object",
+        "source_type": "ai_estimated",
+        "updated_at": "2026-10-20"
+      },
+      {
+        "feature": "ramp",
+        "track": "host",
+        "attributes": {
+          "present": true,
+          "slope_ratio": 12,
+          "width_mm": 1500,
+          "handrails": "both",
+          "surface": "firm",
+          "blocked": false
+        },
+        "reading_confidence": "medium",
+        "measurement_method": "reference_object",
+        "source_type": "ai_estimated",
+        "updated_at": "2026-10-20"
+      },
+      {
+        "feature": "ramp",
+        "track": "visitor",
+        "attributes": {
+          "present": true,
+          "slope_ratio": null,
+          "handrails": "both",
+          "surface": "firm"
+        },
+        "reading_confidence": "low",
+        "measurement_method": "visual_estimate",
+        "source_type": "ai_estimated",
+        "updated_at": "2026-10-14"
+      },
+      {
+        "feature": "lift",
+        "track": "visitor",
+        "attributes": {
+          "present": false,
+          "working": null,
+          "last_confirmed": "2026-10-14"
+        },
+        "reading_confidence": "medium",
+        "measurement_method": "visual_estimate",
+        "source_type": "ai_estimated",
+        "updated_at": "2026-10-14",
+        "note": "Dining hall is upstairs; only stairs seen"
+      },
+      {
+        "feature": "dropoff_path",
+        "track": "host",
+        "attributes": {
+          "dropoff_at_gate": true,
+          "distance_m": 20,
+          "step_free": true,
+          "surface": "firm",
+          "shaded": true,
+          "monsoon_risk": "low"
+        },
+        "reading_confidence": "medium",
+        "measurement_method": "reference_object",
+        "source_type": "ai_estimated",
+        "updated_at": "2026-10-20"
+      },
+      {
+        "feature": "parking",
+        "track": "host",
+        "attributes": {
+          "accessible_bay": true,
+          "distance_m": 20
+        },
+        "reading_confidence": "medium",
+        "measurement_method": "reference_object",
+        "source_type": "ai_estimated",
+        "updated_at": "2026-10-20"
+      }
+    ]
+  },
+  {
+    "google_place_id": null,
+    "data_origin": "dummy",
+    "id": "v05",
+    "name": "Vyttila Pearl Auditorium",
+    "category": "auditorium",
+    "area": "Vyttila",
+    "address": "Vyttila Junction",
+    "lat": 9.9687,
+    "lng": 76.318,
+    "phone": "+91 00000 00105 (demo)",
+    "floors": 1,
+    "upper_floor_areas": [],
+    "google_says": {
+      "wheelchair_entrance": true,
+      "wheelchair_parking": true,
+      "wheelchair_restroom": true,
+      "wheelchair_seating": true,
+      "simulated": true
+    },
+    "features": [
+      {
+        "feature": "entrance",
+        "track": "host",
+        "attributes": {
+          "step_count": 0,
+          "threshold_mm": 0,
+          "door_type": "automatic",
+          "door_width_mm": 1200,
+          "handrail": null
+        },
+        "reading_confidence": "medium",
+        "measurement_method": "reference_object",
+        "source_type": "ai_estimated",
+        "updated_at": "2026-10-20"
+      },
+      {
+        "feature": "toilet",
+        "track": "host",
+        "attributes": {
+          "accessible": true,
+          "wc_type": "western",
+          "width_mm": 2300,
+          "depth_mm": 2100,
+          "door_mm": 950,
+          "door_swing": "sliding",
+          "grab_bars": "both",
+          "transfer_space": true
+        },
+        "reading_confidence": "medium",
+        "measurement_method": "reference_object",
+        "source_type": "ai_estimated",
+        "updated_at": "2026-10-20"
+      },
+      {
+        "feature": "dropoff_path",
+        "track": "host",
+        "attributes": {
+          "dropoff_at_gate": true,
+          "distance_m": 20,
+          "step_free": true,
+          "surface": "firm",
+          "shaded": true,
+          "monsoon_risk": "low"
+        },
+        "reading_confidence": "medium",
+        "measurement_method": "reference_object",
+        "source_type": "ai_estimated",
+        "updated_at": "2026-10-20"
+      },
+      {
+        "feature": "parking",
+        "track": "host",
+        "attributes": {
+          "accessible_bay": true,
+          "distance_m": 20
+        },
+        "reading_confidence": "medium",
+        "measurement_method": "reference_object",
+        "source_type": "ai_estimated",
+        "updated_at": "2026-10-20"
+      },
+      {
+        "feature": "seating",
+        "track": "host",
+        "attributes": {
+          "rest_interval_m": 20,
+          "queue_seating": true,
+          "armrests": true
+        },
+        "reading_confidence": "medium",
+        "measurement_method": "reference_object",
+        "source_type": "ai_estimated",
+        "updated_at": "2026-10-20"
+      }
+    ]
+  },
+  {
+    "google_place_id": null,
+    "data_origin": "dummy",
+    "id": "v06",
+    "name": "Palarivattom Royal Hall",
+    "category": "auditorium",
+    "area": "Palarivattom",
+    "address": "Palarivattom Bypass",
+    "lat": 10.0033,
+    "lng": 76.3074,
+    "phone": "+91 00000 00106 (demo)",
+    "floors": 2,
+    "upper_floor_areas": [
+      {
+        "name": "Dining hall",
+        "floor": 1
+      }
+    ],
+    "google_says": {
+      "wheelchair_entrance": true,
+      "wheelchair_parking": null,
+      "wheelchair_restroom": true,
+      "wheelchair_seating": null,
+      "simulated": true
+    },
+    "features": [
+      {
+        "feature": "entrance",
+        "track": "host",
+        "attributes": {
+          "step_count": 2,
+          "threshold_mm": 0,
+          "door_type": "open",
+          "door_width_mm": 1800,
+          "handrail": "both"
+        },
+        "reading_confidence": "medium",
+        "measurement_method": "reference_object",
+        "source_type": "ai_estimated",
+        "updated_at": "2026-10-20"
+      },
+      {
+        "feature": "ramp",
+        "track": "host",
+        "attributes": {
+          "present": true,
+          "slope_ratio": 12,
+          "width_mm": 1200,
+          "handrails": "both",
+          "surface": "firm",
+          "blocked": false
+        },
+        "reading_confidence": "medium",
+        "measurement_method": "reference_object",
+        "source_type": "ai_estimated",
+        "updated_at": "2026-10-20"
+      },
+      {
+        "feature": "lift",
+        "track": "host",
+        "attributes": {
+          "present": true,
+          "working": true,
+          "last_confirmed": "2026-10-05",
+          "car_w_mm": 1500,
+          "car_d_mm": 1500,
+          "door_mm": 900
+        },
+        "reading_confidence": "medium",
+        "measurement_method": "reference_object",
+        "source_type": "ai_estimated",
+        "updated_at": "2026-10-20"
+      },
+      {
+        "feature": "toilet",
+        "track": "host",
+        "attributes": {
+          "accessible": true,
+          "wc_type": "western",
+          "width_mm": 2300,
+          "depth_mm": 2100,
+          "door_mm": 950,
+          "door_swing": "inward",
+          "grab_bars": "both",
+          "transfer_space": true
+        },
+        "reading_confidence": "medium",
+        "measurement_method": "reference_object",
+        "source_type": "ai_estimated",
+        "updated_at": "2026-10-20"
+      },
+      {
+        "feature": "dropoff_path",
+        "track": "host",
+        "attributes": {
+          "dropoff_at_gate": true,
+          "distance_m": 20,
+          "step_free": true,
+          "surface": "firm",
+          "shaded": true,
+          "monsoon_risk": "low"
+        },
+        "reading_confidence": "medium",
+        "measurement_method": "reference_object",
+        "source_type": "ai_estimated",
+        "updated_at": "2026-10-20"
+      }
+    ]
+  },
+  {
+    "google_place_id": null,
+    "data_origin": "dummy",
+    "id": "v07",
+    "name": "Kaloor Coffee House",
+    "category": "restaurant",
+    "area": "Kaloor",
+    "address": "Stadium Road, Kaloor",
+    "lat": 9.9973,
+    "lng": 76.299,
+    "phone": "+91 00000 00107 (demo)",
+    "floors": 1,
+    "upper_floor_areas": [],
+    "popular": true,
+    "google_says": {
+      "wheelchair_entrance": null,
+      "wheelchair_parking": null,
+      "wheelchair_restroom": null,
+      "wheelchair_seating": null,
+      "simulated": true
+    },
+    "features": [
+      {
+        "feature": "entrance",
+        "track": "host",
+        "attributes": {
+          "step_count": 3,
+          "threshold_mm": 0,
+          "door_type": "swing",
+          "door_width_mm": 900,
+          "handrail": "none"
+        },
+        "reading_confidence": "medium",
+        "measurement_method": "reference_object",
+        "source_type": "ai_estimated",
+        "updated_at": "2026-10-20"
+      },
+      {
+        "feature": "entrance",
+        "track": "visitor",
+        "attributes": {
+          "step_count": 3,
+          "handrail": "none"
+        },
+        "reading_confidence": "medium",
+        "measurement_method": "visual_estimate",
+        "source_type": "ai_estimated",
+        "updated_at": "2026-10-16"
+      },
+      {
+        "feature": "ramp",
+        "track": "visitor",
+        "attributes": {
+          "present": false
+        },
+        "reading_confidence": "medium",
+        "measurement_method": "visual_estimate",
+        "source_type": "ai_estimated",
+        "updated_at": "2026-10-16"
+      }
+    ]
+  },
+  {
+    "google_place_id": null,
+    "data_origin": "dummy",
+    "id": "v08",
+    "name": "Vyttila Spice Kitchen",
+    "category": "restaurant",
+    "area": "Vyttila",
+    "address": "Vyttila-Petta Road",
+    "lat": 9.9665,
+    "lng": 76.3205,
+    "phone": "+91 00000 00108 (demo)",
+    "floors": 1,
+    "upper_floor_areas": [],
+    "google_says": {
+      "wheelchair_entrance": true,
+      "wheelchair_parking": null,
+      "wheelchair_restroom": null,
+      "wheelchair_seating": null,
+      "simulated": true
+    },
+    "features": [
+      {
+        "feature": "entrance",
+        "track": "host",
+        "attributes": {
+          "step_count": 0,
+          "threshold_mm": 0,
+          "door_type": "swing",
+          "door_width_mm": 1000,
+          "handrail": null
+        },
+        "reading_confidence": "medium",
+        "measurement_method": "reference_object",
+        "source_type": "ai_estimated",
+        "updated_at": "2026-10-20"
+      },
+      {
+        "feature": "seating",
+        "track": "visitor",
+        "attributes": {
+          "rest_interval_m": null,
+          "queue_seating": null,
+          "armrests": true,
+          "table_knee_clearance": true
+        },
+        "reading_confidence": "medium",
+        "measurement_method": "visual_estimate",
+        "source_type": "ai_estimated",
+        "updated_at": "2026-10-20"
+      },
+      {
+        "feature": "dropoff_path",
+        "track": "host",
+        "attributes": {
+          "dropoff_at_gate": true,
+          "distance_m": 20,
+          "step_free": true,
+          "surface": "firm",
+          "shaded": true,
+          "monsoon_risk": "low"
+        },
+        "reading_confidence": "medium",
+        "measurement_method": "reference_object",
+        "source_type": "ai_estimated",
+        "updated_at": "2026-10-20"
+      }
+    ]
+  },
+  {
+    "google_place_id": null,
+    "data_origin": "dummy",
+    "id": "v09",
+    "name": "Kakkanad Biryani Point",
+    "category": "restaurant",
+    "area": "Kakkanad",
+    "address": "Collectorate Junction, Kakkanad",
+    "lat": 10.0142,
+    "lng": 76.3388,
+    "phone": "+91 00000 00109 (demo)",
+    "floors": 1,
+    "upper_floor_areas": [],
+    "google_says": {
+      "wheelchair_entrance": true,
+      "wheelchair_parking": null,
+      "wheelchair_restroom": true,
+      "wheelchair_seating": null,
+      "simulated": true
+    },
+    "features": [
+      {
+        "feature": "entrance",
+        "track": "host",
+        "attributes": {
+          "step_count": 0,
+          "threshold_mm": 0,
+          "door_type": "sliding",
+          "door_width_mm": 1100,
+          "handrail": null
+        },
+        "reading_confidence": "medium",
+        "measurement_method": "reference_object",
+        "source_type": "ai_estimated",
+        "updated_at": "2026-10-20"
+      },
+      {
+        "feature": "toilet",
+        "track": "host",
+        "attributes": {
+          "accessible": true,
+          "wc_type": "western",
+          "width_mm": 2300,
+          "depth_mm": 2100,
+          "door_mm": 950,
+          "door_swing": "sliding",
+          "grab_bars": "both",
+          "transfer_space": true
+        },
+        "reading_confidence": "medium",
+        "measurement_method": "reference_object",
+        "source_type": "ai_estimated",
+        "updated_at": "2026-10-20"
+      },
+      {
+        "feature": "toilet",
+        "track": "visitor",
+        "attributes": {
+          "accessible": true,
+          "wc_type": "western",
+          "grab_bars": "both"
+        },
+        "reading_confidence": "medium",
+        "measurement_method": "visual_estimate",
+        "source_type": "ai_estimated",
+        "updated_at": "2026-10-18"
+      },
+      {
+        "feature": "dropoff_path",
+        "track": "host",
+        "attributes": {
+          "dropoff_at_gate": true,
+          "distance_m": 20,
+          "step_free": true,
+          "surface": "firm",
+          "shaded": true,
+          "monsoon_risk": "low"
+        },
+        "reading_confidence": "medium",
+        "measurement_method": "reference_object",
+        "source_type": "ai_estimated",
+        "updated_at": "2026-10-20"
+      },
+      {
+        "feature": "seating",
+        "track": "host",
+        "attributes": {
+          "rest_interval_m": 20,
+          "queue_seating": true,
+          "armrests": true,
+          "table_knee_clearance": true
+        },
+        "reading_confidence": "medium",
+        "measurement_method": "reference_object",
+        "source_type": "ai_estimated",
+        "updated_at": "2026-10-20"
+      }
+    ]
+  },
+  {
+    "google_place_id": null,
+    "data_origin": "dummy",
+    "id": "v10",
+    "name": "MG Road Bistro",
+    "category": "restaurant",
+    "area": "MG Road",
+    "address": "MG Road, Ernakulam",
+    "lat": 9.9711,
+    "lng": 76.2852,
+    "phone": "+91 00000 00110 (demo)",
+    "floors": 1,
+    "upper_floor_areas": [],
+    "google_says": {
+      "wheelchair_entrance": null,
+      "wheelchair_parking": null,
+      "wheelchair_restroom": null,
+      "wheelchair_seating": null,
+      "simulated": true
+    },
+    "features": [
+      {
+        "feature": "entrance",
+        "track": "visitor",
+        "attributes": {
+          "step_count": 0,
+          "threshold_mm": null,
+          "door_type": "swing",
+          "door_width_mm": null,
+          "handrail": null
+        },
+        "reading_confidence": "low",
+        "measurement_method": "visual_estimate",
+        "source_type": "ai_estimated",
+        "updated_at": "2026-10-11",
+        "note": "One photo, no reference object"
+      },
+      {
+        "feature": "toilet",
+        "track": "visitor",
+        "attributes": {
+          "accessible": true,
+          "wc_type": "western",
+          "grab_bars": "both",
+          "transfer_space": true
+        },
+        "reading_confidence": "low",
+        "measurement_method": "visual_estimate",
+        "source_type": "ai_estimated",
+        "updated_at": "2026-10-11"
+      },
+      {
+        "feature": "dropoff_path",
+        "track": "visitor",
+        "attributes": {
+          "dropoff_at_gate": true,
+          "distance_m": 30,
+          "step_free": true,
+          "surface": "firm"
+        },
+        "reading_confidence": "low",
+        "measurement_method": "visual_estimate",
+        "source_type": "ai_estimated",
+        "updated_at": "2026-10-11"
+      }
+    ]
+  },
+  {
+    "google_place_id": null,
+    "data_origin": "dummy",
+    "id": "v11",
+    "name": "Edappally Tea & Snacks",
+    "category": "restaurant",
+    "area": "Edappally",
+    "address": "Edappally Toll",
+    "lat": 10.0225,
+    "lng": 76.3087,
+    "phone": "+91 00000 00111 (demo)",
+    "floors": 1,
+    "upper_floor_areas": [],
+    "google_says": {
+      "wheelchair_entrance": null,
+      "wheelchair_parking": null,
+      "wheelchair_restroom": null,
+      "wheelchair_seating": null,
+      "simulated": true
+    },
+    "features": [
+      {
+        "feature": "entrance",
+        "track": "visitor",
+        "attributes": {
+          "step_count": 1,
+          "threshold_mm": 0,
+          "door_type": "open",
+          "door_width_mm": 1200,
+          "handrail": "none"
+        },
+        "reading_confidence": "medium",
+        "measurement_method": "visual_estimate",
+        "source_type": "ai_estimated",
+        "updated_at": "2026-10-20"
+      },
+      {
+        "feature": "ramp",
+        "track": "visitor",
+        "attributes": {
+          "present": false
+        },
+        "reading_confidence": "medium",
+        "measurement_method": "visual_estimate",
+        "source_type": "ai_estimated",
+        "updated_at": "2026-10-20"
+      },
+      {
+        "feature": "toilet",
+        "track": "visitor",
+        "attributes": {
+          "accessible": true,
+          "wc_type": "western",
+          "grab_bars": "both",
+          "transfer_space": true
+        },
+        "reading_confidence": "medium",
+        "measurement_method": "visual_estimate",
+        "source_type": "ai_estimated",
+        "updated_at": "2026-10-20"
+      },
+      {
+        "feature": "dropoff_path",
+        "track": "visitor",
+        "attributes": {
+          "dropoff_at_gate": true,
+          "distance_m": 10,
+          "step_free": true,
+          "surface": "firm"
+        },
+        "reading_confidence": "medium",
+        "measurement_method": "visual_estimate",
+        "source_type": "ai_estimated",
+        "updated_at": "2026-10-20"
+      }
+    ]
+  },
+  {
+    "google_place_id": null,
+    "data_origin": "dummy",
+    "id": "v12",
+    "name": "Edappally Lake Mall",
+    "category": "mall",
+    "area": "Edappally",
+    "address": "NH 66, Edappally",
+    "lat": 10.0271,
+    "lng": 76.3083,
+    "phone": "+91 00000 00112 (demo)",
+    "floors": 4,
+    "upper_floor_areas": [
+      {
+        "name": "Food court",
+        "floor": 3
+      },
+      {
+        "name": "Cinema",
+        "floor": 3
+      }
+    ],
+    "google_says": {
+      "wheelchair_entrance": true,
+      "wheelchair_parking": true,
+      "wheelchair_restroom": true,
+      "wheelchair_seating": true,
+      "simulated": true
+    },
+    "features": [
+      {
+        "feature": "entrance",
+        "track": "host",
+        "attributes": {
+          "step_count": 0,
+          "threshold_mm": 0,
+          "door_type": "automatic",
+          "door_width_mm": 1200,
+          "handrail": null
+        },
+        "reading_confidence": "medium",
+        "measurement_method": "reference_object",
+        "source_type": "ai_estimated",
+        "updated_at": "2026-10-20"
+      },
+      {
+        "feature": "lift",
+        "track": "host",
+        "attributes": {
+          "present": true,
+          "working": true,
+          "last_confirmed": "2026-10-12",
+          "car_w_mm": 1600,
+          "car_d_mm": 1600,
+          "door_mm": 1000
+        },
+        "reading_confidence": "medium",
+        "measurement_method": "reference_object",
+        "source_type": "ai_estimated",
+        "updated_at": "2026-10-20"
+      },
+      {
+        "feature": "lift",
+        "track": "visitor",
+        "attributes": {
+          "present": true,
+          "working": true,
+          "last_confirmed": "2026-10-19"
+        },
+        "reading_confidence": "medium",
+        "measurement_method": "visual_estimate",
+        "source_type": "ai_estimated",
+        "updated_at": "2026-10-19"
+      },
+      {
+        "feature": "toilet",
+        "track": "host",
+        "attributes": {
+          "accessible": true,
+          "wc_type": "western",
+          "width_mm": 2300,
+          "depth_mm": 2100,
+          "door_mm": 950,
+          "door_swing": "sliding",
+          "grab_bars": "both",
+          "transfer_space": true
+        },
+        "reading_confidence": "medium",
+        "measurement_method": "reference_object",
+        "source_type": "ai_estimated",
+        "updated_at": "2026-10-20"
+      },
+      {
+        "feature": "dropoff_path",
+        "track": "host",
+        "attributes": {
+          "dropoff_at_gate": true,
+          "distance_m": 20,
+          "step_free": true,
+          "surface": "firm",
+          "shaded": true,
+          "monsoon_risk": "low"
+        },
+        "reading_confidence": "medium",
+        "measurement_method": "reference_object",
+        "source_type": "ai_estimated",
+        "updated_at": "2026-10-20"
+      },
+      {
+        "feature": "parking",
+        "track": "host",
+        "attributes": {
+          "accessible_bay": true,
+          "distance_m": 20
+        },
+        "reading_confidence": "medium",
+        "measurement_method": "reference_object",
+        "source_type": "ai_estimated",
+        "updated_at": "2026-10-20"
+      },
+      {
+        "feature": "seating",
+        "track": "host",
+        "attributes": {
+          "rest_interval_m": 20,
+          "queue_seating": true,
+          "armrests": true
+        },
+        "reading_confidence": "medium",
+        "measurement_method": "reference_object",
+        "source_type": "ai_estimated",
+        "updated_at": "2026-10-20"
+      }
+    ]
+  },
+  {
+    "google_place_id": null,
+    "data_origin": "dummy",
+    "id": "v13",
+    "name": "Marine Drive Shopping Arcade",
+    "category": "mall",
+    "area": "Marine Drive",
+    "address": "Marine Drive, Ernakulam",
+    "lat": 9.979,
+    "lng": 76.277,
+    "phone": "+91 00000 00113 (demo)",
+    "floors": 3,
+    "upper_floor_areas": [
+      {
+        "name": "Shops",
+        "floor": 1
+      },
+      {
+        "name": "Shops",
+        "floor": 2
+      }
+    ],
+    "google_says": {
+      "wheelchair_entrance": true,
+      "wheelchair_parking": null,
+      "wheelchair_restroom": null,
+      "wheelchair_seating": null,
+      "simulated": true
+    },
+    "features": [
+      {
+        "feature": "entrance",
+        "track": "host",
+        "attributes": {
+          "step_count": 0,
+          "threshold_mm": 0,
+          "door_type": "automatic",
+          "door_width_mm": 1200,
+          "handrail": null
+        },
+        "reading_confidence": "medium",
+        "measurement_method": "reference_object",
+        "source_type": "ai_estimated",
+        "updated_at": "2026-10-20"
+      },
+      {
+        "feature": "lift",
+        "track": "host",
+        "attributes": {
+          "present": true,
+          "working": true,
+          "last_confirmed": "2026-08-01",
+          "car_w_mm": 1600,
+          "car_d_mm": 1600,
+          "door_mm": 1000
+        },
+        "reading_confidence": "low",
+        "measurement_method": "self_reported",
+        "source_type": "unconfirmed",
+        "updated_at": "2026-08-01"
+      },
+      {
+        "feature": "lift",
+        "track": "visitor",
+        "attributes": {
+          "present": true,
+          "working": false,
+          "last_confirmed": "2026-10-18"
+        },
+        "reading_confidence": "medium",
+        "measurement_method": "visual_estimate",
+        "source_type": "ai_estimated",
+        "updated_at": "2026-10-18",
+        "note": "Out of order sign on lift"
+      },
+      {
+        "feature": "toilet",
+        "track": "host",
+        "attributes": {
+          "accessible": true,
+          "wc_type": "western",
+          "width_mm": 2300,
+          "depth_mm": 2100,
+          "door_mm": 950,
+          "door_swing": "sliding",
+          "grab_bars": "both",
+          "transfer_space": true
+        },
+        "reading_confidence": "medium",
+        "measurement_method": "reference_object",
+        "source_type": "ai_estimated",
+        "updated_at": "2026-10-20"
+      },
+      {
+        "feature": "dropoff_path",
+        "track": "host",
+        "attributes": {
+          "dropoff_at_gate": true,
+          "distance_m": 20,
+          "step_free": true,
+          "surface": "firm",
+          "shaded": true,
+          "monsoon_risk": "low"
+        },
+        "reading_confidence": "medium",
+        "measurement_method": "reference_object",
+        "source_type": "ai_estimated",
+        "updated_at": "2026-10-20"
+      }
+    ]
+  },
+  {
+    "google_place_id": null,
+    "data_origin": "dummy",
+    "id": "v14",
+    "name": "Kadavanthra Fresh Mart",
+    "category": "grocery",
+    "area": "Kadavanthra",
+    "address": "KP Vallon Road, Kadavanthra",
+    "lat": 9.9667,
+    "lng": 76.2992,
+    "phone": "+91 00000 00114 (demo)",
+    "floors": 1,
+    "upper_floor_areas": [],
+    "google_says": {
+      "wheelchair_entrance": null,
+      "wheelchair_parking": null,
+      "wheelchair_restroom": null,
+      "wheelchair_seating": null,
+      "simulated": true
+    },
+    "features": [
+      {
+        "feature": "entrance",
+        "track": "host",
+        "attributes": {
+          "step_count": 2,
+          "threshold_mm": 0,
+          "door_type": "swing",
+          "door_width_mm": 1000,
+          "handrail": "both"
+        },
+        "reading_confidence": "medium",
+        "measurement_method": "reference_object",
+        "source_type": "ai_estimated",
+        "updated_at": "2026-10-20",
+        "note": "Two low steps, handrails both sides"
+      },
+      {
+        "feature": "ramp",
+        "track": "host",
+        "attributes": {
+          "present": false
+        },
+        "reading_confidence": "medium",
+        "measurement_method": "reference_object",
+        "source_type": "ai_estimated",
+        "updated_at": "2026-10-20"
+      },
+      {
+        "feature": "dropoff_path",
+        "track": "host",
+        "attributes": {
+          "dropoff_at_gate": true,
+          "distance_m": 15,
+          "step_free": true,
+          "surface": "firm",
+          "shaded": true,
+          "monsoon_risk": "low"
+        },
+        "reading_confidence": "medium",
+        "measurement_method": "reference_object",
+        "source_type": "ai_estimated",
+        "updated_at": "2026-10-20"
+      },
+      {
+        "feature": "seating",
+        "track": "host",
+        "attributes": {
+          "rest_interval_m": null,
+          "queue_seating": true,
+          "armrests": false
+        },
+        "reading_confidence": "medium",
+        "measurement_method": "reference_object",
+        "source_type": "ai_estimated",
+        "updated_at": "2026-10-20"
+      }
+    ]
+  },
+  {
+    "google_place_id": null,
+    "data_origin": "dummy",
+    "id": "v15",
+    "name": "Kaloor Cinemas",
+    "category": "theatre",
+    "area": "Kaloor",
+    "address": "Banerji Road, Kaloor",
+    "lat": 9.9946,
+    "lng": 76.2925,
+    "phone": "+91 00000 00115 (demo)",
+    "floors": 3,
+    "upper_floor_areas": [
+      {
+        "name": "Screens",
+        "floor": 2
+      }
+    ],
+    "google_says": {
+      "wheelchair_entrance": true,
+      "wheelchair_parking": true,
+      "wheelchair_restroom": true,
+      "wheelchair_seating": true,
+      "simulated": true
+    },
+    "features": [
+      {
+        "feature": "entrance",
+        "track": "host",
+        "attributes": {
+          "step_count": 0,
+          "threshold_mm": 0,
+          "door_type": "automatic",
+          "door_width_mm": 1200,
+          "handrail": null
+        },
+        "reading_confidence": "medium",
+        "measurement_method": "reference_object",
+        "source_type": "ai_estimated",
+        "updated_at": "2026-10-20"
+      },
+      {
+        "feature": "lift",
+        "track": "host",
+        "attributes": {
+          "present": true,
+          "working": true,
+          "last_confirmed": "2026-10-12",
+          "car_w_mm": 1600,
+          "car_d_mm": 1600,
+          "door_mm": 1000
+        },
+        "reading_confidence": "medium",
+        "measurement_method": "reference_object",
+        "source_type": "ai_estimated",
+        "updated_at": "2026-10-20"
+      },
+      {
+        "feature": "toilet",
+        "track": "host",
+        "attributes": {
+          "accessible": true,
+          "wc_type": "western",
+          "width_mm": 2300,
+          "depth_mm": 2100,
+          "door_mm": 950,
+          "door_swing": "sliding",
+          "grab_bars": "both",
+          "transfer_space": true
+        },
+        "reading_confidence": "medium",
+        "measurement_method": "reference_object",
+        "source_type": "ai_estimated",
+        "updated_at": "2026-10-20"
+      },
+      {
+        "feature": "dropoff_path",
+        "track": "host",
+        "attributes": {
+          "dropoff_at_gate": false,
+          "distance_m": 400,
+          "step_free": true,
+          "surface": "firm",
+          "shaded": false,
+          "monsoon_risk": "low"
+        },
+        "reading_confidence": "medium",
+        "measurement_method": "reference_object",
+        "source_type": "ai_estimated",
+        "updated_at": "2026-10-20",
+        "note": "Drop-off only at the parking lot across the road"
+      },
+      {
+        "feature": "parking",
+        "track": "host",
+        "attributes": {
+          "accessible_bay": true,
+          "distance_m": 380
+        },
+        "reading_confidence": "medium",
+        "measurement_method": "reference_object",
+        "source_type": "ai_estimated",
+        "updated_at": "2026-10-20"
+      },
+      {
+        "feature": "seating",
+        "track": "host",
+        "attributes": {
+          "rest_interval_m": 50,
+          "queue_seating": false,
+          "armrests": true
+        },
+        "reading_confidence": "medium",
+        "measurement_method": "reference_object",
+        "source_type": "ai_estimated",
+        "updated_at": "2026-10-20"
+      }
+    ]
+  },
+  {
+    "google_place_id": null,
+    "data_origin": "dummy",
+    "id": "v16",
+    "name": "Edappally Metro Station",
+    "category": "metro",
+    "area": "Edappally",
+    "address": "Edappally Junction",
+    "lat": 10.0249,
+    "lng": 76.3083,
+    "phone": "+91 00000 00116 (demo)",
+    "floors": 2,
+    "upper_floor_areas": [
+      {
+        "name": "Platform",
+        "floor": 1
+      }
+    ],
+    "google_says": {
+      "wheelchair_entrance": true,
+      "wheelchair_parking": null,
+      "wheelchair_restroom": true,
+      "wheelchair_seating": null,
+      "simulated": true
+    },
+    "features": [
+      {
+        "feature": "entrance",
+        "track": "host",
+        "attributes": {
+          "step_count": 0,
+          "threshold_mm": 0,
+          "door_type": "open",
+          "door_width_mm": 1200,
+          "handrail": null
+        },
+        "reading_confidence": "medium",
+        "measurement_method": "reference_object",
+        "source_type": "ai_estimated",
+        "updated_at": "2026-10-20",
+        "note": "Step-free via Exit B"
+      },
+      {
+        "feature": "lift",
+        "track": "host",
+        "attributes": {
+          "present": true,
+          "working": true,
+          "last_confirmed": "2026-10-18",
+          "car_w_mm": 1600,
+          "car_d_mm": 1600,
+          "door_mm": 1000
+        },
+        "reading_confidence": "medium",
+        "measurement_method": "reference_object",
+        "source_type": "ai_estimated",
+        "updated_at": "2026-10-18",
+        "note": "Lift at Exit B"
+      },
+      {
+        "feature": "toilet",
+        "track": "host",
+        "attributes": {
+          "accessible": true,
+          "wc_type": "western",
+          "width_mm": 2300,
+          "depth_mm": 2100,
+          "door_mm": 950,
+          "door_swing": "sliding",
+          "grab_bars": "both",
+          "transfer_space": true
+        },
+        "reading_confidence": "medium",
+        "measurement_method": "reference_object",
+        "source_type": "ai_estimated",
+        "updated_at": "2026-10-20"
+      },
+      {
+        "feature": "dropoff_path",
+        "track": "host",
+        "attributes": {
+          "dropoff_at_gate": true,
+          "distance_m": 20,
+          "step_free": true,
+          "surface": "firm",
+          "shaded": true,
+          "monsoon_risk": "low"
+        },
+        "reading_confidence": "medium",
+        "measurement_method": "reference_object",
+        "source_type": "ai_estimated",
+        "updated_at": "2026-10-20"
+      }
+    ]
+  },
+  {
+    "google_place_id": null,
+    "data_origin": "dummy",
+    "id": "v17",
+    "name": "Vyttila Metro Station",
+    "category": "metro",
+    "area": "Vyttila",
+    "address": "Vyttila Hub",
+    "lat": 9.9671,
+    "lng": 76.3207,
+    "phone": "+91 00000 00117 (demo)",
+    "floors": 2,
+    "upper_floor_areas": [
+      {
+        "name": "Platform",
+        "floor": 1
+      }
+    ],
+    "google_says": {
+      "wheelchair_entrance": true,
+      "wheelchair_parking": null,
+      "wheelchair_restroom": true,
+      "wheelchair_seating": null,
+      "simulated": true
+    },
+    "features": [
+      {
+        "feature": "entrance",
+        "track": "host",
+        "attributes": {
+          "step_count": 0,
+          "threshold_mm": 0,
+          "door_type": "open",
+          "door_width_mm": 1200,
+          "handrail": null
+        },
+        "reading_confidence": "medium",
+        "measurement_method": "reference_object",
+        "source_type": "ai_estimated",
+        "updated_at": "2026-10-20"
+      },
+      {
+        "feature": "lift",
+        "track": "host",
+        "attributes": {
+          "present": true,
+          "working": true,
+          "last_confirmed": "2026-10-12",
+          "car_w_mm": 1600,
+          "car_d_mm": 1600,
+          "door_mm": 1000
+        },
+        "reading_confidence": "medium",
+        "measurement_method": "reference_object",
+        "source_type": "ai_estimated",
+        "updated_at": "2026-10-20"
+      },
+      {
+        "feature": "toilet",
+        "track": "host",
+        "attributes": {
+          "accessible": true,
+          "wc_type": "western",
+          "width_mm": 2300,
+          "depth_mm": 2100,
+          "door_mm": 950,
+          "door_swing": "sliding",
+          "grab_bars": "both",
+          "transfer_space": true
+        },
+        "reading_confidence": "medium",
+        "measurement_method": "reference_object",
+        "source_type": "ai_estimated",
+        "updated_at": "2026-10-20"
+      },
+      {
+        "feature": "dropoff_path",
+        "track": "host",
+        "attributes": {
+          "dropoff_at_gate": true,
+          "distance_m": 20,
+          "step_free": true,
+          "surface": "firm",
+          "shaded": true,
+          "monsoon_risk": "low"
+        },
+        "reading_confidence": "medium",
+        "measurement_method": "reference_object",
+        "source_type": "ai_estimated",
+        "updated_at": "2026-10-20"
+      }
+    ]
+  },
+  {
+    "google_place_id": null,
+    "data_origin": "dummy",
+    "id": "v18",
+    "name": "Palarivattom Metro Station",
+    "category": "metro",
+    "area": "Palarivattom",
+    "address": "Palarivattom Junction",
+    "lat": 10.0042,
+    "lng": 76.3066,
+    "phone": "+91 00000 00118 (demo)",
+    "floors": 2,
+    "upper_floor_areas": [
+      {
+        "name": "Platform",
+        "floor": 1
+      }
+    ],
+    "google_says": {
+      "wheelchair_entrance": true,
+      "wheelchair_parking": null,
+      "wheelchair_restroom": null,
+      "wheelchair_seating": null,
+      "simulated": true
+    },
+    "features": [
+      {
+        "feature": "entrance",
+        "track": "host",
+        "attributes": {
+          "step_count": 0,
+          "threshold_mm": 0,
+          "door_type": "open",
+          "door_width_mm": 1200,
+          "handrail": null
+        },
+        "reading_confidence": "medium",
+        "measurement_method": "reference_object",
+        "source_type": "ai_estimated",
+        "updated_at": "2026-10-20"
+      },
+      {
+        "feature": "lift",
+        "track": "host",
+        "attributes": {
+          "present": true,
+          "working": null,
+          "last_confirmed": null
+        },
+        "reading_confidence": "low",
+        "measurement_method": "self_reported",
+        "source_type": "unconfirmed",
+        "updated_at": "2026-06-01"
+      },
+      {
+        "feature": "dropoff_path",
+        "track": "host",
+        "attributes": {
+          "dropoff_at_gate": true,
+          "distance_m": 20,
+          "step_free": true,
+          "surface": "firm",
+          "shaded": true,
+          "monsoon_risk": "low"
+        },
+        "reading_confidence": "medium",
+        "measurement_method": "reference_object",
+        "source_type": "ai_estimated",
+        "updated_at": "2026-10-20"
+      }
+    ]
+  },
+  {
+    "google_place_id": null,
+    "data_origin": "dummy",
+    "id": "v19",
+    "name": "MG Road Metro Station",
+    "category": "metro",
+    "area": "MG Road",
+    "address": "MG Road, Ernakulam",
+    "lat": 9.9734,
+    "lng": 76.2843,
+    "phone": "+91 00000 00119 (demo)",
+    "floors": 2,
+    "upper_floor_areas": [
+      {
+        "name": "Platform",
+        "floor": 1
+      }
+    ],
+    "google_says": {
+      "wheelchair_entrance": true,
+      "wheelchair_parking": null,
+      "wheelchair_restroom": true,
+      "wheelchair_seating": null,
+      "simulated": true
+    },
+    "features": [
+      {
+        "feature": "entrance",
+        "track": "host",
+        "attributes": {
+          "step_count": 0,
+          "threshold_mm": 0,
+          "door_type": "open",
+          "door_width_mm": 1200,
+          "handrail": null
+        },
+        "reading_confidence": "medium",
+        "measurement_method": "reference_object",
+        "source_type": "ai_estimated",
+        "updated_at": "2026-10-20"
+      },
+      {
+        "feature": "lift",
+        "track": "host",
+        "attributes": {
+          "present": true,
+          "working": true,
+          "last_confirmed": "2026-10-12",
+          "car_w_mm": 1600,
+          "car_d_mm": 1600,
+          "door_mm": 1000
+        },
+        "reading_confidence": "medium",
+        "measurement_method": "reference_object",
+        "source_type": "ai_estimated",
+        "updated_at": "2026-10-20"
+      },
+      {
+        "feature": "toilet",
+        "track": "host",
+        "attributes": {
+          "accessible": true,
+          "wc_type": "western",
+          "width_mm": 2300,
+          "depth_mm": 2100,
+          "door_mm": 950,
+          "door_swing": "sliding",
+          "grab_bars": "both",
+          "transfer_space": true
+        },
+        "reading_confidence": "medium",
+        "measurement_method": "reference_object",
+        "source_type": "ai_estimated",
+        "updated_at": "2026-10-20"
+      },
+      {
+        "feature": "dropoff_path",
+        "track": "host",
+        "attributes": {
+          "dropoff_at_gate": true,
+          "distance_m": 20,
+          "step_free": true,
+          "surface": "firm",
+          "shaded": true,
+          "monsoon_risk": "low"
+        },
+        "reading_confidence": "medium",
+        "measurement_method": "reference_object",
+        "source_type": "ai_estimated",
+        "updated_at": "2026-10-20"
+      }
+    ]
+  },
+  {
+    "google_place_id": null,
+    "data_origin": "dummy",
+    "id": "v20",
+    "name": "Vyttila Water Metro Terminal",
+    "category": "water_metro",
+    "area": "Vyttila",
+    "address": "Vyttila Mobility Hub",
+    "lat": 9.9663,
+    "lng": 76.3226,
+    "phone": "+91 00000 00120 (demo)",
+    "floors": 1,
+    "upper_floor_areas": [],
+    "google_says": {
+      "wheelchair_entrance": true,
+      "wheelchair_parking": null,
+      "wheelchair_restroom": null,
+      "wheelchair_seating": null,
+      "simulated": true
+    },
+    "features": [
+      {
+        "feature": "entrance",
+        "track": "host",
+        "attributes": {
+          "step_count": 1,
+          "threshold_mm": 0,
+          "door_type": "open",
+          "door_width_mm": 1500,
+          "handrail": "both"
+        },
+        "reading_confidence": "medium",
+        "measurement_method": "reference_object",
+        "source_type": "ai_estimated",
+        "updated_at": "2026-10-20",
+        "note": "Step down onto the jetty"
+      },
+      {
+        "feature": "ramp",
+        "track": "host",
+        "attributes": {
+          "present": true,
+          "slope_ratio": 12,
+          "width_mm": 1500,
+          "handrails": "both",
+          "surface": "slippery",
+          "blocked": false
+        },
+        "reading_confidence": "high",
+        "measurement_method": "phone_tilt",
+        "source_type": "ai_estimated",
+        "updated_at": "2026-10-20",
+        "note": "Gangway angle changes with the tide; wet in rain"
+      },
+      {
+        "feature": "toilet",
+        "track": "host",
+        "attributes": {
+          "accessible": true,
+          "wc_type": "western",
+          "width_mm": 2300,
+          "depth_mm": 2100,
+          "door_mm": 950,
+          "door_swing": "sliding",
+          "grab_bars": "both",
+          "transfer_space": true
+        },
+        "reading_confidence": "medium",
+        "measurement_method": "reference_object",
+        "source_type": "ai_estimated",
+        "updated_at": "2026-10-20"
+      },
+      {
+        "feature": "dropoff_path",
+        "track": "host",
+        "attributes": {
+          "dropoff_at_gate": true,
+          "distance_m": 20,
+          "step_free": true,
+          "surface": "firm",
+          "shaded": true,
+          "monsoon_risk": "medium"
+        },
+        "reading_confidence": "medium",
+        "measurement_method": "reference_object",
+        "source_type": "ai_estimated",
+        "updated_at": "2026-10-20"
+      }
+    ]
+  },
+  {
+    "google_place_id": null,
+    "data_origin": "dummy",
+    "id": "v21",
+    "name": "District Office Complex, Kakkanad",
+    "category": "government",
+    "area": "Kakkanad",
+    "address": "Civil Station Road, Kakkanad",
+    "lat": 10.0167,
+    "lng": 76.3395,
+    "phone": "+91 00000 00121 (demo)",
+    "floors": 3,
+    "upper_floor_areas": [
+      {
+        "name": "Offices",
+        "floor": 1
+      },
+      {
+        "name": "Offices",
+        "floor": 2
+      }
+    ],
+    "google_says": {
+      "wheelchair_entrance": true,
+      "wheelchair_parking": null,
+      "wheelchair_restroom": null,
+      "wheelchair_seating": null,
+      "simulated": true
+    },
+    "features": [
+      {
+        "feature": "entrance",
+        "track": "host",
+        "attributes": {
+          "step_count": 5,
+          "threshold_mm": 0,
+          "door_type": "swing",
+          "door_width_mm": 1200,
+          "handrail": "both"
+        },
+        "reading_confidence": "medium",
+        "measurement_method": "reference_object",
+        "source_type": "ai_estimated",
+        "updated_at": "2026-10-20"
+      },
+      {
+        "feature": "ramp",
+        "track": "host",
+        "attributes": {
+          "present": true,
+          "slope_ratio": 12,
+          "width_mm": 1200,
+          "handrails": "both",
+          "surface": "firm",
+          "blocked": false
+        },
+        "reading_confidence": "medium",
+        "measurement_method": "reference_object",
+        "source_type": "ai_estimated",
+        "updated_at": "2026-10-20"
+      },
+      {
+        "feature": "ramp",
+        "track": "visitor",
+        "attributes": {
+          "present": true,
+          "blocked": true
+        },
+        "reading_confidence": "medium",
+        "measurement_method": "visual_estimate",
+        "source_type": "ai_estimated",
+        "updated_at": "2026-10-18",
+        "note": "Ramp gate locked; bikes parked on it"
+      },
+      {
+        "feature": "lift",
+        "track": "host",
+        "attributes": {
+          "present": true,
+          "working": true,
+          "last_confirmed": "2026-10-12",
+          "car_w_mm": 1600,
+          "car_d_mm": 1600,
+          "door_mm": 1000
+        },
+        "reading_confidence": "medium",
+        "measurement_method": "reference_object",
+        "source_type": "ai_estimated",
+        "updated_at": "2026-10-20"
+      },
+      {
+        "feature": "toilet",
+        "track": "host",
+        "attributes": {
+          "accessible": true,
+          "wc_type": "western",
+          "width_mm": 2300,
+          "depth_mm": 2100,
+          "door_mm": 950,
+          "door_swing": "sliding",
+          "grab_bars": "both",
+          "transfer_space": true
+        },
+        "reading_confidence": "medium",
+        "measurement_method": "reference_object",
+        "source_type": "ai_estimated",
+        "updated_at": "2026-10-20"
+      },
+      {
+        "feature": "dropoff_path",
+        "track": "host",
+        "attributes": {
+          "dropoff_at_gate": true,
+          "distance_m": 20,
+          "step_free": true,
+          "surface": "firm",
+          "shaded": true,
+          "monsoon_risk": "low"
+        },
+        "reading_confidence": "medium",
+        "measurement_method": "reference_object",
+        "source_type": "ai_estimated",
+        "updated_at": "2026-10-20"
+      }
+    ]
+  },
+  {
+    "google_place_id": null,
+    "data_origin": "dummy",
+    "id": "v22",
+    "name": "Edappally Village Office",
+    "category": "government",
+    "area": "Edappally",
+    "address": "Edappally North",
+    "lat": 10.0298,
+    "lng": 76.3071,
+    "phone": "+91 00000 00122 (demo)",
+    "floors": 2,
+    "upper_floor_areas": [
+      {
+        "name": "Office counter",
+        "floor": 1
+      }
+    ],
+    "google_says": {
+      "wheelchair_entrance": null,
+      "wheelchair_parking": null,
+      "wheelchair_restroom": null,
+      "wheelchair_seating": null,
+      "simulated": true
+    },
+    "features": [
+      {
+        "feature": "entrance",
+        "track": "visitor",
+        "attributes": {
+          "step_count": 3,
+          "threshold_mm": 0,
+          "door_type": "swing",
+          "door_width_mm": 900,
+          "handrail": "one"
+        },
+        "reading_confidence": "medium",
+        "measurement_method": "visual_estimate",
+        "source_type": "ai_estimated",
+        "updated_at": "2026-10-20"
+      },
+      {
+        "feature": "ramp",
+        "track": "visitor",
+        "attributes": {
+          "present": false
+        },
+        "reading_confidence": "medium",
+        "measurement_method": "visual_estimate",
+        "source_type": "ai_estimated",
+        "updated_at": "2026-10-20"
+      },
+      {
+        "feature": "lift",
+        "track": "visitor",
+        "attributes": {
+          "present": false
+        },
+        "reading_confidence": "medium",
+        "measurement_method": "visual_estimate",
+        "source_type": "ai_estimated",
+        "updated_at": "2026-10-20"
+      }
+    ]
+  },
+  {
+    "google_place_id": null,
+    "data_origin": "dummy",
+    "id": "v23",
+    "name": "Akshaya Centre, Kaloor",
+    "category": "government",
+    "area": "Kaloor",
+    "address": "Kaloor-Kadavanthra Road",
+    "lat": 9.9935,
+    "lng": 76.2961,
+    "phone": "+91 00000 00123 (demo)",
+    "floors": 2,
+    "upper_floor_areas": [
+      {
+        "name": "Service counter",
+        "floor": 1
+      }
+    ],
+    "google_says": {
+      "wheelchair_entrance": null,
+      "wheelchair_parking": null,
+      "wheelchair_restroom": null,
+      "wheelchair_seating": null,
+      "simulated": true
+    },
+    "features": [
+      {
+        "feature": "entrance",
+        "track": "host",
+        "attributes": {
+          "step_count": 0,
+          "threshold_mm": 0,
+          "door_type": "swing",
+          "door_width_mm": 900,
+          "handrail": null
+        },
+        "reading_confidence": "medium",
+        "measurement_method": "reference_object",
+        "source_type": "ai_estimated",
+        "updated_at": "2026-10-20"
+      },
+      {
+        "feature": "lift",
+        "track": "host",
+        "attributes": {
+          "present": false
+        },
+        "reading_confidence": "medium",
+        "measurement_method": "reference_object",
+        "source_type": "ai_estimated",
+        "updated_at": "2026-10-20"
+      },
+      {
+        "feature": "dropoff_path",
+        "track": "host",
+        "attributes": {
+          "dropoff_at_gate": true,
+          "distance_m": 20,
+          "step_free": true,
+          "surface": "firm",
+          "shaded": true,
+          "monsoon_risk": "low"
+        },
+        "reading_confidence": "medium",
+        "measurement_method": "reference_object",
+        "source_type": "ai_estimated",
+        "updated_at": "2026-10-20"
+      }
+    ]
+  },
+  {
+    "google_place_id": null,
+    "data_origin": "dummy",
+    "id": "v24",
+    "name": "Thrippunithura Devi Temple",
+    "name_ml": "തൃപ്പൂണിത്തുറ ദേവി ക്ഷേത്രം",
+    "category": "worship",
+    "area": "Thrippunithura",
+    "address": "Temple Road, Thrippunithura",
+    "lat": 9.9439,
+    "lng": 76.3489,
+    "phone": "+91 00000 00124 (demo)",
+    "floors": 1,
+    "upper_floor_areas": [],
+    "google_says": {
+      "wheelchair_entrance": null,
+      "wheelchair_parking": null,
+      "wheelchair_restroom": null,
+      "wheelchair_seating": null,
+      "simulated": true
+    },
+    "features": [
+      {
+        "feature": "entrance",
+        "track": "visitor",
+        "attributes": {
+          "step_count": 2,
+          "threshold_mm": 150,
+          "door_type": "open",
+          "door_width_mm": 1500,
+          "handrail": "both",
+          "footwear_area": true,
+          "wheelchair_route_beyond": false
+        },
+        "reading_confidence": "medium",
+        "measurement_method": "visual_estimate",
+        "source_type": "ai_estimated",
+        "updated_at": "2026-10-20",
+        "note": "Footwear removed at the gate; seating at the footwear area"
+      },
+      {
+        "feature": "ramp",
+        "track": "visitor",
+        "attributes": {
+          "present": false
+        },
+        "reading_confidence": "medium",
+        "measurement_method": "visual_estimate",
+        "source_type": "ai_estimated",
+        "updated_at": "2026-10-20"
+      },
+      {
+        "feature": "seating",
+        "track": "visitor",
+        "attributes": {
+          "rest_interval_m": 20,
+          "queue_seating": true,
+          "armrests": false
+        },
+        "reading_confidence": "medium",
+        "measurement_method": "visual_estimate",
+        "source_type": "ai_estimated",
+        "updated_at": "2026-10-20"
+      }
+    ]
+  },
+  {
+    "google_place_id": null,
+    "data_origin": "dummy",
+    "id": "v25",
+    "name": "St. Mary's Heritage Church, Fort Kochi",
+    "category": "worship",
+    "area": "Fort Kochi",
+    "address": "Church Road, Fort Kochi",
+    "lat": 9.9658,
+    "lng": 76.2421,
+    "phone": "+91 00000 00125 (demo)",
+    "floors": 1,
+    "upper_floor_areas": [],
+    "google_says": {
+      "wheelchair_entrance": null,
+      "wheelchair_parking": null,
+      "wheelchair_restroom": null,
+      "wheelchair_seating": null,
+      "simulated": true
+    },
+    "features": [
+      {
+        "feature": "entrance",
+        "track": "host",
+        "attributes": {
+          "step_count": 0,
+          "threshold_mm": 75,
+          "door_type": "swing",
+          "door_width_mm": 1400,
+          "handrail": null
+        },
+        "reading_confidence": "medium",
+        "measurement_method": "reference_object",
+        "source_type": "ai_estimated",
+        "updated_at": "2026-10-20",
+        "note": "Raised wooden doorstep (padi) at the main door"
+      },
+      {
+        "feature": "dropoff_path",
+        "track": "host",
+        "attributes": {
+          "dropoff_at_gate": true,
+          "distance_m": 20,
+          "step_free": true,
+          "surface": "broken",
+          "shaded": true,
+          "monsoon_risk": "high"
+        },
+        "reading_confidence": "medium",
+        "measurement_method": "reference_object",
+        "source_type": "ai_estimated",
+        "updated_at": "2026-10-20"
+      }
+    ]
+  },
+  {
+    "google_place_id": null,
+    "data_origin": "dummy",
+    "id": "v26",
+    "name": "Kaloor Juma Masjid",
+    "category": "worship",
+    "area": "Kaloor",
+    "address": "Kaloor Junction",
+    "lat": 9.9968,
+    "lng": 76.3012,
+    "phone": "+91 00000 00126 (demo)",
+    "floors": 1,
+    "upper_floor_areas": [],
+    "google_says": {
+      "wheelchair_entrance": null,
+      "wheelchair_parking": null,
+      "wheelchair_restroom": null,
+      "wheelchair_seating": null,
+      "simulated": true
+    },
+    "features": [
+      {
+        "feature": "entrance",
+        "track": "host",
+        "attributes": {
+          "step_count": 0,
+          "threshold_mm": 0,
+          "door_type": "open",
+          "door_width_mm": 1500,
+          "handrail": null,
+          "footwear_area": true,
+          "wheelchair_route_beyond": true
+        },
+        "reading_confidence": "medium",
+        "measurement_method": "reference_object",
+        "source_type": "ai_estimated",
+        "updated_at": "2026-10-20"
+      },
+      {
+        "feature": "dropoff_path",
+        "track": "host",
+        "attributes": {
+          "dropoff_at_gate": true,
+          "distance_m": 20,
+          "step_free": true,
+          "surface": "firm",
+          "shaded": true,
+          "monsoon_risk": "low"
+        },
+        "reading_confidence": "medium",
+        "measurement_method": "reference_object",
+        "source_type": "ai_estimated",
+        "updated_at": "2026-10-20"
+      }
+    ]
+  },
+  {
+    "google_place_id": null,
+    "data_origin": "dummy",
+    "id": "v27",
+    "name": "Fort Kochi Heritage Homestay",
+    "category": "tourism",
+    "area": "Fort Kochi",
+    "address": "Princess Street, Fort Kochi",
+    "lat": 9.9671,
+    "lng": 76.2437,
+    "phone": "+91 00000 00127 (demo)",
+    "floors": 2,
+    "upper_floor_areas": [
+      {
+        "name": "Guest rooms",
+        "floor": 1
+      }
+    ],
+    "google_says": {
+      "wheelchair_entrance": null,
+      "wheelchair_parking": null,
+      "wheelchair_restroom": null,
+      "wheelchair_seating": null,
+      "simulated": true
+    },
+    "features": [
+      {
+        "feature": "entrance",
+        "track": "host",
+        "attributes": {
+          "step_count": 3,
+          "threshold_mm": 100,
+          "door_type": "swing",
+          "door_width_mm": 850,
+          "handrail": "none"
+        },
+        "reading_confidence": "medium",
+        "measurement_method": "self_reported",
+        "source_type": "unconfirmed",
+        "updated_at": "2026-10-20",
+        "note": "Traditional raised plinth"
+      },
+      {
+        "feature": "ramp",
+        "track": "host",
+        "attributes": {
+          "present": false
+        },
+        "reading_confidence": "medium",
+        "measurement_method": "self_reported",
+        "source_type": "unconfirmed",
+        "updated_at": "2026-10-20"
+      },
+      {
+        "feature": "lift",
+        "track": "host",
+        "attributes": {
+          "present": false
+        },
+        "reading_confidence": "medium",
+        "measurement_method": "self_reported",
+        "source_type": "unconfirmed",
+        "updated_at": "2026-10-20"
+      },
+      {
+        "feature": "dropoff_path",
+        "track": "host",
+        "attributes": {
+          "dropoff_at_gate": true,
+          "distance_m": 15,
+          "step_free": true,
+          "surface": "broken",
+          "shaded": true,
+          "monsoon_risk": "high"
+        },
+        "reading_confidence": "medium",
+        "measurement_method": "self_reported",
+        "source_type": "unconfirmed",
+        "updated_at": "2026-10-20"
+      }
+    ]
+  },
+  {
+    "google_place_id": null,
+    "data_origin": "dummy",
+    "id": "v28",
+    "name": "Marine Drive Walkway Café",
+    "category": "restaurant",
+    "area": "Marine Drive",
+    "address": "Marine Drive Walkway",
+    "lat": 9.9812,
+    "lng": 76.2759,
+    "phone": "+91 00000 00128 (demo)",
+    "floors": 1,
+    "upper_floor_areas": [],
+    "google_says": {
+      "wheelchair_entrance": true,
+      "wheelchair_parking": null,
+      "wheelchair_restroom": true,
+      "wheelchair_seating": null,
+      "simulated": true
+    },
+    "features": [
+      {
+        "feature": "entrance",
+        "track": "visitor",
+        "attributes": {
+          "step_count": 2,
+          "threshold_mm": 0,
+          "door_type": "swing",
+          "door_width_mm": 900,
+          "handrail": "none"
+        },
+        "reading_confidence": "medium",
+        "measurement_method": "reference_object",
+        "source_type": "ai_estimated",
+        "updated_at": "2026-10-17"
+      },
+      {
+        "feature": "ramp",
+        "track": "visitor",
+        "attributes": {
+          "present": false
+        },
+        "reading_confidence": "medium",
+        "measurement_method": "visual_estimate",
+        "source_type": "ai_estimated",
+        "updated_at": "2026-10-17"
+      },
+      {
+        "feature": "toilet",
+        "track": "visitor",
+        "attributes": {
+          "accessible": false
+        },
+        "reading_confidence": "medium",
+        "measurement_method": "visual_estimate",
+        "source_type": "ai_estimated",
+        "updated_at": "2026-10-17"
+      }
+    ]
+  }
+]

@@ -1,0 +1,118 @@
+{
+  "_about": "Profile thresholds. HG = Harmonised Guidelines and Space Standards for Barrier Free Built Environment (MoUD 2016), via the Assam Social Welfare Dept / Shishu Sarothi overview. 'assumed' values are placeholders. Ramp gradient-by-length table, HG 2021 edition and KMBR 2019 clauses still to confirm. Edit values here, never in code.",
+  "wheelchair": {
+    "label": "Wheelchair",
+    "label_ml": "വീൽചെയർ",
+    "entrance": {
+      "level": "required",
+      "max_steps_without_ramp": 0,
+      "steps_tolerated_with_handrail": 0,
+      "max_threshold_mm": 12,
+      "min_door_mm": 900,
+      "_source": "HG: threshold max 12 mm, door clear width min 900 mm"
+    },
+    "ramp": {
+      "level": "required",
+      "max_slope_ratio": 12,
+      "min_width_mm": 1200,
+      "handrails": "required",
+      "_source": "HG: width 1200 mm, handrails both sides; slope 1:12 placeholder"
+    },
+    "lift": {
+      "level": "required",
+      "needed_from_floor": 1,
+      "min_car_w_mm": 1500,
+      "min_car_d_mm": 1500,
+      "min_door_mm": 900,
+      "_source": "HG: car 1500 x 1500 mm, door 900 mm"
+    },
+    "toilet": {
+      "level": "required",
+      "wc_type": "western",
+      "min_width_mm": 2200,
+      "min_depth_mm": 2000,
+      "min_door_mm": 900,
+      "grab_bars": "required",
+      "transfer_space": "required",
+      "_source": "HG: 2200 x 2000 mm, door 900 mm outward/sliding, 900 mm transfer space"
+    },
+    "dropoff_path": {
+      "level": "required",
+      "step_free": "required",
+      "max_distance_m": 300,
+      "_source": "step-free firm path (HG); 300 m assumed"
+    },
+    "parking": { "level": "preferred", "max_distance_m": 30, "_source": "HG: within 30 m" },
+    "seating": { "level": "optional", "max_rest_interval_m": null }
+  },
+  "crutches": {
+    "label": "Crutches / walker / cane",
+    "label_ml": "ക്രച്ചസ് / വാക്കർ / വടി",
+    "entrance": {
+      "level": "required",
+      "max_steps_without_ramp": 0,
+      "steps_tolerated_with_handrail": 2,
+      "max_threshold_mm": null,
+      "min_door_mm": null,
+      "_source": "assumed: up to 2 low steps with handrail tolerated (shows as Partial)"
+    },
+    "ramp": {
+      "level": "required",
+      "max_slope_ratio": 12,
+      "min_width_mm": 900,
+      "handrails": "required",
+      "_source": "slope placeholder; 900 mm assumed"
+    },
+    "lift": {
+      "level": "required",
+      "needed_from_floor": 2,
+      "min_car_w_mm": null,
+      "min_car_d_mm": null,
+      "min_door_mm": null,
+      "_source": "assumed: lift required beyond 1 floor"
+    },
+    "toilet": {
+      "level": "preferred",
+      "wc_type": "western",
+      "min_width_mm": null,
+      "min_depth_mm": null,
+      "min_door_mm": null,
+      "grab_bars": "required",
+      "transfer_space": "optional"
+    },
+    "dropoff_path": { "level": "preferred", "step_free": "preferred", "max_distance_m": 200, "_source": "200 m assumed" },
+    "parking": { "level": "preferred", "max_distance_m": 30 },
+    "seating": { "level": "preferred", "max_rest_interval_m": 30, "_source": "HG: rest areas every 30 m" }
+  },
+  "low_stamina": {
+    "label": "Low stamina",
+    "label_ml": "കുറഞ്ഞ ക്ഷമത",
+    "entrance": {
+      "level": "preferred",
+      "max_steps_without_ramp": 0,
+      "steps_tolerated_with_handrail": 3,
+      "max_threshold_mm": null,
+      "min_door_mm": null
+    },
+    "ramp": { "level": "optional", "max_slope_ratio": 12, "min_width_mm": null, "handrails": "preferred" },
+    "lift": {
+      "level": "required",
+      "needed_from_floor": 2,
+      "min_car_w_mm": null,
+      "min_car_d_mm": null,
+      "min_door_mm": null
+    },
+    "toilet": {
+      "level": "preferred",
+      "wc_type": null,
+      "min_width_mm": null,
+      "min_depth_mm": null,
+      "min_door_mm": null,
+      "grab_bars": "optional",
+      "transfer_space": "optional"
+    },
+    "dropoff_path": { "level": "preferred", "step_free": "optional", "max_distance_m": 150, "_source": "150 m assumed" },
+    "parking": { "level": "preferred", "max_distance_m": 30 },
+    "seating": { "level": "preferred", "max_rest_interval_m": 30, "_source": "HG: rest areas every 30 m" }
+  }
+}
