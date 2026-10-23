@@ -5,6 +5,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { readPhoto, toFeatureValue, type Reference } from "@/lib/vision";
 import { addEvidence, getVenue } from "@/lib/store";
+import { getVenueLive } from "@/lib/host";
 import { evaluateVenue } from "@/lib/matcher";
 import type { Companion, FeatureName, ProfileId } from "@/lib/types";
 
@@ -52,6 +53,6 @@ export async function POST(req: NextRequest) {
         ? "Lay your phone on the ramp and use the tilt reading to raise this to High."
         : null;
 
-  const result = saved ? evaluateVenue(getVenue(venueId)!, profile, { companion }) : null;
+  const result = saved ? evaluateVenue((await getVenueLive(venueId))!, profile, { companion }) : null;
   return NextResponse.json({ output: r.output, provider: r.provider, saved, raise_hint: raiseHint, result });
 }

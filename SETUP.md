@@ -27,10 +27,23 @@ npm run dev     # starts the app
 | `GEMINI_API_KEY` | Voice backup | Optional |
 | `OPENAI_API_KEY` | Backup for agent, photos and English voice | Optional |
 | `SERPAPI_API_KEY` | Real Google venues (not wired yet) | No |
+| `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`, `SUPABASE_SERVICE_ROLE_KEY` | Host dashboard (`/host`) and admin queue (`/admin`) | Yes, for the host demo |
+| `ADMIN_EMAILS` | Comma-separated emails that can approve venue claims | Yes, for the host demo |
 
 After editing `.env.local`, stop the server (Ctrl+C) and run `npm run dev` again.
 
-**Never commit `.env.local` or paste keys into screenshots.** It's already git-ignored.
+**Never commit `.env.local` or paste keys into screenshots.** It's already git-ignored. The service-role key can read and change everything in the database: keep it only in `.env.local`.
+
+### Host dashboard setup (Supabase, once)
+
+1. Create a free project at https://supabase.com.
+2. **SQL Editor → New query**: paste all of `supabase/schema.sql` and press **Run**. This creates the tables and the private `host-evidence` file bucket.
+3. **Authentication → Sign In / Providers → Email**: keep Email enabled. Turn **Confirm email** on.
+4. **Authentication → Emails → Magic Link** template: replace the body so it contains the code, for example `<p>Your AccessKochi code: <strong>{{ .Token }}</strong></p>`. Without `{{ .Token }}`, hosts get a link instead of a 6-digit code.
+5. **Project Settings → API**: copy the Project URL, the `anon` key and the `service_role` key into `.env.local`. Put your own email in `ADMIN_EMAILS`.
+6. Restart `npm run dev`.
+
+Supabase's built-in email sends only a few emails per hour. That's enough for the demo; add your own SMTP (Authentication → Emails → SMTP settings) before real use.
 
 ## 3. Check everything is connected
 
@@ -51,6 +64,9 @@ Open **http://localhost:3000/api/health**. You want to see:
 5. **Voice:** tap **Speak**, say the wedding request in Malayalam, tap **Stop**.
 6. **Photo:** on any venue page, under **Help verify this place**, choose Ramp, Reference "None", take a photo, then **Read photo**: confidence **Low**. Try again with an A4 sheet in frame and Reference "A4 sheet": **Medium**.
 7. **Browse:** the venue list ranked for the profile, with the "show places that don't work for me" toggle.
+8. **Host:** Profile → "Own or run a venue?" → sign in with an email code → claim Periyar General Hospital (v01) with any photo as proof.
+9. **Admin:** sign in with an `ADMIN_EMAILS` address → `/admin` → open the proof → **Approve**.
+10. **Live status:** back on the host page, switch on **Lift out of order**. The preview turns red at once; within 15 seconds the hospital shows "Doesn't work for you: lift not working" in plans and on `/venue/v01`.
 
 ## Useful links while running
 

@@ -1,17 +1,17 @@
 // GET /api/venues?profile=wheelchair&lat=10.01&lng=76.34&radius=15&category=restaurant&companion=with_companion&show_excluded=1
 import { NextRequest, NextResponse } from "next/server";
-import { getVenues } from "@/lib/store";
+import { getVenuesLive } from "@/lib/host";
 import { matchVenues } from "@/lib/matcher";
 import type { Category, Companion, ProfileId } from "@/lib/types";
 
-export function GET(req: NextRequest) {
+export async function GET(req: NextRequest) {
   const q = req.nextUrl.searchParams;
   const profile = (q.get("profile") ?? "wheelchair") as ProfileId;
   if (!["wheelchair", "crutches", "low_stamina"].includes(profile)) {
     return NextResponse.json({ error: "profile must be wheelchair | crutches | low_stamina" }, { status: 400 });
   }
   const lat = q.get("lat"), lng = q.get("lng");
-  const results = matchVenues(getVenues(), {
+  const results = matchVenues(await getVenuesLive(), {
     profile,
     companion: (q.get("companion") ?? "alone") as Companion,
     location: lat && lng ? { lat: Number(lat), lng: Number(lng) } : undefined,
