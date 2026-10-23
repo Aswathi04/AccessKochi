@@ -86,7 +86,7 @@ export function ProfileForm({ next = "/plan", wizard = false }: { next?: string;
     </Card>,
   ];
 
-  const finish = () => { save({ onboarded: true }); router.push(next); };
+  const finish = () => { save({ onboarded: true }); router.replace(next); };
 
   if (!wizard) {
     return (

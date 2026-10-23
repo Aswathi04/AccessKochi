@@ -4,6 +4,8 @@
 import { use, useCallback, useEffect, useState } from "react";
 import { PhotoUpload } from "@/components/PhotoUpload";
 import { Card, ConfidenceTag, DummyBadge, VERDICT_STRIPE, VerdictBadge } from "@/components/ui";
+import type { ReportRow } from "@/lib/host";
+import { fill } from "@/lib/i18n";
 import { useSettings } from "@/lib/settings";
 import type { TrackResult, Venue, VenueResult } from "@/lib/types";
 
@@ -25,13 +27,14 @@ export default function VenuePage({ params }: { params: Promise<{ id: string }> 
   const { settings, loaded, t } = useSettings();
   const [venue, setVenue] = useState<Venue | null>(null);
   const [result, setResult] = useState<VenueResult | null>(null);
+  const [reports, setReports] = useState<ReportRow[]>([]);
   const [error, setError] = useState(false);
 
   const load = useCallback(async () => {
     const res = await fetch(`/api/venues/${id}?profile=${settings.profile}&companion=${settings.companion}`);
     if (!res.ok) return setError(true);
     const data = await res.json();
-    setVenue(data.venue); setResult(data.result);
+    setVenue(data.venue); setResult(data.result); setReports(data.reports ?? []);
   }, [id, settings.profile, settings.companion]);
 
   useEffect(() => { if (loaded) load(); }, [loaded, load]);
@@ -103,6 +106,37 @@ export default function VenuePage({ params }: { params: Promise<{ id: string }> 
               {gRow("Seating", g.wheelchair_seating)}
             </ul>
           </Card>
+
+          {!!venue.documents_on_file?.length && (
+            <Card>
+              <h2 className="font-semibold">📄 {t("v_docs")}</h2>
+              <ul className="mt-2 space-y-1 text-sm">
+                {venue.documents_on_file.map((d) => (
+                  <li key={d.kind + d.expires_on}>{d.label}{d.expires_on && <span className="text-muted"> · {fill(t("v_valid_until"), { d: d.expires_on })}</span>}</li>
+                ))}
+              </ul>
+              <p className="mt-2 text-xs text-muted">{t("v_docs_note")}</p>
+            </Card>
+          )}
+
+          {reports.length > 0 && (
+            <Card>
+              <h2 className="font-semibold">{t("v_reports")}</h2>
+              <ul className="mt-2 divide-y divide-line">
+                {reports.map((r) => (
+                  <li key={r.id} className="space-y-1 py-3 text-sm">
+                    <div className="flex flex-wrap items-center gap-2">
+                      <span className="mr-auto font-medium">{t(`feature_${r.feature}`)}</span>
+                      <ConfidenceTag c={r.reading_confidence} />
+                    </div>
+                    <p className="text-xs text-muted">{r.created_at.slice(0, 10)}</p>
+                    {r.reasons.map((x) => <p key={x}>• {x}</p>)}
+                    {r.host_reply && <p className="rounded-lg bg-bg p-2">{t("v_host_replied")} {r.host_reply}</p>}
+                  </li>
+                ))}
+              </ul>
+            </Card>
+          )}
 
           <Card>
             <details className="group">

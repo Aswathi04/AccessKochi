@@ -35,6 +35,17 @@ const FEATURE_LABEL: Record<FeatureName, string> = {
 
 const num = (v: unknown) => (typeof v === "number" ? v : null);
 
+// HG Table 3.4: the gentler the slope, the longer a single run may be. rows = [N for 1:N, max run m].
+export function maxRunForSlope(slope: number, rows: [number, number][]): number | null {
+  const ok = rows.filter(([n]) => slope >= n);
+  return ok.length ? Math.max(...ok.map(([, m]) => m)) : null;
+}
+
+// Room/car sizes in either orientation: compare short side with short side, long with long.
+function fits(w: number, d: number, minW: number, minD: number) {
+  return Math.min(w, d) >= Math.min(minW, minD) && Math.max(w, d) >= Math.max(minW, minD);
+}
+
 // ---------------- per-feature rules ----------------
 
 function evalEntrance(a: Partial<AttrMap["entrance"]>, c: Cfg, ctx: Ctx): EvalOut {
@@ -116,6 +127,12 @@ function evalRamp(a: Partial<AttrMap["ramp"]>, c: Cfg): EvalOut {
     else if (a.slope_ratio < maxS) {
       out.push("fail");
       reasons.push(`ramp about 1:${a.slope_ratio}, steeper than 1:${maxS}`);
+    } else if (Array.isArray(c.max_run_by_slope_m) && a.run_m != null) {
+      const maxRun = maxRunForSlope(a.slope_ratio, c.max_run_by_slope_m as [number, number][]);
+      if (maxRun !== null && a.run_m > maxRun) {
+        out.push("fail");
+        reasons.push(`ramp run about ${a.run_m} m at 1:${a.slope_ratio}; a slope this steep needs a landing every ${maxRun} m`);
+      }
     }
   }
   const minW = num(c.min_width_mm);
@@ -149,10 +166,15 @@ function evalLift(a: Partial<AttrMap["lift"]>, c: Cfg, ctx: Ctx): EvalOut {
   if (a.working == null) { out.push("unknown"); unconfirmed.push("whether the lift is working"); }
 
   const w = num(c.min_car_w_mm), d = num(c.min_car_d_mm), door = num(c.min_door_mm);
+  const lw = num(c.legal_min_car_w_mm), ld = num(c.legal_min_car_d_mm);
   if (w !== null && d !== null) {
     if (a.car_w_mm == null || a.car_d_mm == null) unconfirmed.push("lift size");
-    else if (a.car_w_mm < w || a.car_d_mm < d) {
-      out.push("fail"); reasons.push(`lift car about ${a.car_w_mm} x ${a.car_d_mm} mm (min ${w} x ${d} mm)`);
+    else if (!fits(a.car_w_mm, a.car_d_mm, w, d)) {
+      const legal = lw !== null && ld !== null && fits(a.car_w_mm, a.car_d_mm, lw, ld);
+      out.push(legal ? "partial" : "fail");
+      reasons.push(legal
+        ? `lift car about ${a.car_w_mm} x ${a.car_d_mm} mm: meets the Kerala minimum, but too small to turn a wheelchair (guideline ${w} x ${d} mm)`
+        : `lift car about ${a.car_w_mm} x ${a.car_d_mm} mm (min ${w} x ${d} mm)`);
     }
   }
   if (door !== null && a.door_mm != null && a.door_mm < door) {
@@ -179,8 +201,13 @@ function evalToilet(a: Partial<AttrMap["toilet"]>, c: Cfg): EvalOut {
     else if (a.transfer_space == null) unconfirmed.push("transfer space beside the WC");
   }
   const w = num(c.min_width_mm), d = num(c.min_depth_mm), door = num(c.min_door_mm);
-  if (w !== null && d !== null && a.width_mm != null && a.depth_mm != null && (a.width_mm < w || a.depth_mm < d)) {
-    out.push("fail"); reasons.push(`toilet about ${a.width_mm} x ${a.depth_mm} mm (min ${w} x ${d} mm)`);
+  const lw = num(c.legal_min_width_mm), ld = num(c.legal_min_depth_mm);
+  if (w !== null && d !== null && a.width_mm != null && a.depth_mm != null && !fits(a.width_mm, a.depth_mm, w, d)) {
+    const legal = lw !== null && ld !== null && fits(a.width_mm, a.depth_mm, lw, ld);
+    out.push(legal ? "partial" : "fail");
+    reasons.push(legal
+      ? `toilet about ${a.width_mm} x ${a.depth_mm} mm: meets the Kerala minimum, smaller than the guideline (${w} x ${d} mm)`
+      : `toilet about ${a.width_mm} x ${a.depth_mm} mm (min ${w} x ${d} mm)`);
   }
   if (door !== null && a.door_mm != null && a.door_mm < door) {
     out.push("fail"); reasons.push(`toilet door about ${a.door_mm} mm (min ${door} mm)`);

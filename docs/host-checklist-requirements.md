@@ -180,7 +180,9 @@ Note: HG 3.10.5 also says landings every ≤9 m; Table 3.4 allows only 6 m at 1:
 
 ---
 
-## Mismatches with `src/data/profiles.json` (fix before launch)
+## Mismatches with `src/data/profiles.json`
+
+Status (Oct 2026): 1, 2, 3, 4 and 5 are done in `profiles.json` and `src/lib/matcher.ts`. Where KPBR's legal minimum is lower than HG: meeting HG = pass, meeting only KPBR = partial (the reason says so), below KPBR = fail. KMBR 2019 is still unchecked.
 
 1. **Ramp slope**: `max_slope_ratio: 12` everywhere is a placeholder. Replace with HG Table 3.4 (slope allowed depends on run length). This closes the open item in HANDOFF.md.
 2. **Source edition**: `_about` cites HG 2016 via a secondary summary. Re-cite to HG 2021 sections above.

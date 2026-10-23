@@ -1,4 +1,4 @@
--- AccessKochi host dashboard schema. Run once in Supabase: SQL Editor > New query > paste > Run.
+-- AccessKochi host dashboard schema. Run in Supabase: SQL Editor > New query > paste > Run. Safe to run again after updates.
 -- Every table has RLS on and no policies: the browser can't read or write them directly.
 -- All access goes through the Next.js API routes, which use the service-role key and check permissions in code.
 
@@ -62,3 +62,61 @@ alter table audit_log enable row level security;
 insert into storage.buckets (id, name, public, file_size_limit)
 values ('host-evidence', 'host-evidence', false, 52428800)
 on conflict (id) do nothing;
+
+-- ---------------------------------------------------------------------------------------------
+-- Added later (documents, visitor reports, insights, AI photo check). Safe to re-run this whole file.
+
+-- AI reading of a checklist photo: {verdict: agrees|disagrees|unclear, detail, at}
+alter table checklist_answers add column if not exists ai_check jsonb;
+
+-- Documents a host uploads. An admin checks each one; only approved, unexpired documents count.
+create table if not exists documents (
+  id uuid primary key default gen_random_uuid(),
+  venue_id text not null,
+  user_id uuid not null references auth.users(id) on delete cascade,
+  kind text not null check (kind in ('access_audit', 'aic_audit', 'building_permit', 'occupancy_cert', 'completion_cert', 'lift_licence', 'fire_noc')),
+  ref_no text,                  -- permit / licence / registration number
+  issued_by text,               -- auditor, authority or inspectorate
+  issued_on date,
+  expires_on date,              -- required for lift licence and fire NOC
+  sections text[] not null default '{}', -- checklist sections the document covers
+  file_path text not null,
+  status text not null default 'pending' check (status in ('pending', 'approved', 'rejected')),
+  admin_note text,
+  decided_by text,
+  decided_at timestamptz,
+  created_at timestamptz not null default now()
+);
+create index if not exists documents_venue_idx on documents (venue_id);
+
+-- Visitor photo reports (visitor track). Hosts can reply; a reply never changes the verdict.
+create table if not exists visitor_reports (
+  id uuid primary key default gen_random_uuid(),
+  venue_id text not null,
+  feature text not null,
+  attributes jsonb not null default '{}'::jsonb,
+  reading_confidence text not null,
+  measurement_method text not null,
+  source_type text not null,
+  reasons text[] not null default '{}',
+  note text,
+  created_at timestamptz not null default now(),
+  host_reply text,
+  host_reply_by text,
+  host_reply_at timestamptz
+);
+create index if not exists visitor_reports_venue_idx on visitor_reports (venue_id, created_at desc);
+
+-- A venue left out of someone's search because it doesn't suit their profile (for host insights).
+create table if not exists skip_events (
+  id bigserial primary key,
+  venue_id text not null,
+  profile text not null,
+  reason text,
+  created_at timestamptz not null default now()
+);
+create index if not exists skip_events_venue_idx on skip_events (venue_id, created_at desc);
+
+alter table documents enable row level security;
+alter table visitor_reports enable row level security;
+alter table skip_events enable row level security;

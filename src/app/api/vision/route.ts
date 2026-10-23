@@ -1,11 +1,11 @@
 // POST /api/vision  (multipart form)
 //   image: file (jpeg/png, resized in the browser to ~1024 px)
 //   venue_id, feature (entrance|ramp|toilet|lift|dropoff_path), reference (none|a4_sheet|phone_upright|standard_door)
-//   role (host|visitor), tilt_deg (optional), save ("1" to add to the venue's evidence)
+//   tilt_deg (optional), save ("1" to add to the venue's visitor evidence). Hosts add evidence in the host dashboard.
 import { NextRequest, NextResponse } from "next/server";
 import { readPhoto, toFeatureValue, type Reference } from "@/lib/vision";
 import { addEvidence, getVenue } from "@/lib/store";
-import { getVenueLive } from "@/lib/host";
+import { getVenueLive, saveVisitorReport } from "@/lib/host";
 import { evaluateVenue } from "@/lib/matcher";
 import type { Companion, FeatureName, ProfileId } from "@/lib/types";
 
@@ -21,7 +21,6 @@ export async function POST(req: NextRequest) {
   const venueId = String(form.get("venue_id") ?? "");
   const feature = String(form.get("feature") ?? "") as FeatureName;
   const reference = (String(form.get("reference") ?? "none") as Reference);
-  const role = String(form.get("role") ?? "visitor") === "host" ? "host" : "visitor";
   const tiltRaw = form.get("tilt_deg");
   const tiltDeg = tiltRaw ? Number(tiltRaw) : null;
   const profile = String(form.get("profile") ?? "wheelchair") as ProfileId;
@@ -42,7 +41,8 @@ export async function POST(req: NextRequest) {
 
   let saved = false;
   if (form.get("save") === "1" && r.output.reading_confidence !== "cant_tell") {
-    addEvidence(venueId, toFeatureValue(r.output, role, reference, tiltDeg));
+    const fv = toFeatureValue(r.output, "visitor", reference, tiltDeg);
+    if (!(await saveVisitorReport(venueId, fv, r.output.reasons))) addEvidence(venueId, fv);
     saved = true;
   }
 

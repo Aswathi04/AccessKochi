@@ -3,7 +3,7 @@
 // the summary sentence is the only free text, and it's written from those fields.
 import { NextRequest, NextResponse } from "next/server";
 import { runAgent, type Lang } from "@/lib/agent";
-import { getVenuesLive } from "@/lib/host";
+import { getVenuesLive, logSkips } from "@/lib/host";
 import type { Companion, ProfileId } from "@/lib/types";
 
 export const runtime = "nodejs";
@@ -20,5 +20,6 @@ export async function POST(req: NextRequest) {
   const location = loc && typeof loc.lat === "number" && typeof loc.lng === "number" ? { lat: loc.lat, lng: loc.lng } : undefined;
 
   const plan = await runAgent({ text, profile, companion, language, location, venues: await getVenuesLive() });
+  await logSkips(plan.rejected.map((r) => ({ venue_id: r.venue_id, profile, reason: r.reason })));
   return NextResponse.json(plan);
 }

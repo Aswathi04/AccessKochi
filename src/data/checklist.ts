@@ -19,14 +19,14 @@ export interface ChecklistItem {
   only?: Category[]; // shown only for these venue categories
 }
 
-export interface ChecklistSection { id: string; title: string; guideline: string; when?: "upper_floors"; items: ChecklistItem[] }
+export interface ChecklistSection { id: string; title: string; title_ml: string; guideline: string; when?: "upper_floors"; items: ChecklistItem[] }
 
 const p = (feature: FeatureName, attrs: Record<string, unknown>): Patch => ({ feature, attrs });
 const n = (key: string, label: string, unit: string, feature: FeatureName, attr = key): ChecklistInput => ({ key, label, unit, feature, attr });
 
 export const SECTIONS: ChecklistSection[] = [
   {
-    id: "parking", title: "Parking and drop-off", guideline: "HG 3.4, 4.1 · KPBR 42(5)",
+    id: "parking", title_ml: "പാർക്കിംഗും ഇറങ്ങാനുള്ള സ്ഥലവും", title: "Parking and drop-off", guideline: "HG 3.4, 4.1 · KPBR 42(5)",
     items: [
       { id: "P1", text: "At least one accessible car parking bay", target: "1 per first 50 bays; KPBR 3%, min 1", source: "HG Table 3.1; KPBR 42(5)(a)", onYes: p("parking", { accessible_bay: true }), onNo: p("parking", { accessible_bay: false }) },
       { id: "P3", text: "Accessible bay is wide enough, including the transfer zone", target: "≥ 5000 × 3600 mm", source: "HG 3.4.1(2); KPBR 42(5)(b)" },
@@ -36,7 +36,7 @@ export const SECTIONS: ChecklistSection[] = [
     ],
   },
   {
-    id: "route", title: "Route from drop-off to the door", guideline: "HG 3.5–3.7 · KPBR 42(6)",
+    id: "route", title_ml: "ഇറങ്ങുന്നിടത്തു നിന്ന് വാതിൽ വരെയുള്ള വഴി", title: "Route from drop-off to the door", guideline: "HG 3.5–3.7 · KPBR 42(6)",
     items: [
       { id: "W0", text: "The whole route from drop-off to the entrance is step-free", source: "HG 3.5; KPBR 42(1)", onYes: p("dropoff_path", { step_free: true }), onNo: p("dropoff_path", { step_free: false }), inputs: [n("dropoff_distance_m", "Drop-off to entrance", "m", "dropoff_path", "distance_m")] },
       { id: "W1", text: "Walkway clear width", target: "≥ 1200 mm (1800 two-way)", source: "HG 3.5.1(1)" },
@@ -51,7 +51,7 @@ export const SECTIONS: ChecklistSection[] = [
     ],
   },
   {
-    id: "entrance", title: "Entrance", guideline: "HG 4.1, 4.10 · KPBR 42(1), 42(8)",
+    id: "entrance", title_ml: "പ്രവേശന കവാടം", title: "Entrance", guideline: "HG 4.1, 4.10 · KPBR 42(1), 42(8)",
     items: [
       { id: "E1", text: "Main entrance is step-free, or has a ramp beside the steps", source: "HG 4.1.3(4); KPBR 42(1)", onYes: p("entrance", { step_count: 0 }), inputs: [n("step_count", "Steps at the entrance (0 if none)", "steps", "entrance")] },
       { id: "E2", text: "Accessible entrance is the main one or right next to it, not at the rear", source: "HG 4.1.3(2), (9)" },
@@ -66,7 +66,7 @@ export const SECTIONS: ChecklistSection[] = [
     ],
   },
   {
-    id: "ramp", title: "Ramps", guideline: "HG 3.10, 4.6 · KPBR 42(3)",
+    id: "ramp", title_ml: "റാമ്പുകൾ", title: "Ramps", guideline: "HG 3.10, 4.6 · KPBR 42(3)",
     items: [
       { id: "R0", text: "There is a ramp at the entrance", source: "HG 3.10", onYes: p("ramp", { present: true }), onNo: p("ramp", { present: false }) },
       { id: "R1", text: "Ramp slope suits its length", target: "1:12 up to 6 m run · 1:14 up to 9 m · 1:15 up to 11 m · 1:20 up to 15 m", source: "HG Table 3.4; KPBR 42(3)", inputs: [n("slope_ratio", "Slope is 1 in", "", "ramp"), n("ramp_run_m", "Longest single run", "m", "ramp", "run_m")] },
@@ -80,7 +80,7 @@ export const SECTIONS: ChecklistSection[] = [
     ],
   },
   {
-    id: "handrails", title: "Handrails", guideline: "HG 3.11",
+    id: "handrails", title_ml: "കൈവരികൾ", title: "Handrails", guideline: "HG 3.11",
     items: [
       { id: "H1", text: "Handrails are round and easy to grip", target: "38–50 mm diameter", source: "HG 3.11.1(2)" },
       { id: "H2", text: "Gap between handrail and wall", target: "40–60 mm", source: "HG 3.11.1(4)" },
@@ -88,7 +88,7 @@ export const SECTIONS: ChecklistSection[] = [
     ],
   },
   {
-    id: "lift", title: "Lifts", guideline: "HG 4.7 · KPBR 40, 42(2)", when: "upper_floors",
+    id: "lift", title_ml: "ലിഫ്റ്റുകൾ", title: "Lifts", guideline: "HG 4.7 · KPBR 40, 42(2)", when: "upper_floors",
     items: [
       { id: "L1", text: "A lift (or ramp) reaches every public floor", source: "KPBR 42(2), 40(1)", onYes: p("lift", { present: true }), onNo: p("lift", { present: false }) },
       { id: "L3", text: "Lift car size", target: "≥ 1500 × 1500 mm (1900 × 1900 for new buildings)", source: "HG 4.7.1(2); KPBR 42(2)", inputs: [n("car_w_mm", "Car width", "mm", "lift"), n("car_d_mm", "Car depth", "mm", "lift")] },
@@ -103,7 +103,7 @@ export const SECTIONS: ChecklistSection[] = [
     ],
   },
   {
-    id: "toilet", title: "Accessible toilet", guideline: "HG 4.9, Table 4.1 · KPBR 42(4)",
+    id: "toilet", title_ml: "പ്രവേശനക്ഷമ ശൗചാലയം", title: "Accessible toilet", guideline: "HG 4.9, Table 4.1 · KPBR 42(4)",
     items: [
       { id: "T1", text: "At least one accessible toilet with a washbasin, on the ground floor", source: "KPBR 42(4)(a)", onYes: p("toilet", { accessible: true }), onNo: p("toilet", { accessible: false }) },
       { id: "T2", text: "Toilet room size", target: "HG 2200 × 2000 mm (Kerala minimum 1500 × 1750)", source: "HG 4.9.4; KPBR 42(4)(b)", inputs: [n("toilet_width_mm", "Room width", "mm", "toilet", "width_mm"), n("toilet_depth_mm", "Room depth", "mm", "toilet", "depth_mm")] },
@@ -122,7 +122,7 @@ export const SECTIONS: ChecklistSection[] = [
     ],
   },
   {
-    id: "stairs", title: "Stairs", guideline: "HG 4.5 · KPBR 35",
+    id: "stairs", title_ml: "പടികൾ", title: "Stairs", guideline: "HG 4.5 · KPBR 35",
     items: [
       { id: "S1", text: "Even steps", target: "tread ≥ 300 mm, riser ≤ 150 mm", source: "HG 4.5(2); KPBR 35(1)(3)" },
       { id: "S2", text: "Stair width", target: "≥ 1200 mm (HG 1500)", source: "KPBR 35(1)(3); HG 4.5(6)" },
@@ -132,7 +132,7 @@ export const SECTIONS: ChecklistSection[] = [
     ],
   },
   {
-    id: "inside", title: "Inside the building", guideline: "HG 4.2–4.4",
+    id: "inside", title_ml: "കെട്ടിടത്തിനകത്ത്", title: "Inside the building", guideline: "HG 4.2–4.4",
     items: [
       { id: "C1", text: "Corridor clear width", target: "≥ 1200 mm (1500 for passing)", source: "HG 4.4.1" },
       { id: "C2", text: "Rest seats on long indoor routes", target: "every ≤ 50 m", source: "HG 4.4.2" },
@@ -143,7 +143,7 @@ export const SECTIONS: ChecklistSection[] = [
     ],
   },
   {
-    id: "extras", title: "For this type of venue", guideline: "HG 4.12, 4.13, 6.9",
+    id: "extras", title_ml: "ഈ തരം സ്ഥാപനത്തിന്", title: "For this type of venue", guideline: "HG 4.12, 4.13, 6.9",
     items: [
       { id: "X1", text: "Accessible tables", target: "1 per 10 tables, min 2; ≤ 800 mm high", source: "HG 4.13.1", only: ["restaurant"], onYes: p("seating", { table_knee_clearance: true }), onNo: p("seating", { table_knee_clearance: false }) },
       { id: "X2", text: "Clear path between tables", target: "≥ 1200 mm main, ≥ 900 mm to tables", source: "HG 4.13.2", only: ["restaurant"] },
@@ -155,7 +155,7 @@ export const SECTIONS: ChecklistSection[] = [
     ],
   },
   {
-    id: "info", title: "Information and emergency", guideline: "HG 5, 7",
+    id: "info", title_ml: "വിവരങ്ങളും അടിയന്തര സംവിധാനങ്ങളും", title: "Information and emergency", guideline: "HG 5, 7",
     items: [
       { id: "I1", text: "Accessibility symbol at the accessible entrance; signs to it from other entrances", source: "HG 4.1.3(10); KPBR 42(8)(d)" },
       { id: "I2", text: "Braille or tactile signs", target: "900–1500 mm", source: "HG 5.4.5(6)" },

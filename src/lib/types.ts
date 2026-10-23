@@ -45,6 +45,7 @@ export interface EntranceAttrs {
 export interface RampAttrs {
   present: boolean | null;
   slope_ratio: number | null; // 12 means 1:12; lower number = steeper
+  run_m?: number | null; // longest single run between landings (HG Table 3.4)
   width_mm: number | null;
   handrails: "none" | "one" | "both" | null;
   surface: "firm" | "slippery" | "gravel" | null;
@@ -139,6 +140,7 @@ export interface Venue {
   popular?: boolean;
   google_says: GoogleSays;
   features: FeatureValue[];
+  documents_on_file?: { kind: string; label: string; expires_on: string | null }[];
 }
 
 // ---- Matcher output ----

@@ -1,5 +1,5 @@
 {
-  "_about": "Profile thresholds. HG = Harmonised Guidelines and Space Standards for Barrier Free Built Environment (MoUD 2016), via the Assam Social Welfare Dept / Shishu Sarothi overview. 'assumed' values are placeholders. Ramp gradient-by-length table, HG 2021 edition and KMBR 2019 clauses still to confirm. Edit values here, never in code.",
+  "_about": "Profile thresholds. HG = Harmonised Guidelines and Standards for Universal Accessibility in India 2021 (MoHUA). KPBR = Kerala Panchayat Building Rules 2019 (binding in village panchayats only). KMBR 2019 (Kochi, Thrikkakara) still to check. Where KPBR sets a lower legal minimum than HG: meeting HG = pass, meeting only KPBR = partial, below KPBR = fail. 'assumed' values are placeholders. Edit values here, never in code. Detail: docs/host-checklist-requirements.md.",
   "wheelchair": {
     "label": "Wheelchair",
     "label_ml": "വീൽചെയർ",
@@ -9,14 +9,36 @@
       "steps_tolerated_with_handrail": 0,
       "max_threshold_mm": 12,
       "min_door_mm": 900,
-      "_source": "HG: threshold max 12 mm, door clear width min 900 mm"
+      "_source": "HG 4.10.3: threshold max 12 mm; HG 4.1.4(2), KPBR 42(8)(c): door clear width min 900 mm"
     },
     "ramp": {
       "level": "required",
       "max_slope_ratio": 12,
+      "max_run_by_slope_m": [
+        [
+          12,
+          6
+        ],
+        [
+          14,
+          9
+        ],
+        [
+          15,
+          11
+        ],
+        [
+          20,
+          15
+        ],
+        [
+          25,
+          18
+        ]
+      ],
       "min_width_mm": 1200,
       "handrails": "required",
-      "_source": "HG: width 1200 mm, handrails both sides; slope 1:12 placeholder"
+      "_source": "HG 3.10.2 Table 3.4: [1:N, longest run in m]; steeper than 1:12 never allowed (also KPBR 42(3)). HG 3.10.3: width 1200 mm. HG 3.10.6: handrails both sides"
     },
     "lift": {
       "level": "required",
@@ -24,7 +46,9 @@
       "min_car_w_mm": 1500,
       "min_car_d_mm": 1500,
       "min_door_mm": 900,
-      "_source": "HG: car 1500 x 1500 mm, door 900 mm"
+      "_source": "HG 4.7.1(2): car 1500 x 1500 mm where space is limited (1900 x 1900 for new buildings); KPBR 42(2): 1100 x 2000 mm legal minimum; HG 4.7.2(1): door 900 mm",
+      "legal_min_car_w_mm": 1100,
+      "legal_min_car_d_mm": 2000
     },
     "toilet": {
       "level": "required",
@@ -34,16 +58,25 @@
       "min_door_mm": 900,
       "grab_bars": "required",
       "transfer_space": "required",
-      "_source": "HG: 2200 x 2000 mm, door 900 mm outward/sliding, 900 mm transfer space"
+      "_source": "HG 4.9.4, Table 4.1: 2200 x 2000 mm, door 900 mm outward/sliding, 900 mm transfer space; KPBR 42(4)(b): 1500 x 1750 mm legal minimum",
+      "legal_min_width_mm": 1500,
+      "legal_min_depth_mm": 1750
     },
     "dropoff_path": {
       "level": "required",
       "step_free": "required",
       "max_distance_m": 300,
-      "_source": "step-free firm path (HG); 300 m assumed"
+      "_source": "HG 3.5: step-free, firm walkway; 300 m assumed"
     },
-    "parking": { "level": "preferred", "max_distance_m": 30, "_source": "HG: within 30 m" },
-    "seating": { "level": "optional", "max_rest_interval_m": null }
+    "parking": {
+      "level": "preferred",
+      "max_distance_m": 30,
+      "_source": "HG 3.4.2(1), KPBR 42(5)(a): within 30 m"
+    },
+    "seating": {
+      "level": "optional",
+      "max_rest_interval_m": null
+    }
   },
   "crutches": {
     "label": "Crutches / walker / cane",
@@ -59,9 +92,31 @@
     "ramp": {
       "level": "required",
       "max_slope_ratio": 12,
+      "max_run_by_slope_m": [
+        [
+          12,
+          6
+        ],
+        [
+          14,
+          9
+        ],
+        [
+          15,
+          11
+        ],
+        [
+          20,
+          15
+        ],
+        [
+          25,
+          18
+        ]
+      ],
       "min_width_mm": 900,
       "handrails": "required",
-      "_source": "slope placeholder; 900 mm assumed"
+      "_source": "HG 3.10.2 Table 3.4; 900 mm width assumed"
     },
     "lift": {
       "level": "required",
@@ -80,9 +135,21 @@
       "grab_bars": "required",
       "transfer_space": "optional"
     },
-    "dropoff_path": { "level": "preferred", "step_free": "preferred", "max_distance_m": 200, "_source": "200 m assumed" },
-    "parking": { "level": "preferred", "max_distance_m": 30 },
-    "seating": { "level": "preferred", "max_rest_interval_m": 30, "_source": "HG: rest areas every 30 m" }
+    "dropoff_path": {
+      "level": "preferred",
+      "step_free": "preferred",
+      "max_distance_m": 200,
+      "_source": "200 m assumed"
+    },
+    "parking": {
+      "level": "preferred",
+      "max_distance_m": 30
+    },
+    "seating": {
+      "level": "preferred",
+      "max_rest_interval_m": 30,
+      "_source": "HG 3.5.1(3): seats every 30 m on walkways over 60 m (indoor corridors: every 50 m, HG 4.4.2)"
+    }
   },
   "low_stamina": {
     "label": "Low stamina",
@@ -94,7 +161,12 @@
       "max_threshold_mm": null,
       "min_door_mm": null
     },
-    "ramp": { "level": "optional", "max_slope_ratio": 12, "min_width_mm": null, "handrails": "preferred" },
+    "ramp": {
+      "level": "optional",
+      "max_slope_ratio": 12,
+      "min_width_mm": null,
+      "handrails": "preferred"
+    },
     "lift": {
       "level": "required",
       "needed_from_floor": 2,
@@ -111,8 +183,20 @@
       "grab_bars": "optional",
       "transfer_space": "optional"
     },
-    "dropoff_path": { "level": "preferred", "step_free": "optional", "max_distance_m": 150, "_source": "150 m assumed" },
-    "parking": { "level": "preferred", "max_distance_m": 30 },
-    "seating": { "level": "preferred", "max_rest_interval_m": 30, "_source": "HG: rest areas every 30 m" }
+    "dropoff_path": {
+      "level": "preferred",
+      "step_free": "optional",
+      "max_distance_m": 150,
+      "_source": "150 m assumed"
+    },
+    "parking": {
+      "level": "preferred",
+      "max_distance_m": 30
+    },
+    "seating": {
+      "level": "preferred",
+      "max_rest_interval_m": 30,
+      "_source": "HG 3.5.1(3): seats every 30 m on walkways over 60 m (indoor corridors: every 50 m, HG 4.4.2)"
+    }
   }
 }

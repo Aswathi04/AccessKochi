@@ -28,7 +28,6 @@ export function PhotoUpload({ venueId, onSaved }: { venueId: string; onSaved: (r
   const { settings, t } = useSettings();
   const [feature, setFeature] = useState<(typeof FEATURES)[number]>("ramp");
   const [reference, setReference] = useState<string>("none");
-  const [role, setRole] = useState<"visitor" | "host">("visitor");
   const [file, setFile] = useState<File | null>(null);
   const [preview, setPreview] = useState<string | null>(null);
   const [tilt, setTilt] = useState<number | null>(null);
@@ -63,7 +62,6 @@ export function PhotoUpload({ venueId, onSaved }: { venueId: string; onSaved: (r
       form.append("venue_id", venueId);
       form.append("feature", feature);
       form.append("reference", reference);
-      form.append("role", role);
       if (tilt != null && feature === "ramp") form.append("tilt_deg", String(tilt));
       form.append("profile", settings.profile);
       form.append("companion", settings.companion);
@@ -92,12 +90,6 @@ export function PhotoUpload({ venueId, onSaved }: { venueId: string; onSaved: (r
         <label className="block text-sm">{t("reference")}
           <select className={sel} value={reference} onChange={(e) => setReference(e.target.value)}>
             {REFS.map((r) => <option key={r.id} value={r.id}>{t(r.key)}</option>)}
-          </select>
-        </label>
-        <label className="block text-sm">{t("i_am")}
-          <select className={sel} value={role} onChange={(e) => setRole(e.target.value as "visitor" | "host")}>
-            <option value="visitor">{t("role_visitor")}</option>
-            <option value="host">{t("role_host")}</option>
           </select>
         </label>
         {feature === "ramp" && (

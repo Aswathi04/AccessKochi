@@ -1,6 +1,6 @@
 // GET /api/venues?profile=wheelchair&lat=10.01&lng=76.34&radius=15&category=restaurant&companion=with_companion&show_excluded=1
 import { NextRequest, NextResponse } from "next/server";
-import { getVenuesLive } from "@/lib/host";
+import { getVenuesLive, logSkips } from "@/lib/host";
 import { matchVenues } from "@/lib/matcher";
 import type { Category, Companion, ProfileId } from "@/lib/types";
 
@@ -11,13 +11,15 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: "profile must be wheelchair | crutches | low_stamina" }, { status: 400 });
   }
   const lat = q.get("lat"), lng = q.get("lng");
-  const results = matchVenues(await getVenuesLive(), {
+  const all = matchVenues(await getVenuesLive(), {
     profile,
     companion: (q.get("companion") ?? "alone") as Companion,
     location: lat && lng ? { lat: Number(lat), lng: Number(lng) } : undefined,
     radius_km: q.get("radius") ? Number(q.get("radius")) : 15,
     categories: q.getAll("category") as Category[],
-    include_excluded: q.get("show_excluded") === "1",
+    include_excluded: true,
   });
+  await logSkips(all.filter((r) => r.verdict === "fail").map((r) => ({ venue_id: r.venue_id, profile, reason: r.reasons[0] ?? null })));
+  const results = q.get("show_excluded") === "1" ? all : all.filter((r) => r.verdict !== "fail");
   return NextResponse.json({ profile, count: results.length, results });
 }
