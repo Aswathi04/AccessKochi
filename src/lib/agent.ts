@@ -168,7 +168,9 @@ export function heuristicParse(text: string, venues: Venue[]): Constraints {
       .map((a) => ({ ...a, d: Math.abs(a.pos - c.pos) }))
       .filter((a) => a.d < 30)
       .sort((x, y) => x.d - y.d)[0];
-    const label = t.slice(Math.max(0, c.pos - 12), c.pos + c.word.length + 12).trim();
+    // ~12 chars either side, widened to whole words
+    const end = t.indexOf(" ", c.pos + c.word.length + 12);
+    const label = t.slice(t.lastIndexOf(" ", Math.max(0, c.pos - 12)) + 1, end < 0 ? t.length : end).trim();
     stops.push({ venue_id: n?.venue.id ?? null, category: c.category, area: nearArea?.area ?? null, label });
   }
   // named venues whose category word wasn't said ("Periyar")
@@ -351,16 +353,17 @@ export function templateSummary(p: Omit<Plan, "summary" | "parsed_by" | "summary
 
 async function llmSummary(p: Omit<Plan, "summary" | "parsed_by" | "summary_by" | "language">, lang: Lang, request: string): Promise<{ text: string; by: string } | null> {
   const facts = {
-    stops: p.stops.map((s) => ({ stop: s.stop, name: s.name, verdict: s.verdict, problems: s.reasons, unconfirmed: s.unconfirmed, works: s.highlights, flags: s.flags.map((f) => f.detail), must_go: s.must_go })),
+    stops: p.stops.map((s) => ({ stop: s.stop, name: s.name, verdict: VERDICT_WORDS[lang][s.verdict], problems: s.reasons, unconfirmed: s.unconfirmed, works: s.highlights, flags: s.flags.map((f) => f.detail), must_go: s.must_go })),
     rejected: p.rejected.map((r) => ({ name: r.name, reason: r.reason })),
   };
   const system = [
     "You explain an accessibility trip plan in 2-4 short sentences.",
     "Use ONLY the facts in the JSON. Do not add any place, feature or number that is not in it.",
-    "Never say a place is \"fully accessible\". Use the verdict words: works for you / mostly works / not confirmed / has problems.",
+    "Never say a place is \"fully accessible\". Describe each stop with its \"verdict\" text exactly as given.",
     "Mention every unconfirmed item as \"unconfirmed, call ahead\". Mention skipped places and why.",
+    "Only items in a stop's \"unconfirmed\" list are unconfirmed. Items in \"works\" are confirmed; never call them unconfirmed.",
     "If sources disagree (flags), say so without picking a side.",
-    lang === "ml" ? "Write in simple Malayalam (Malayalam script). Keep place names in English." : "Write in simple English.",
+    lang === "ml" ? "Write in simple Malayalam (Malayalam script) only; translate problems and features too. Keep place names in English." : "Write in simple English.",
     'Reply as JSON: {"summary": "..."}',
   ].join("\n");
   const r = await chatJson<{ summary: string }>(
