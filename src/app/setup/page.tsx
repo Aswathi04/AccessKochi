@@ -9,7 +9,7 @@ export default function SetupPage() {
   return (
     <div className="space-y-6">
       <div className="mx-auto max-w-lg pt-2">
-        <h1 className="text-3xl font-medium">{t("app")}</h1>
+        <h1 className="text-3xl font-bold">{t("app")}</h1>
         <p className="text-lg text-muted">{t("tagline")}</p>
       </div>
       <ProfileForm wizard />
