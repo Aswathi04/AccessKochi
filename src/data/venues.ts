@@ -1,4 +1,4 @@
-// 28 DUMMY Kochi venues for the demo. Every venue is data_origin: "dummy".
+// 34 DUMMY Kochi venues for the demo. Every venue is data_origin: "dummy".
 // Businesses, hospitals, auditoriums and places of worship are FICTIONAL names.
 // Metro / Water Metro stations use real station names but DUMMY accessibility data,
 // so the UI must show the "dummy data" badge. Phone numbers are placeholders.
@@ -418,6 +418,83 @@ export const venues: Venue[] = [
       f("entrance", "visitor", { step_count: 2, threshold_mm: 0, door_type: "swing", door_width_mm: 900, handrail: "none" }, "medium", "reference_object", "2026-10-17"),
       f("ramp", "visitor", { present: false }, "medium", "visual_estimate", "2026-10-17"),
       f("toilet", "visitor", { accessible: false }, "medium", "visual_estimate", "2026-10-17"),
+    ],
+  },
+
+  // ---------------- Demo: "a movie near Edappally, then groceries" ----------------
+  // v29 + v32 work and are ~300 m apart; v30 (popular) and v33 (closest to the user) fail; v31, v34 work but are further.
+  {
+    ...base, id: "v29", name: "Edappally Cineplex", category: "theatre",
+    area: "Edappally", address: "NH 66 Service Road, Edappally", lat: 10.0268, lng: 76.3092, phone: ph("0129"),
+    floors: 3, upper_floor_areas: [{ name: "Screens", floor: 2 }],
+    google_says: sim(true, true, true, true),
+    features: [
+      f("entrance", "host", goodEntrance),
+      f("entrance", "visitor", { step_count: 0, threshold_mm: 0, door_type: "automatic" }, "medium", "reference_object", "2026-10-18"),
+      f("lift", "host", goodLift),
+      f("toilet", "host", goodToilet),
+      f("dropoff_path", "host", goodDropoff),
+      f("parking", "host", goodParking),
+      f("seating", "host", goodSeating),
+    ],
+  },
+  {
+    ...base, id: "v30", name: "Palarivattom Star Talkies", category: "theatre",
+    area: "Palarivattom", address: "Palarivattom Junction", lat: 10.0047, lng: 76.3079, phone: ph("0130"),
+    floors: 2, upper_floor_areas: [{ name: "Balcony", floor: 1 }], popular: true,
+    google_says: sim(true, null, null, null),
+    features: [
+      f("entrance", "host", { step_count: 4, threshold_mm: 0, door_type: "swing", door_width_mm: 900, handrail: "one" }, "medium", "self_reported", D, "Four steps up to the foyer"),
+      f("entrance", "visitor", { step_count: 4, handrail: "one" }, "medium", "visual_estimate", "2026-10-15"),
+      f("ramp", "visitor", { present: false }, "medium", "visual_estimate", "2026-10-15"),
+    ],
+  },
+  {
+    ...base, id: "v31", name: "Kakkanad Infopark Screens", category: "theatre",
+    area: "Kakkanad", address: "Infopark Road, Kakkanad", lat: 10.011, lng: 76.359, phone: ph("0131"),
+    floors: 2, upper_floor_areas: [{ name: "Screens", floor: 1 }],
+    google_says: sim(true, true, true, null),
+    features: [
+      f("entrance", "host", goodEntrance),
+      f("lift", "host", goodLift),
+      f("toilet", "host", goodToilet),
+      f("dropoff_path", "host", goodDropoff),
+      f("seating", "host", goodSeating),
+    ],
+  },
+  {
+    ...base, id: "v32", name: "Edappally Daily Supermarket", category: "grocery",
+    area: "Edappally", address: "Opposite Edappally Church, Edappally", lat: 10.025, lng: 76.3101, phone: ph("0132"),
+    floors: 1, upper_floor_areas: [],
+    google_says: sim(true, null, null, null),
+    features: [
+      f("entrance", "host", { ...goodEntrance, door_width_mm: 1500 }),
+      f("toilet", "host", goodToilet, "medium", "reference_object", D, "Customer toilet next to the billing area"),
+      f("dropoff_path", "host", { ...goodDropoff, distance_m: 10 }),
+      f("parking", "host", goodParking),
+      f("seating", "host", { rest_interval_m: 25, queue_seating: true, armrests: true }, "medium", "reference_object", D, "Chairs at the billing counters"),
+    ],
+  },
+  {
+    ...base, id: "v33", name: "Edappally Corner Stores", category: "grocery",
+    area: "Edappally", address: "Market Road, Edappally", lat: 10.0263, lng: 76.3122, phone: ph("0133"),
+    floors: 1, upper_floor_areas: [], popular: true,
+    google_says: sim(null, null, null, null),
+    features: [
+      f("entrance", "visitor", { step_count: 1, threshold_mm: 50, door_type: "swing", door_width_mm: 750, handrail: "none" }, "medium", "reference_object", "2026-10-19", "One step and a narrow door"),
+      f("ramp", "visitor", { present: false }, "medium", "visual_estimate", "2026-10-19"),
+    ],
+  },
+  {
+    ...base, id: "v34", name: "Palarivattom FreshCart", category: "grocery",
+    area: "Palarivattom", address: "Civil Line Road, Palarivattom", lat: 10.0028, lng: 76.3062, phone: ph("0134"),
+    floors: 1, upper_floor_areas: [],
+    google_says: sim(null, null, null, null),
+    features: [
+      f("entrance", "host", goodEntrance),
+      f("toilet", "host", goodToilet),
+      f("dropoff_path", "host", goodDropoff),
+      f("seating", "host", goodSeating),
     ],
   },
 ];

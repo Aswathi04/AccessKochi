@@ -1,6 +1,7 @@
 "use client";
 // Screens 2 + 3: "What's on your mind?" and the plan result.
 // Phone: big mic first, then the plan as stacked cards. Desktop: composer left, plan right.
+// After a plan, the next message continues the same trip ("grocery shopping too") until "New plan".
 import Link from "next/link";
 import { useState } from "react";
 import { MicButton } from "@/components/MicButton";
@@ -12,6 +13,7 @@ export default function PlanPage() {
   const { settings, t } = useSettings();
   const [text, setText] = useState("");
   const [plan, setPlan] = useState<Plan | null>(null);
+  const [turns, setTurns] = useState<string[]>([]);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -22,10 +24,12 @@ export default function PlanPage() {
       const res = await fetch("/api/agent", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ text: q, profile: settings.profile, companion: settings.companion, language: settings.language, location: settings.location }),
+        body: JSON.stringify({ text: q, profile: settings.profile, companion: settings.companion, language: settings.language, location: settings.location, context: plan?.context }),
       });
       if (!res.ok) throw new Error();
       setPlan(await res.json());
+      setTurns((prev) => (plan ? [...prev, q] : [q]));
+      setText("");
     } catch {
       setError(t("error_generic"));
     } finally {
@@ -61,7 +65,7 @@ export default function PlanPage() {
       {plan && (
         <div className="flex items-center gap-3">
           <MicButton onText={(s) => { setText(s); run(s); }} />
-          <button type="button" onClick={() => { setPlan(null); setText(""); }} className="min-h-12 rounded-xl border border-line px-4 font-semibold">
+          <button type="button" onClick={() => { setPlan(null); setTurns([]); setText(""); }} className="min-h-12 rounded-xl border border-line px-4 font-semibold">
             {t("new_plan")}
           </button>
         </div>
@@ -77,8 +81,18 @@ export default function PlanPage() {
       <div className="contents md:col-start-1 md:block md:space-y-6">
         {plan.stops.length > 0 && (
           <Card className="order-1 border-emerald-200 bg-emerald-50">
+            <ul className="mb-3 space-y-1 text-sm">
+              {turns.map((x, i) => <li key={i} className="rounded-xl bg-white/70 px-3 py-2"><strong>{t("you_said")}:</strong> {x}</li>)}
+            </ul>
             <h2 className="mb-1 text-lg font-bold">{t("your_plan")}</h2>
             <p>{plan.summary}</p>
+            {plan.follow_up && (
+              <div className="mt-3 space-y-2">
+                <p className="font-semibold">{plan.follow_up}</p>
+                <button type="button" disabled={busy} onClick={() => run(t("followup_ex"))}
+                  className="min-h-11 rounded-full border border-emerald-300 bg-white px-4 text-sm font-semibold">{t("followup_ex")}</button>
+              </div>
+            )}
           </Card>
         )}
         <div className="order-3">{composer}</div>
@@ -111,6 +125,22 @@ export default function PlanPage() {
                     {s.reasons.length > 0 && <ul className="mt-3 space-y-0.5">{s.reasons.map((r) => <li key={r} className="text-red-800">✕ {r}</li>)}</ul>}
                     {s.highlights.length > 0 && <ul className="mt-2 space-y-0.5">{s.highlights.map((h) => <li key={h} className="text-emerald-800">✓ {h}</li>)}</ul>}
                     {s.flags.map((f) => <p key={f.detail} className="mt-1 text-sm text-orange-800">⚑ {f.detail}</p>)}
+                    {s.alternatives.length > 0 && (
+                      <div className="mt-3 rounded-xl bg-bg p-3">
+                        <p className="mb-1 text-sm font-semibold">{t("other_options")}</p>
+                        <ul className="space-y-1">
+                          {s.alternatives.map((a) => (
+                            <li key={a.venue_id}>
+                              <Link href={`/venue/${a.venue_id}${q}`} className="flex min-h-11 flex-wrap items-center gap-2 text-sm">
+                                <span className="font-medium text-brand">{a.name}</span>
+                                <span className="text-muted">{a.area}{a.distance_km != null && ` · ~${a.distance_km} ${t("km")}`}</span>
+                                <VerdictBadge verdict={a.verdict} size="sm" />
+                              </Link>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
                     {s.unconfirmed.length > 0 && (
                       <p className="mt-3 rounded-xl bg-amber-50 p-3 text-sm text-amber-900">⚠ {t("unconfirmed")}: {s.unconfirmed.join(", ")}</p>
                     )}

@@ -104,7 +104,7 @@ export function PhotoUpload({ venueId, onSaved }: { venueId: string; onSaved: (r
 
       <label className="block cursor-pointer rounded-xl border-2 border-dashed border-line p-6 text-center">
         <span className="font-medium">📷 {t("take_photo")}</span>
-        <input type="file" accept="image/*" capture="environment" className="sr-only"
+        <input type="file" accept="image/*" className="sr-only"
           onChange={(e) => {
             const f = e.target.files?.[0] ?? null;
             setFile(f); setOut(null);

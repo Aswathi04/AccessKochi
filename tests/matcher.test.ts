@@ -6,9 +6,9 @@ const ev = (id: string, p: "wheelchair" | "crutches" | "low_stamina", companion?
   evaluateVenue(venuesById[id], p, { companion });
 
 describe("seed data", () => {
-  it("has 25-30 dummy venues", () => {
+  it("has 25-40 dummy venues", () => {
     expect(venues.length).toBeGreaterThanOrEqual(25);
-    expect(venues.length).toBeLessThanOrEqual(30);
+    expect(venues.length).toBeLessThanOrEqual(40);
     expect(venues.every((v) => v.data_origin === "dummy")).toBe(true);
     expect(venues.every((v) => v.google_says.simulated)).toBe(true);
   });

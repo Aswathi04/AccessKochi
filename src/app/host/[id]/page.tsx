@@ -281,7 +281,7 @@ function Item({ venueId, item, saved, photoUrl, documented, onSaved, readOnly }:
         {saved && !dirty && !readOnly && (
           <label className={`flex min-h-11 cursor-pointer items-center gap-2 rounded-xl border border-dashed border-line px-3 text-sm font-semibold ${busy ? "opacity-50" : ""}`}>
             📷 {busy === "photo" ? t("h_checking") : saved.photo_path ? t("h_replace_photo") : t("h_add_photo")}
-            <input type="file" accept="image/*" capture="environment" className="sr-only" disabled={!!busy} onChange={(e) => e.target.files?.[0] && upload(e.target.files[0])} />
+            <input type="file" accept="image/*" className="sr-only" disabled={!!busy} onChange={(e) => e.target.files?.[0] && upload(e.target.files[0])} />
           </label>
         )}
         {saved && !dirty && <span className="text-sm text-emerald-800">{t(saved.photo_path ? "h_saved_photo" : documented ? "h_saved_doc" : "h_saved_self")}</span>}
