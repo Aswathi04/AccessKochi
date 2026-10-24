@@ -24,13 +24,13 @@ export default function DiscoverPage() {
   }, [loaded, settings.profile, settings.companion, settings.location, cat, showExcluded]);
 
   const chip = (label: string, on: boolean, onClick: () => void) => (
-    <button type="button" onClick={onClick} aria-pressed={on}
-      className={`min-h-11 shrink-0 rounded-full border px-4 text-sm font-medium ${on ? "border-brand bg-brand text-brand-ink" : "border-line bg-card"}`}>{label}</button>
+    <button key={label} type="button" onClick={onClick} aria-pressed={on}
+      className={`min-h-11 shrink-0 rounded-full border-2 px-4 text-[0.9375rem] font-bold ${on ? "border-brand bg-brand text-brand-ink" : "border-control bg-card text-brand hover:bg-soft-blue"}`}>{label}</button>
   );
 
   return (
     <div className="space-y-4">
-      <h1 className="text-2xl font-medium">{t("browse_title")}</h1>
+      <h1 className="text-2xl font-bold">{t("browse_title")}</h1>
       <div className="no-scrollbar -mx-4 flex gap-2 overflow-x-auto px-4 md:mx-0 md:flex-wrap md:px-0">
         {chip(t("all"), cat === null, () => setCat(null))}
         {CATS.map((c) => chip(t(`cat_${c}` as const), cat === c, () => setCat(c)))}
@@ -46,7 +46,7 @@ export default function DiscoverPage() {
               <Link href={`/venue/${r.venue_id}`} className="block h-full">
                 <Card className={`h-full border-l-8 hover:border-brand ${VERDICT_STRIPE[r.verdict]}`}>
                   <div className="flex flex-wrap items-center gap-2">
-                    <h2 className="mr-auto font-medium">{r.name}</h2>
+                    <h2 className="mr-auto font-bold">{r.name}</h2>
                     <VerdictBadge verdict={r.verdict} size="sm" />
                     <DummyBadge />
                     {r.distance_km != null && <span className="text-sm text-muted">{r.distance_km} {t("km")}</span>}
