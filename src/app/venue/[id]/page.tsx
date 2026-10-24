@@ -13,11 +13,11 @@ function TrackCell({ tr }: { tr?: TrackResult }) {
   const { t } = useSettings();
   if (!tr) return <span className="text-muted">{t("no_data")}</span>;
   return (
-    <div className="space-y-1">
+    <div className="min-w-0 space-y-1">
       <VerdictBadge verdict={tr.verdict} size="sm" />
       <div><ConfidenceTag c={tr.confidence} /></div>
-      <div className="text-xs text-muted">{tr.source_type.replace("_", " ")} · {tr.updated_at}</div>
-      {tr.reasons.map((r) => <div key={r} className="text-xs">{r}</div>)}
+      <div className="text-sm text-muted">{tr.source_type.replace("_", " ")} · {tr.updated_at}</div>
+      {tr.reasons.map((r) => <div key={r} className="text-sm">{r}</div>)}
     </div>
   );
 }
@@ -50,12 +50,12 @@ export default function VenuePage({ params }: { params: Promise<{ id: string }> 
 
   return (
     <div className="space-y-4">
-      <button type="button" onClick={() => history.back()} className="min-h-11 text-sm font-medium text-brand">← {t("back")}</button>
+      <button type="button" onClick={() => history.back()} className="min-h-11 text-sm font-bold text-brand">← {t("back")}</button>
       <div className="grid gap-4 md:grid-cols-[minmax(0,3fr)_minmax(0,2fr)] md:items-start">
         <div className="space-y-4">
           <Card className={`border-l-8 ${VERDICT_STRIPE[result.verdict]}`}>
             <div className="flex flex-wrap items-center gap-2">
-              <h1 className="text-2xl font-medium leading-tight">{venue.name}</h1>
+              <h1 className="text-2xl font-bold leading-tight">{venue.name}</h1>
               {venue.data_origin === "dummy" && <DummyBadge />}
             </div>
             {venue.name_ml && <p className="text-muted">{venue.name_ml}</p>}
@@ -68,26 +68,26 @@ export default function VenuePage({ params }: { params: Promise<{ id: string }> 
             )}
             <div className="mt-4 grid grid-cols-2 gap-2">
               {venue.phone && (
-                <a href={`tel:${venue.phone.replace(/[^\d+]/g, "")}`} className="flex min-h-12 items-center justify-center rounded-xl bg-brand font-medium text-brand-ink">📞 {t("call")}</a>
+                <a href={`tel:${venue.phone.replace(/[^\d+]/g, "")}`} className="flex min-h-12 items-center justify-center rounded-xl bg-brand font-bold text-brand-ink">📞 {t("call")}</a>
               )}
-              <a href={maps} target="_blank" rel="noreferrer" className={`flex min-h-12 items-center justify-center rounded-xl border border-line font-medium text-brand ${venue.phone ? "" : "col-span-2"}`}>🧭 {t("directions")}</a>
+              <a href={maps} target="_blank" rel="noreferrer" className={`flex min-h-12 items-center justify-center rounded-full border-2 border-brand font-bold text-brand hover:bg-soft-blue ${venue.phone ? "" : "col-span-2"}`}>🧭 {t("directions")}</a>
             </div>
           </Card>
 
-          <h2 className="pt-2 text-lg font-medium">{t("features_title")}</h2>
+          <h2 className="pt-2 text-lg font-bold">{t("features_title")}</h2>
           <ul className="space-y-3">
             {result.features.map((f) => (
               <li key={f.feature}>
                 <Card className={`border-l-8 ${VERDICT_STRIPE[f.verdict]}`}>
                   <div className="flex flex-wrap items-center gap-2">
-                    <h3 className="mr-auto font-medium">{t(`feature_${f.feature}` as const)}</h3>
+                    <h3 className="mr-auto font-bold">{t(`feature_${f.feature}` as const)}</h3>
                     <VerdictBadge verdict={f.verdict} size="sm" />
                   </div>
-                  <p className="text-xs text-muted">{f.level}</p>
-                  {f.conflict && <p className="mt-1 text-sm font-medium text-flag">⚑ {t("conflict")}</p>}
-                  <div className="mt-3 grid grid-cols-2 gap-3 border-t border-line pt-3">
-                    <div><p className="mb-1 text-xs font-medium uppercase tracking-wide text-muted">{t("host")}</p><TrackCell tr={f.tracks.host} /></div>
-                    <div><p className="mb-1 text-xs font-medium uppercase tracking-wide text-muted">{t("visitor")}</p><TrackCell tr={f.tracks.visitor} /></div>
+                  <p className="text-sm text-muted">{f.level}</p>
+                  {f.conflict && <p className="mt-1 text-sm font-bold text-flag">⚑ {t("conflict")}</p>}
+                  <div className="mt-3 grid grid-cols-1 gap-3 border-t min-[380px]:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] border-line pt-3">
+                    <div><p className="mb-1 text-sm font-bold text-muted">{t("host")}</p><TrackCell tr={f.tracks.host} /></div>
+                    <div><p className="mb-1 text-sm font-bold text-muted">{t("visitor")}</p><TrackCell tr={f.tracks.visitor} /></div>
                   </div>
                 </Card>
               </li>
@@ -97,8 +97,8 @@ export default function VenuePage({ params }: { params: Promise<{ id: string }> 
 
         <div className="space-y-4">
           <Card className="bg-deep">
-            <h2 className="font-medium">{t("google_says")} {g.simulated && <span className="text-xs text-muted">(simulated)</span>}</h2>
-            <p className="mb-2 text-xs text-muted">{t("google_note")}</p>
+            <h2 className="font-bold">{t("google_says")} {g.simulated && <span className="text-sm text-muted">(simulated)</span>}</h2>
+            <p className="mb-2 text-sm text-muted">{t("google_note")}</p>
             <ul className="grid grid-cols-2 gap-1 text-sm">
               {gRow("Wheelchair entrance", g.wheelchair_entrance)}
               {gRow("Parking", g.wheelchair_parking)}
@@ -109,27 +109,27 @@ export default function VenuePage({ params }: { params: Promise<{ id: string }> 
 
           {!!venue.documents_on_file?.length && (
             <Card>
-              <h2 className="font-medium">📄 {t("v_docs")}</h2>
+              <h2 className="font-bold">📄 {t("v_docs")}</h2>
               <ul className="mt-2 space-y-1 text-sm">
                 {venue.documents_on_file.map((d) => (
                   <li key={d.kind + d.expires_on}>{d.label}{d.expires_on && <span className="text-muted"> · {fill(t("v_valid_until"), { d: d.expires_on })}</span>}</li>
                 ))}
               </ul>
-              <p className="mt-2 text-xs text-muted">{t("v_docs_note")}</p>
+              <p className="mt-2 text-sm text-muted">{t("v_docs_note")}</p>
             </Card>
           )}
 
           {reports.length > 0 && (
             <Card>
-              <h2 className="font-medium">{t("v_reports")}</h2>
+              <h2 className="font-bold">{t("v_reports")}</h2>
               <ul className="mt-2 divide-y divide-line">
                 {reports.map((r) => (
                   <li key={r.id} className="space-y-1 py-3 text-sm">
                     <div className="flex flex-wrap items-center gap-2">
-                      <span className="mr-auto font-medium">{t(`feature_${r.feature}`)}</span>
+                      <span className="mr-auto font-bold">{t(`feature_${r.feature}`)}</span>
                       <ConfidenceTag c={r.reading_confidence} />
                     </div>
-                    <p className="text-xs text-muted">{r.created_at.slice(0, 10)}</p>
+                    <p className="text-sm text-muted">{r.created_at.slice(0, 10)}</p>
                     {r.reasons.map((x) => <p key={x}>• {x}</p>)}
                     {r.host_reply && <p className="rounded-lg bg-deep p-2">{t("v_host_replied")} {r.host_reply}</p>}
                   </li>
@@ -140,7 +140,7 @@ export default function VenuePage({ params }: { params: Promise<{ id: string }> 
 
           <Card>
             <details className="group">
-              <summary className="flex min-h-11 cursor-pointer list-none items-center text-lg font-medium">
+              <summary className="flex min-h-11 cursor-pointer list-none items-center text-lg font-bold">
                 📷 {t("help_verify")}<span className="ml-auto text-muted transition group-open:rotate-180" aria-hidden>▾</span>
               </summary>
               <div className="mt-3"><PhotoUpload venueId={venue.id} onSaved={(r) => { setResult(r); load(); }} /></div>
