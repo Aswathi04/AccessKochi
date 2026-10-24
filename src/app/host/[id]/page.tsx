@@ -57,7 +57,7 @@ export default function HostVenuePage({ params }: { params: Promise<{ id: string
   if (!hostConfigured) return <Card><p>{t("not_configured")}</p></Card>;
   if (loading) return <p className="text-muted">…</p>;
   if (!session) return null;
-  if (error) return <Card><p className="text-bad">{error}</p><Link href="/host" className="mt-3 inline-block font-medium text-brand">← {t("h_back_host")}</Link></Card>;
+  if (error) return <Card><p className="text-bad">{error}</p><Link href="/host" className="mt-3 inline-block font-bold text-brand">← {t("h_back_host")}</Link></Card>;
   if (!data) return <p className="text-muted">…</p>;
 
   const published = data.claim?.status === "approved";
@@ -68,10 +68,10 @@ export default function HostVenuePage({ params }: { params: Promise<{ id: string
 
   return (
     <div className="space-y-5">
-      <Link href={ro ? "/admin" : "/host"} className="min-h-11 text-sm font-medium text-brand">← {t(ro ? "h_back_admin" : "h_back_host")}</Link>
+      <Link href={ro ? "/admin" : "/host"} className="min-h-11 text-sm font-bold text-brand">← {t(ro ? "h_back_admin" : "h_back_host")}</Link>
       {ro && <p className="rounded-xl bg-deep p-4" role="status">{t("h_admin_ro")}</p>}
       <div>
-        <h1 className="text-2xl font-medium md:text-3xl">{data.venue.name}</h1>
+        <h1 className="text-2xl font-bold md:text-3xl">{data.venue.name}</h1>
         <p className="text-muted">{data.venue.address}</p>
       </div>
       {!published && !ro && (
@@ -89,14 +89,14 @@ export default function HostVenuePage({ params }: { params: Promise<{ id: string
           <div className="no-scrollbar -mx-4 flex gap-2 overflow-x-auto px-4 md:mx-0 md:px-0" role="tablist">
             {TABS.map((k) => (
               <button key={k} type="button" role="tab" aria-selected={tab === k} onClick={() => setTab(k)}
-                className={`min-h-11 shrink-0 rounded-full border px-4 text-sm font-medium ${tab === k ? "border-brand bg-brand text-brand-ink" : "border-line bg-card"}`}>
+                className={`min-h-11 shrink-0 rounded-full border-2 px-4 text-[0.9375rem] font-bold ${tab === k ? "border-brand bg-brand text-brand-ink" : "border-control bg-card text-brand hover:bg-soft-blue"}`}>
                 {t(tabLabel[k])}{k === "reports" && data.reports.some((r) => !r.host_reply) ? " •" : ""}
               </button>
             ))}
           </div>
           {tab === "checklist" && (
             <>
-              <h2 className="text-lg font-medium">{t("h_checklist")}</h2>
+              <h2 className="text-lg font-bold">{t("h_checklist")}</h2>
               <p className="text-sm text-muted">{t("h_checklist_d")}</p>
               {t("h_items_en") && <p className="text-sm text-muted">{t("h_items_en")}</p>}
               {data.sections.map((s) => (
@@ -131,10 +131,10 @@ function LiveStatus({ venueId, rows, onChange, readOnly }: { venueId: string; ro
   };
   return (
     <Card>
-      <h2 className="text-lg font-medium">{t("h_now")}</h2>
+      <h2 className="text-lg font-bold">{t("h_now")}</h2>
       <p className="text-sm text-muted">{t("h_now_d")}</p>
-      {!readOnly && <label className="mt-3 block text-sm font-medium">{t("h_for_how_long")}
-        <select className="mt-1 min-h-12 w-full rounded-xl border border-line bg-card px-3" value={hours} onChange={(e) => setHours(Number(e.target.value))}>
+      {!readOnly && <label className="mt-3 block text-sm font-bold">{t("h_for_how_long")}
+        <select className="mt-1 min-h-12 w-full ui-field rounded-xl px-3" value={hours} onChange={(e) => setHours(Number(e.target.value))}>
           {DURATIONS.map((h) => <option key={h} value={h}>{t(`h_dur_${h}`)}</option>)}
         </select>
       </label>}
@@ -144,10 +144,10 @@ function LiveStatus({ venueId, rows, onChange, readOnly }: { venueId: string; ro
           return (
             <li key={s.kind}>
               <button type="button" role="switch" aria-checked={!!a} disabled={readOnly || busy === s.kind} onClick={() => toggle(s.kind)}
-                className={`flex min-h-14 w-full items-center gap-3 rounded-xl border-2 px-4 text-left font-medium ${a ? "border-bad bg-bad-soft text-bad" : "border-line"}`}>
+                className={`flex min-h-14 w-full items-center gap-3 rounded-xl border-2 px-4 text-left font-bold ${a ? "border-bad bg-bad-soft text-bad" : "border-control"}`}>
                 <span aria-hidden className="text-2xl">{s.icon}</span>
                 <span className="flex-1">{t(`h_st_${s.kind}`)}
-                  {a && <span className="block text-xs font-normal">{fill(t("h_until_tap"), { d: when(a.until, settings.language) })}</span>}
+                  {a && <span className="block text-sm font-normal">{fill(t("h_until_tap"), { d: when(a.until, settings.language) })}</span>}
                 </span>
                 <span className={`h-7 w-12 rounded-full p-1 ${a ? "bg-bad" : "bg-line"}`} aria-hidden>
                   <span className={`block h-5 w-5 rounded-full bg-deep transition ${a ? "translate-x-5" : ""}`} />
@@ -166,14 +166,14 @@ function Preview({ preview }: { preview: Record<ProfileId, VenueResult> }) {
   const { t } = useSettings();
   return (
     <Card>
-      <h2 className="text-lg font-medium">{t("h_preview")}</h2>
+      <h2 className="text-lg font-bold">{t("h_preview")}</h2>
       <p className="text-sm text-muted">{t("h_preview_d")}</p>
       <ul className="mt-3 space-y-3">
         {PROFILES.map((p) => {
           const r = preview[p];
           return (
             <li key={p} className={`rounded-xl border border-line border-l-8 p-3 ${VERDICT_STRIPE[r.verdict]}`}>
-              <div className="flex flex-wrap items-center gap-2"><span className="mr-auto font-medium">{t(`h_pf_${p}`)}</span><VerdictBadge verdict={r.verdict} size="sm" /></div>
+              <div className="flex flex-wrap items-center gap-2"><span className="mr-auto font-bold">{t(`h_pf_${p}`)}</span><VerdictBadge verdict={r.verdict} size="sm" /></div>
               {r.reasons.slice(0, 3).map((x) => <p key={x} className="text-sm text-bad">✕ {x}</p>)}
               {r.unconfirmed.length > 0 && <p className="text-sm text-warn">⚠ {t("unconfirmed")}: {r.unconfirmed.slice(0, 4).join(", ")}</p>}
               {r.flags.filter((f) => f.kind === "conflict").map((f) => <p key={f.detail} className="text-sm text-flag">⚑ {f.detail}</p>)}
@@ -195,10 +195,10 @@ function Section({ venueId, section, score, answers, photoUrls, documented, onSa
       <details className="group" open={score.answered < section.items.length}>
         <summary className="flex min-h-12 cursor-pointer list-none flex-wrap items-center gap-2">
           <span className="mr-auto">
-            <span className="block text-lg font-medium">{settings.language === "ml" ? section.title_ml : section.title}</span>
-            <span className="block text-xs text-muted">{section.guideline}{documented && " · 📄"}</span>
+            <span className="block text-lg font-bold">{settings.language === "ml" ? section.title_ml : section.title}</span>
+            <span className="block text-sm text-muted">{section.guideline}{documented && " · 📄"}</span>
           </span>
-          <span className="rounded-full bg-deep px-3 py-1 text-sm font-medium">{fill(t("h_met"), { m: score.met, n: score.total })}</span>
+          <span className="rounded-full bg-deep px-3 py-1 text-sm font-bold">{fill(t("h_met"), { m: score.met, n: score.total })}</span>
           <span className="text-muted transition group-open:rotate-180" aria-hidden>▾</span>
         </summary>
         <ul className="mt-3 divide-y divide-line">
@@ -214,7 +214,7 @@ function AiNote({ check }: { check: AiCheck }) {
   const cls = check.verdict === "agrees" ? "bg-good-soft text-good" : check.verdict === "disagrees" ? "bg-flag-soft text-flag" : "bg-deep text-mist";
   return (
     <p className={`mt-2 rounded-lg p-2 text-sm ${cls}`} role="status">
-      {t(`h_ai_${check.verdict}`)}{check.verdict === "disagrees" && <span className="block text-xs">{check.detail}</span>}
+      {t(`h_ai_${check.verdict}`)}{check.verdict === "disagrees" && <span className="block text-sm">{check.detail}</span>}
     </p>
   );
 }
@@ -248,20 +248,20 @@ function Item({ venueId, item, saved, photoUrl, documented, onSaved, readOnly }:
 
   return (
     <li className="py-4">
-      <p className="font-medium">{item.text}</p>
+      <p className="font-bold">{item.text}</p>
       {item.target && <p className="text-sm">{t("h_requirement")} <strong>{item.target}</strong></p>}
-      <p className="text-xs text-muted">{item.source}</p>
+      <p className="text-sm text-muted">{item.source}</p>
       <div className="mt-2 grid grid-cols-2 gap-2 sm:grid-cols-4" role="radiogroup" aria-label={item.text}>
         {ANSWERS.map((a) => (
           <button key={a} type="button" role="radio" aria-checked={answer === a} disabled={readOnly} onClick={() => setAnswer(a)}
-            className={`min-h-11 rounded-xl border px-2 text-sm font-medium ${answer === a ? (a === "yes" ? "border-good bg-good-soft text-good" : a === "no" ? "border-bad bg-bad-soft text-bad" : "border-brand bg-deep") : "border-line"}`}>
+            className={`min-h-11 rounded-xl border-2 px-2 text-sm font-bold ${answer === a ? (a === "yes" ? "border-good bg-good-soft text-good" : a === "no" ? "border-bad bg-bad-soft text-bad" : "border-brand bg-deep") : "border-control"}`}>
             {t(`h_a_${a}`)}
           </button>
         ))}
       </div>
       {answer === "na" && (
         <input aria-label={t("h_na_reason")} placeholder={t("h_na_reason")} value={reason} onChange={(e) => setReason(e.target.value)} disabled={readOnly}
-          className="mt-2 min-h-11 w-full rounded-xl border border-line px-3" />
+          className="mt-2 min-h-11 w-full ui-field rounded-xl px-3" />
       )}
       {item.inputs && answer && answer !== "na" && (
         <div className="mt-2 flex flex-wrap gap-2">
@@ -269,7 +269,7 @@ function Item({ venueId, item, saved, photoUrl, documented, onSaved, readOnly }:
             <label key={inp.key} className="text-sm">{inp.label}
               <span className="mt-1 flex items-center gap-1">
                 <input inputMode="decimal" value={values[inp.key] ?? ""} disabled={readOnly} onChange={(e) => setValues({ ...values, [inp.key]: e.target.value.replace(/[^\d.]/g, "") })}
-                  className="min-h-11 w-28 rounded-xl border border-line px-3" />
+                  className="min-h-11 w-28 ui-field rounded-xl px-3" />
                 <span className="text-muted">{inp.unit}</span>
               </span>
             </label>
@@ -279,7 +279,7 @@ function Item({ venueId, item, saved, photoUrl, documented, onSaved, readOnly }:
       <div className="mt-2 flex flex-wrap items-center gap-3">
         {dirty && answer && !readOnly && <PrimaryButton type="button" onClick={save} disabled={!!busy}>{busy === "save" ? t("h_saving") : t("h_save")}</PrimaryButton>}
         {saved && !dirty && !readOnly && (
-          <label className={`flex min-h-11 cursor-pointer items-center gap-2 rounded-xl border border-dashed border-line px-3 text-sm font-medium ${busy ? "opacity-50" : ""}`}>
+          <label className={`flex min-h-11 cursor-pointer items-center gap-2 rounded-xl border-2 border-dashed border-control px-3 text-sm font-bold ${busy ? "opacity-50" : ""}`}>
             📷 {busy === "photo" ? t("h_checking") : saved.photo_path ? t("h_replace_photo") : t("h_add_photo")}
             <input type="file" accept="image/*" className="sr-only" disabled={!!busy} onChange={(e) => e.target.files?.[0] && upload(e.target.files[0])} />
           </label>
@@ -324,7 +324,7 @@ function Documents({ venueId, data, onSaved, readOnly }: { venueId: string; data
     setBusy(false);
   };
 
-  const field = "mt-1 min-h-12 w-full rounded-xl border border-line bg-card px-3";
+  const field = "mt-1 min-h-12 w-full ui-field rounded-xl px-3";
   const badge = (d: DocRow) => d.status === "approved" && !d.valid
     ? { text: t("h_doc_expired"), cls: "bg-deep text-mist" }
     : { text: t(`h_doc_${d.status as "pending" | "approved" | "rejected"}`), cls: d.status === "approved" ? "bg-good-soft text-good" : d.status === "rejected" ? "bg-bad-soft text-bad" : "bg-warn-soft text-warn" };
@@ -341,13 +341,13 @@ function Documents({ venueId, data, onSaved, readOnly }: { venueId: string; data
               <li key={d.id}>
                 <Card className="space-y-1">
                   <div className="flex flex-wrap items-center gap-2">
-                    <h3 className="mr-auto font-medium">{ml ? DOC_KINDS[d.kind].label_ml : DOC_KINDS[d.kind].label}</h3>
-                    <span className={`rounded-full px-3 py-1 text-xs font-medium ${b.cls}`}>{b.text}</span>
+                    <h3 className="mr-auto font-bold">{ml ? DOC_KINDS[d.kind].label_ml : DOC_KINDS[d.kind].label}</h3>
+                    <span className={`rounded-full px-3 py-1 text-sm font-bold ${b.cls}`}>{b.text}</span>
                   </div>
                   <p className="text-sm text-muted">{[d.ref_no, d.issued_by, d.issued_on && `${t("h_doc_issued")} ${d.issued_on}`, d.expires_on && `${t("h_doc_expires")} ${d.expires_on}`].filter(Boolean).join(" · ")}</p>
                   <p className="text-sm">{t("h_doc_covers")} {(DOC_KINDS[d.kind].sections ?? d.sections).map(title).join(", ")}</p>
                   {d.admin_note && <p className="rounded-xl bg-deep p-2 text-sm">{t("h_admin_says")} {d.admin_note}</p>}
-                  {d.file_url && <a href={d.file_url} target="_blank" rel="noreferrer" className="inline-flex min-h-11 items-center font-medium text-brand">{t("h_doc_open")}</a>}
+                  {d.file_url && <a href={d.file_url} target="_blank" rel="noreferrer" className="inline-flex min-h-11 items-center font-bold text-brand">{t("h_doc_open")}</a>}
                 </Card>
               </li>
             );
@@ -357,22 +357,22 @@ function Documents({ venueId, data, onSaved, readOnly }: { venueId: string; data
       {!readOnly && (
         <Card>
           <form className="grid gap-3 md:grid-cols-2" onSubmit={(e) => { e.preventDefault(); submit(); }}>
-            <label className="block text-sm font-medium md:col-span-2">{t("h_doc_type")}
+            <label className="block text-sm font-bold md:col-span-2">{t("h_doc_type")}
               <select className={field} value={kind} onChange={(e) => { setKind(e.target.value as DocKind); setSections([]); }}>
                 {(Object.keys(DOC_KINDS) as DocKind[]).map((k) => <option key={k} value={k}>{ml ? DOC_KINDS[k].label_ml : DOC_KINDS[k].label}</option>)}
               </select>
             </label>
-            <label className="block text-sm font-medium">{t("h_doc_ref")}<input className={field} value={refNo} onChange={(e) => setRefNo(e.target.value)} /></label>
-            <label className="block text-sm font-medium">{t("h_doc_issuer")}<input className={field} value={issuer} onChange={(e) => setIssuer(e.target.value)} /></label>
-            <label className="block text-sm font-medium">{t("h_doc_issued")}<input type="date" className={field} value={issued} onChange={(e) => setIssued(e.target.value)} /></label>
-            <label className="block text-sm font-medium">{t("h_doc_expires")}{info.needsExpiry && " *"}
+            <label className="block text-sm font-bold">{t("h_doc_ref")}<input className={field} value={refNo} onChange={(e) => setRefNo(e.target.value)} /></label>
+            <label className="block text-sm font-bold">{t("h_doc_issuer")}<input className={field} value={issuer} onChange={(e) => setIssuer(e.target.value)} /></label>
+            <label className="block text-sm font-bold">{t("h_doc_issued")}<input type="date" className={field} value={issued} onChange={(e) => setIssued(e.target.value)} /></label>
+            <label className="block text-sm font-bold">{t("h_doc_expires")}{info.needsExpiry && " *"}
               <input type="date" required={info.needsExpiry} className={field} value={expires} onChange={(e) => setExpires(e.target.value)} />
             </label>
             {info.sections ? (
               <p className="text-sm md:col-span-2">{t("h_doc_covers")} {info.sections.map(title).join(", ")}</p>
             ) : (
               <fieldset className="md:col-span-2">
-                <legend className="text-sm font-medium">{t("h_doc_sections")}</legend>
+                <legend className="text-sm font-bold">{t("h_doc_sections")}</legend>
                 <div className="mt-1 grid gap-1 sm:grid-cols-2">
                   {data.sections.map((s) => (
                     <label key={s.id} className="flex min-h-11 items-center gap-2 text-sm">
@@ -384,10 +384,10 @@ function Documents({ venueId, data, onSaved, readOnly }: { venueId: string; data
                 </div>
               </fieldset>
             )}
-            <label className="block text-sm font-medium md:col-span-2">{t("h_doc_file")}
+            <label className="block text-sm font-bold md:col-span-2">{t("h_doc_file")}
               <input required type="file" accept="application/pdf,image/*" className={`${field} py-2`} onChange={(e) => setFile(e.target.files?.[0] ?? null)} />
             </label>
-            <p className="text-xs text-muted md:col-span-2">{ml ? NOT_ACCEPTED_ML : NOT_ACCEPTED}</p>
+            <p className="text-sm text-muted md:col-span-2">{ml ? NOT_ACCEPTED_ML : NOT_ACCEPTED}</p>
             {msg && <p className={`md:col-span-2 ${msg.ok ? "text-good" : "text-bad"}`} role="status">{msg.text}</p>}
             <PrimaryButton type="submit" className="md:col-span-2" disabled={busy || !file || (!info.sections && !sections.length) || (info.needsExpiry && !expires)}>
               {busy ? t("h_sending") : t("h_doc_send")}
@@ -408,10 +408,10 @@ function Reports({ venueId, reports, canReply, onSaved }: { venueId: string; rep
       {reports.length === 0 ? <p className="text-muted">{t("h_reports_none")}</p> : reports.map((r) => (
         <Card key={r.id} className="space-y-2">
           <div className="flex flex-wrap items-center gap-2">
-            <h3 className="mr-auto font-medium">{t(`feature_${r.feature}`)}</h3>
+            <h3 className="mr-auto font-bold">{t(`feature_${r.feature}`)}</h3>
             <ConfidenceTag c={r.reading_confidence} />
           </div>
-          <p className="text-xs text-muted">{when(r.created_at, settings.language)}</p>
+          <p className="text-sm text-muted">{when(r.created_at, settings.language)}</p>
           {r.reasons.length > 0 && <ul className="text-sm">{r.reasons.map((x) => <li key={x}>• {x}</li>)}</ul>}
           {r.note && <p className="text-sm text-muted">{r.note}</p>}
           {r.host_reply ? <p className="rounded-xl bg-deep p-3 text-sm">{t("h_replied")} {r.host_reply}</p>
@@ -435,8 +435,8 @@ function ReplyForm({ venueId, reportId, onSaved }: { venueId: string; reportId: 
   };
   return (
     <form className="space-y-2" onSubmit={(e) => { e.preventDefault(); send(); }}>
-      <label className="block text-sm font-medium">{t("h_your_reply")}
-        <textarea rows={2} maxLength={500} value={text} onChange={(e) => setText(e.target.value)} className="mt-1 w-full rounded-xl border border-line px-3 py-2" />
+      <label className="block text-sm font-bold">{t("h_your_reply")}
+        <textarea rows={2} maxLength={500} value={text} onChange={(e) => setText(e.target.value)} className="mt-1 w-full ui-field rounded-xl px-3 py-2" />
       </label>
       <PrimaryButton type="submit" disabled={busy || !text.trim()}>{busy ? t("h_sending") : t("h_reply_send")}</PrimaryButton>
       {error && <p className="text-bad" role="alert">{error}</p>}
@@ -449,13 +449,13 @@ function Insights({ insights }: { insights: Data["insights"] }) {
   return (
     <div className="space-y-4">
       <Card>
-        <h2 className="text-lg font-medium">{t("h_ins_skips")}</h2>
+        <h2 className="text-lg font-bold">{t("h_ins_skips")}</h2>
         <p className="text-sm text-muted">{t("h_ins_skips_d")}</p>
         {insights.skips.length === 0 ? <p className="mt-2">{t("h_ins_none")}</p> : (
           <ul className="mt-3 space-y-2">
             {insights.skips.map((s) => (
               <li key={s.profile} className="rounded-xl bg-deep p-3">
-                <p className="font-medium">{t(`h_pf_${s.profile}`)}: {fill(t("h_ins_times"), { n: s.count })}</p>
+                <p className="font-bold">{t(`h_pf_${s.profile}`)}: {fill(t("h_ins_times"), { n: s.count })}</p>
                 {s.top_reason && <p className="text-sm">{t("h_ins_top")} {s.top_reason}</p>}
               </li>
             ))}
@@ -463,16 +463,16 @@ function Insights({ insights }: { insights: Data["insights"] }) {
         )}
       </Card>
       <Card>
-        <h2 className="text-lg font-medium">{t("h_ins_fixes")}</h2>
+        <h2 className="text-lg font-bold">{t("h_ins_fixes")}</h2>
         <p className="text-sm text-muted">{t("h_ins_fixes_d")}</p>
         {insights.fixes.length === 0 ? <p className="mt-2">{t("h_ins_nofix")}</p> : (
           <ol className="mt-3 space-y-3">
             {insights.fixes.map((f, i) => (
               <li key={f.fix} className="rounded-xl border border-line p-3">
-                <p className="font-medium">{i + 1}. {settings.language === "ml" ? f.fix_ml : f.fix}</p>
+                <p className="font-bold">{i + 1}. {settings.language === "ml" ? f.fix_ml : f.fix}</p>
                 <p className="text-sm">{t("h_ins_cost")} <strong>{f.cost}</strong></p>
                 <p className="text-sm text-muted">{t("h_ins_helps")} {f.profiles.map((p) => t(`h_pf_${p}`)).join(", ")}{f.skips > 0 && ` · ${fill(t("h_ins_times"), { n: f.skips })}`}</p>
-                <p className="text-xs text-muted">{t("h_ins_because")} {f.because}</p>
+                <p className="text-sm text-muted">{t("h_ins_because")} {f.because}</p>
               </li>
             ))}
           </ol>
