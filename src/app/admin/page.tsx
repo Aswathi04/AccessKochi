@@ -47,20 +47,20 @@ export default function AdminPage() {
 
   if (!hostConfigured) return <Card><p>{t("not_configured")}</p></Card>;
   if (loading) return <p className="text-muted">…</p>;
-  if (error) return <Card><p className="text-red-700">{error}</p></Card>;
+  if (error) return <Card><p className="text-bad">{error}</p></Card>;
   if (!session || !admin) return null;
 
   const pill = (on: boolean) => `min-h-11 shrink-0 rounded-full border px-4 text-sm font-medium ${on ? "border-brand bg-brand text-brand-ink" : "border-line bg-card"}`;
   return (
     <div className="space-y-5">
       <div className="flex flex-wrap items-center gap-3">
-        <h1 className="mr-auto text-2xl font-bold md:text-3xl">{t("a_title")}</h1>
-        <button type="button" onClick={() => signOut(router)} className="min-h-11 rounded-full border border-line px-4 text-sm font-semibold">{t("sign_out")}</button>
+        <h1 className="mr-auto text-2xl font-medium md:text-3xl">{t("a_title")}</h1>
+        <button type="button" onClick={() => signOut(router)} className="min-h-11 rounded-full border border-line px-4 text-sm font-medium">{t("sign_out")}</button>
       </div>
       <div className="grid grid-cols-2 gap-2" role="tablist">
         {(["claims", "docs"] as const).map((q) => (
           <button key={q} type="button" role="tab" aria-selected={queue === q} onClick={() => { setQueue(q); setTab("pending"); }}
-            className={`min-h-12 rounded-xl border-2 font-semibold ${queue === q ? "border-brand bg-emerald-50" : "border-line bg-card"}`}>{t(q === "claims" ? "a_claims" : "a_docs")}</button>
+            className={`min-h-12 rounded-xl border-2 font-medium ${queue === q ? "ui-chip border-brand bg-raise" : "border-line bg-card"}`}>{t(q === "claims" ? "a_claims" : "a_docs")}</button>
         ))}
       </div>
       <div className="no-scrollbar -mx-4 flex gap-2 overflow-x-auto px-4 md:mx-0 md:px-0" role="tablist">
@@ -99,10 +99,10 @@ function ClaimCard({ c, onDone }: { c: Claim; onDone: () => void }) {
     <li>
       <Card className="h-full space-y-3">
         <div>
-          <h2 className="text-lg font-semibold">{c.venue?.name ?? c.venue_id}</h2>
+          <h2 className="text-lg font-medium">{c.venue?.name ?? c.venue_id}</h2>
           <p className="text-sm text-muted">{c.venue?.address}{c.venue?.phone && ` · ${t("a_listed_phone")} ${c.venue.phone}`}</p>
         </div>
-        {c.dispute && <p className="rounded-xl bg-orange-50 p-3 text-sm font-semibold text-orange-900">{t("a_dispute")}</p>}
+        {c.dispute && <p className="rounded-xl bg-flag-soft p-3 text-sm font-medium text-flag">{t("a_dispute")}</p>}
         <dl className="grid grid-cols-[auto_1fr] gap-x-3 gap-y-1 text-sm">
           <dt className="text-muted">{t("a_claimant")}</dt><dd>{c.full_name} ({c.role})</dd>
           <dt className="text-muted">{t("email")}</dt><dd className="break-all">{c.email}</dd>
@@ -110,19 +110,19 @@ function ClaimCard({ c, onDone }: { c: Claim; onDone: () => void }) {
           <dt className="text-muted">{t("a_sent")}</dt><dd>{when(c.created_at)}</dd>
           {c.decided_by && <><dt className="text-muted">{t("a_decided_by")}</dt><dd>{c.decided_by}</dd></>}
         </dl>
-        {c.proof_note && <p className="rounded-xl bg-bg p-3 text-sm">“{c.proof_note}”</p>}
-        <Link href={`/host/${c.venue_id}`} className="flex min-h-12 items-center justify-center rounded-xl border border-line font-semibold text-brand">{t("a_view_checklist")}</Link>
-        {c.proof_url && <a href={c.proof_url} target="_blank" rel="noreferrer" className="flex min-h-12 items-center justify-center rounded-xl border border-line font-semibold text-brand">{t("a_open_proof")}</a>}
+        {c.proof_note && <p className="rounded-xl bg-deep p-3 text-sm">“{c.proof_note}”</p>}
+        <Link href={`/host/${c.venue_id}`} className="flex min-h-12 items-center justify-center rounded-xl border border-line font-medium text-brand">{t("a_view_checklist")}</Link>
+        {c.proof_url && <a href={c.proof_url} target="_blank" rel="noreferrer" className="flex min-h-12 items-center justify-center rounded-xl border border-line font-medium text-brand">{t("a_open_proof")}</a>}
         <p className="text-xs text-muted">{t("a_check_claim")}</p>
         <label className="block text-sm font-medium">{t("a_note")}
           <textarea rows={2} value={note} onChange={(e) => setNote(e.target.value)} className="mt-1 w-full rounded-xl border border-line px-3 py-2" />
         </label>
         <div className="grid grid-cols-3 gap-2">
           <PrimaryButton type="button" disabled={busy} onClick={() => decide("approved", note)}>{t("a_approve")}</PrimaryButton>
-          <button type="button" disabled={busy || !note.trim()} onClick={() => decide("more_info", note)} className="min-h-12 rounded-xl border border-line font-semibold disabled:opacity-50">{t("a_more")}</button>
-          <button type="button" disabled={busy || !note.trim()} onClick={() => decide("rejected", note)} className="min-h-12 rounded-xl border border-red-300 font-semibold text-red-800 disabled:opacity-50">{t("a_reject")}</button>
+          <button type="button" disabled={busy || !note.trim()} onClick={() => decide("more_info", note)} className="min-h-12 rounded-xl border border-line font-medium disabled:opacity-50">{t("a_more")}</button>
+          <button type="button" disabled={busy || !note.trim()} onClick={() => decide("rejected", note)} className="min-h-12 rounded-xl border border-bad/60 font-medium text-bad disabled:opacity-50">{t("a_reject")}</button>
         </div>
-        {error && <p className="text-red-700" role="alert">{error}</p>}
+        {error && <p className="text-bad" role="alert">{error}</p>}
       </Card>
     </li>
   );
@@ -139,7 +139,7 @@ function DocCard({ d, onDone }: { d: Doc; onDone: () => void }) {
     <li>
       <Card className="h-full space-y-3">
         <div>
-          <h2 className="text-lg font-semibold">{ml ? info?.label_ml : info?.label}</h2>
+          <h2 className="text-lg font-medium">{ml ? info?.label_ml : info?.label}</h2>
           <p className="text-sm text-muted">{d.venue?.name ?? d.venue_id} · {d.venue?.address}</p>
         </div>
         <dl className="grid grid-cols-[auto_1fr] gap-x-3 gap-y-1 text-sm">
@@ -151,17 +151,17 @@ function DocCard({ d, onDone }: { d: Doc; onDone: () => void }) {
           <dt className="text-muted">{t("a_sent")}</dt><dd>{when(d.created_at)}</dd>
           {d.decided_by && <><dt className="text-muted">{t("a_decided_by")}</dt><dd>{d.decided_by}</dd></>}
         </dl>
-        {d.file_url && <a href={d.file_url} target="_blank" rel="noreferrer" className="flex min-h-12 items-center justify-center rounded-xl border border-line font-semibold text-brand">{t("h_doc_open")}</a>}
-        <Link href={`/host/${d.venue_id}`} className="flex min-h-12 items-center justify-center rounded-xl border border-line font-semibold text-brand">{t("a_view_checklist")}</Link>
+        {d.file_url && <a href={d.file_url} target="_blank" rel="noreferrer" className="flex min-h-12 items-center justify-center rounded-xl border border-line font-medium text-brand">{t("h_doc_open")}</a>}
+        <Link href={`/host/${d.venue_id}`} className="flex min-h-12 items-center justify-center rounded-xl border border-line font-medium text-brand">{t("a_view_checklist")}</Link>
         <p className="text-xs text-muted">{t("a_check")} {info?.check}</p>
         <label className="block text-sm font-medium">{t("a_note_doc")}
           <textarea rows={2} value={note} onChange={(e) => setNote(e.target.value)} className="mt-1 w-full rounded-xl border border-line px-3 py-2" />
         </label>
         <div className="grid grid-cols-2 gap-2">
           <PrimaryButton type="button" disabled={busy} onClick={() => decide("approved", note)}>{t("a_approve")}</PrimaryButton>
-          <button type="button" disabled={busy || !note.trim()} onClick={() => decide("rejected", note)} className="min-h-12 rounded-xl border border-red-300 font-semibold text-red-800 disabled:opacity-50">{t("a_reject")}</button>
+          <button type="button" disabled={busy || !note.trim()} onClick={() => decide("rejected", note)} className="min-h-12 rounded-xl border border-bad/60 font-medium text-bad disabled:opacity-50">{t("a_reject")}</button>
         </div>
-        {error && <p className="text-red-700" role="alert">{error}</p>}
+        {error && <p className="text-bad" role="alert">{error}</p>}
       </Card>
     </li>
   );

@@ -38,18 +38,18 @@ export default function StartPage() {
     if (error) { setError(error.message); setBusy(false); }
   };
 
-  if (error) return <Card><p className="text-red-700" role="alert">{error}</p></Card>;
+  if (error) return <Card><p className="text-bad" role="alert">{error}</p></Card>;
   if (admin !== false || uses) return <p className="text-muted">…</p>;
   return (
     <div className="mx-auto max-w-lg space-y-4">
-      <h1 className="text-2xl font-bold">{t("uses_q")}</h1>
+      <h1 className="text-2xl font-medium">{t("uses_q")}</h1>
       <div className="grid gap-3" role="radiogroup" aria-label={t("uses_q")}>
         {CHOICES.map((c) => (
           <button key={c.id} type="button" role="radio" aria-checked={false} disabled={busy} onClick={() => choose(c.id)}
             className="flex min-h-20 items-center gap-4 rounded-2xl border-2 border-line bg-card p-4 text-left disabled:opacity-50">
             <span className="text-4xl" aria-hidden>{c.icon}</span>
             <span>
-              <span className="block text-lg font-semibold">{t(`uses_${c.id}`)}</span>
+              <span className="block text-lg font-medium">{t(`uses_${c.id}`)}</span>
               <span className="block text-sm text-muted">{t(`uses_${c.id}_d`)}</span>
             </span>
           </button>

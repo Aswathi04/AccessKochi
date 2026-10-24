@@ -37,7 +37,7 @@ export function AuthForm() {
 
   return (
     <Card className="mx-auto max-w-md">
-      <h1 className="text-2xl font-bold">{t("signin_title")}</h1>
+      <h1 className="text-2xl font-medium">{t("signin_title")}</h1>
       <p className="mt-1 text-muted">{t("signin_d")}</p>
       <form className="mt-4 space-y-3" onSubmit={(e) => { e.preventDefault(); if (sent) verify(); else send(); }}>
         {!sent ? (
@@ -54,14 +54,14 @@ export function AuthForm() {
               className="min-h-12 w-full rounded-xl border border-line px-4 text-2xl tracking-widest" />
           </>
         )}
-        {error && <p className="text-red-700" role="alert">{error}</p>}
+        {error && <p className="text-bad" role="alert">{error}</p>}
         <PrimaryButton type="submit" className="w-full" disabled={busy || !email || (sent && code.length < 6)}>
           {busy ? t("wait") : sent ? t("verify") : t("send_code")}
         </PrimaryButton>
         {sent && (
           <div className="grid grid-cols-2 gap-2">
-            <button type="button" className="min-h-11 text-sm font-semibold text-brand" onClick={() => { setSent(false); setCode(""); setError(null); }}>{t("edit_email")}</button>
-            <button type="button" className="min-h-11 text-sm font-semibold text-brand disabled:text-muted" disabled={busy || wait > 0} onClick={send}>
+            <button type="button" className="min-h-11 text-sm font-medium text-brand" onClick={() => { setSent(false); setCode(""); setError(null); }}>{t("edit_email")}</button>
+            <button type="button" className="min-h-11 text-sm font-medium text-brand disabled:text-muted" disabled={busy || wait > 0} onClick={send}>
               {wait > 0 ? `${t("resend_in")} ${wait}s` : t("resend")}
             </button>
           </div>

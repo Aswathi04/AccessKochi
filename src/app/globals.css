@@ -1,41 +1,118 @@
 @import "tailwindcss";
 
+/* Auros-inspired: abyssal teal canvas, teal surface stack for depth (no shadows), white headings,
+   silver/mist body text, lavender for highlights, aurora gradient only on primary actions.
+   All text/background pairs meet WCAG AA on the dark surfaces. */
 :root {
-  --bg: #f7f5f0;
-  --card: #ffffff;
-  --ink: #1d2320;
-  --muted: #5b6560;
-  --line: #e3e0d8;
-  --brand: #0f6e5f;
-  --brand-ink: #ffffff;
+  color-scheme: dark; /* native selects, date pickers and scrollbars follow the dark theme */
+  --bg: #012624; /* Liquid Abyss: canvas */
+  --deep: #011d1c; /* Liquid Deep: recessed */
+  --card: #003734; /* Liquid Kelp: raised */
+  --raise: #0a4642; /* one step above kelp: selected / hover */
+  --ink: #ffffff; /* headings, primary text */
+  --mist: #edfffe; /* body text */
+  --muted: #bbc7c6; /* secondary text */
+  --line: rgba(255, 255, 255, 0.14);
+  --brand: #8ff0e8; /* aqua: links, selected fills (with dark text) */
+  --brand-ink: #012624;
+  --lavender: #fde9ff;
+  --good: #7ee2c5;
+  --warn: #ffd98a;
+  --bad: #ffa3b1;
+  --flag: #ffc08a;
+  --aurora: linear-gradient(90deg, #cbfffc 0%, #edfffe 26%, #fffdfa 48%, #fad1ff 89%);
+  --bio: linear-gradient(90deg, #00827c 0%, #cbfffc 100%);
 }
 
 @theme inline {
   --color-bg: var(--bg);
+  --color-deep: var(--deep);
   --color-card: var(--card);
+  --color-raise: var(--raise);
   --color-ink: var(--ink);
+  --color-mist: var(--mist);
   --color-muted: var(--muted);
   --color-line: var(--line);
   --color-brand: var(--brand);
   --color-brand-ink: var(--brand-ink);
-  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans Malayalam", "Noto Sans", sans-serif;
+  --color-lavender: var(--lavender);
+  --color-good: var(--good);
+  --color-good-soft: rgb(126 226 197 / 0.14);
+  --color-warn: var(--warn);
+  --color-warn-soft: rgb(255 217 138 / 0.13);
+  --color-bad: var(--bad);
+  --color-bad-soft: rgb(255 163 177 / 0.14);
+  --color-flag: var(--flag);
+  --color-flag-soft: rgb(255 192 138 / 0.13);
+  --font-sans: var(--font-body), ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, var(--font-ml), "Noto Sans Malayalam", sans-serif;
+  --font-display: var(--font-body), var(--font-ml), "Noto Sans Malayalam", ui-sans-serif, system-ui, sans-serif;
+  --font-logo: var(--font-body), ui-sans-serif, system-ui, sans-serif;
 }
 
 body {
-  background: var(--bg);
-  color: var(--ink);
+  color: var(--mist);
   font-family: var(--font-sans);
   font-size: 17px;
   line-height: 1.5;
   -webkit-tap-highlight-color: transparent;
   overscroll-behavior-y: none;
+  background-color: var(--bg);
+  /* bioluminescent glow at the top edge, teal into faint pink (decorative) */
+  background-image:
+    radial-gradient(60rem 28rem at 85% -8rem, rgba(250, 209, 255, 0.10), transparent 70%),
+    radial-gradient(50rem 30rem at 10% -10rem, rgba(0, 130, 124, 0.35), transparent 70%);
+  background-attachment: fixed;
+  background-repeat: no-repeat;
 }
+
+h1, h2, h3 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  color: var(--ink);
+  letter-spacing: -0.02em;
+}
+h1 { letter-spacing: -0.035em; line-height: 1.05; }
+
+::placeholder { color: #8fa6a4; opacity: 1; }
 
 /* horizontal chip rows: swipe, no visible scrollbar */
 .no-scrollbar { scrollbar-width: none; }
 .no-scrollbar::-webkit-scrollbar { display: none; }
 
+/* in the components layer so utilities (e.g. coloured border-l stripes) can override them */
+@layer components {
+  /* surfaces: depth from the teal stack, no shadows */
+  .ui-card { border: 1px solid rgba(255, 255, 255, 0.06); }
+  .ui-chip { border: 1px solid var(--line); }
+  .ui-press:active:not(:disabled) { opacity: 0.85; }
+
+  /* uppercase tracked eyebrow, the instrument-label look */
+  .ui-kicker {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  /* primary action: the aurora gradient, dark text */
+  .ui-aurora {
+    background-image: var(--aurora);
+    color: #1b1b1b;
+  }
+
+  /* the bioluminescent orb (mic button, logo mark) */
+  .ui-orb {
+    background: radial-gradient(circle at 35% 30%, #edfffe 0%, #8ff0e8 28%, #00827c 62%, #003734 100%);
+    color: #012624;
+  }
+}
+
 :focus-visible {
-  outline: 3px solid #f2a900;
-  outline-offset: 2px;
+  outline: 2px solid var(--brand);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
 }

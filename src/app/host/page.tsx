@@ -13,7 +13,7 @@ interface Claim { id: string; venue_id: string; venue_name: string; role: string
 interface Me { email: string; admin: boolean; claims: Claim[] }
 
 const STATUS_CLS: Record<string, string> = {
-  pending: "bg-amber-100 text-amber-900", approved: "bg-emerald-100 text-emerald-900", rejected: "bg-red-100 text-red-900", more_info: "bg-orange-100 text-orange-900",
+  pending: "bg-warn-soft text-warn", approved: "bg-good-soft text-good", rejected: "bg-bad-soft text-bad", more_info: "bg-flag-soft text-flag",
 };
 type ClaimStatus = "pending" | "approved" | "rejected" | "more_info";
 type Role = "owner" | "manager" | "staff";
@@ -36,19 +36,19 @@ export default function HostHome() {
   if (!hostConfigured) return <Card><p>{t("not_configured")}</p></Card>;
   if (loading) return <p className="text-muted">…</p>;
   if (!session) return null;
-  if (!me || me.admin) return error ? <p className="text-red-700" role="alert">{error}</p> : <p className="text-muted">…</p>;
+  if (!me || me.admin) return error ? <p className="text-bad" role="alert">{error}</p> : <p className="text-muted">…</p>;
 
   return (
     <div className="space-y-6">
       <div className="flex flex-wrap items-center gap-3">
-        <h1 className="mr-auto text-2xl font-bold md:text-3xl">{t("h_dash")}</h1>
-        <button type="button" onClick={() => signOut(router)} className="min-h-11 rounded-full border border-line px-4 text-sm font-semibold">{t("sign_out")}</button>
+        <h1 className="mr-auto text-2xl font-medium md:text-3xl">{t("h_dash")}</h1>
+        <button type="button" onClick={() => signOut(router)} className="min-h-11 rounded-full border border-line px-4 text-sm font-medium">{t("sign_out")}</button>
       </div>
       <p className="text-muted">{fill(t("h_signed_in"), { e: session.user.email ?? "" })}</p>
-      {error && <p className="text-red-700" role="alert">{error}</p>}
+      {error && <p className="text-bad" role="alert">{error}</p>}
 
       <section className="space-y-3">
-        <h2 className="text-lg font-bold">{t("h_your_venues")}</h2>
+        <h2 className="text-lg font-medium">{t("h_your_venues")}</h2>
         {me.claims.length === 0 ? <p className="text-muted">{t("h_no_venues")}</p> : (
           <ul className="grid gap-3 md:grid-cols-2">
             {me.claims.map((c) => {
@@ -56,13 +56,13 @@ export default function HostHome() {
                 <li key={c.id}>
                   <Card className="h-full">
                     <div className="flex flex-wrap items-center gap-2">
-                      <h3 className="mr-auto font-semibold">{c.venue_name}</h3>
-                      <span className={`rounded-full px-3 py-1 text-xs font-semibold ${STATUS_CLS[c.status]}`}>{t(`h_cs_${c.status as ClaimStatus}`)}</span>
+                      <h3 className="mr-auto font-medium">{c.venue_name}</h3>
+                      <span className={`rounded-full px-3 py-1 text-xs font-medium ${STATUS_CLS[c.status]}`}>{t(`h_cs_${c.status as ClaimStatus}`)}</span>
                     </div>
                     <p className="text-sm text-muted">{t("h_you")} {t(`h_role_${c.role as Role}`)}{c.dispute && ` · ${t("h_dispute")}`}</p>
-                    {c.admin_note && <p className="mt-2 rounded-xl bg-bg p-3 text-sm">{t("h_admin_says")} {c.admin_note}</p>}
+                    {c.admin_note && <p className="mt-2 rounded-xl bg-deep p-3 text-sm">{t("h_admin_says")} {c.admin_note}</p>}
                     {c.status !== "rejected" && (
-                      <Link href={`/host/${c.venue_id}`} className="mt-3 flex min-h-12 items-center justify-center rounded-xl bg-brand font-semibold text-brand-ink">
+                      <Link href={`/host/${c.venue_id}`} className="mt-3 flex min-h-12 items-center justify-center rounded-xl bg-brand font-medium text-brand-ink">
                         {c.status === "approved" ? t("h_manage") : t("h_fill_draft")}
                       </Link>
                     )}
@@ -107,7 +107,7 @@ function ClaimForm({ onDone, taken }: { onDone: () => void; taken: Set<string> }
   const field = "mt-1 min-h-12 w-full rounded-xl border border-line bg-card px-3";
   return (
     <Card>
-      <h2 className="text-lg font-bold">{t("h_claim")}</h2>
+      <h2 className="text-lg font-medium">{t("h_claim")}</h2>
       <p className="text-sm text-muted">{t("h_claim_d")}</p>
       <form className="mt-4 grid gap-3 md:grid-cols-2" onSubmit={(e) => { e.preventDefault(); submit(); }}>
         <label className="block text-sm font-medium md:col-span-2">{t("h_venue")}
@@ -136,7 +136,7 @@ function ClaimForm({ onDone, taken }: { onDone: () => void; taken: Set<string> }
           <textarea className={`${field} py-2`} rows={2} value={note} onChange={(e) => setNote(e.target.value)} />
         </label>
         <p className="text-xs text-muted md:col-span-2">{t("h_claim_rule")}</p>
-        {msg && <p className={`md:col-span-2 ${msg.ok ? "text-emerald-800" : "text-red-700"}`} role="status">{msg.text}</p>}
+        {msg && <p className={`md:col-span-2 ${msg.ok ? "text-good" : "text-bad"}`} role="status">{msg.text}</p>}
         <PrimaryButton type="submit" className="md:col-span-2" disabled={busy || !venueId || !name || !file}>{busy ? t("h_sending") : t("h_send_claim")}</PrimaryButton>
       </form>
     </Card>

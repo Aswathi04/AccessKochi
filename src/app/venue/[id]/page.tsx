@@ -50,44 +50,44 @@ export default function VenuePage({ params }: { params: Promise<{ id: string }> 
 
   return (
     <div className="space-y-4">
-      <button type="button" onClick={() => history.back()} className="min-h-11 text-sm font-semibold text-brand">← {t("back")}</button>
+      <button type="button" onClick={() => history.back()} className="min-h-11 text-sm font-medium text-brand">← {t("back")}</button>
       <div className="grid gap-4 md:grid-cols-[minmax(0,3fr)_minmax(0,2fr)] md:items-start">
         <div className="space-y-4">
           <Card className={`border-l-8 ${VERDICT_STRIPE[result.verdict]}`}>
             <div className="flex flex-wrap items-center gap-2">
-              <h1 className="text-2xl font-bold leading-tight">{venue.name}</h1>
+              <h1 className="text-2xl font-medium leading-tight">{venue.name}</h1>
               {venue.data_origin === "dummy" && <DummyBadge />}
             </div>
             {venue.name_ml && <p className="text-muted">{venue.name_ml}</p>}
             <p className="text-sm text-muted">{venue.address}</p>
             <div className="mt-3"><VerdictBadge verdict={result.verdict} size="lg" /></div>
-            {result.reasons.length > 0 && <ul className="mt-3 space-y-0.5">{result.reasons.map((r) => <li key={r} className="text-red-800">✕ {r}</li>)}</ul>}
-            {result.flags.map((f) => <p key={f.detail} className="mt-1 text-sm text-orange-800">⚑ {f.detail}</p>)}
+            {result.reasons.length > 0 && <ul className="mt-3 space-y-0.5">{result.reasons.map((r) => <li key={r} className="text-bad">✕ {r}</li>)}</ul>}
+            {result.flags.map((f) => <p key={f.detail} className="mt-1 text-sm text-flag">⚑ {f.detail}</p>)}
             {result.unconfirmed.length > 0 && (
-              <p className="mt-3 rounded-xl bg-amber-50 p-3 text-sm text-amber-900">⚠ {t("unconfirmed")}: {result.unconfirmed.join(", ")}</p>
+              <p className="mt-3 rounded-xl bg-warn-soft p-3 text-sm text-warn">⚠ {t("unconfirmed")}: {result.unconfirmed.join(", ")}</p>
             )}
             <div className="mt-4 grid grid-cols-2 gap-2">
               {venue.phone && (
-                <a href={`tel:${venue.phone.replace(/[^\d+]/g, "")}`} className="flex min-h-12 items-center justify-center rounded-xl bg-brand font-semibold text-brand-ink">📞 {t("call")}</a>
+                <a href={`tel:${venue.phone.replace(/[^\d+]/g, "")}`} className="flex min-h-12 items-center justify-center rounded-xl bg-brand font-medium text-brand-ink">📞 {t("call")}</a>
               )}
-              <a href={maps} target="_blank" rel="noreferrer" className={`flex min-h-12 items-center justify-center rounded-xl border border-line font-semibold text-brand ${venue.phone ? "" : "col-span-2"}`}>🧭 {t("directions")}</a>
+              <a href={maps} target="_blank" rel="noreferrer" className={`flex min-h-12 items-center justify-center rounded-xl border border-line font-medium text-brand ${venue.phone ? "" : "col-span-2"}`}>🧭 {t("directions")}</a>
             </div>
           </Card>
 
-          <h2 className="pt-2 text-lg font-bold">{t("features_title")}</h2>
+          <h2 className="pt-2 text-lg font-medium">{t("features_title")}</h2>
           <ul className="space-y-3">
             {result.features.map((f) => (
               <li key={f.feature}>
                 <Card className={`border-l-8 ${VERDICT_STRIPE[f.verdict]}`}>
                   <div className="flex flex-wrap items-center gap-2">
-                    <h3 className="mr-auto font-semibold">{t(`feature_${f.feature}` as const)}</h3>
+                    <h3 className="mr-auto font-medium">{t(`feature_${f.feature}` as const)}</h3>
                     <VerdictBadge verdict={f.verdict} size="sm" />
                   </div>
                   <p className="text-xs text-muted">{f.level}</p>
-                  {f.conflict && <p className="mt-1 text-sm font-semibold text-orange-700">⚑ {t("conflict")}</p>}
+                  {f.conflict && <p className="mt-1 text-sm font-medium text-flag">⚑ {t("conflict")}</p>}
                   <div className="mt-3 grid grid-cols-2 gap-3 border-t border-line pt-3">
-                    <div><p className="mb-1 text-xs font-semibold uppercase tracking-wide text-muted">{t("host")}</p><TrackCell tr={f.tracks.host} /></div>
-                    <div><p className="mb-1 text-xs font-semibold uppercase tracking-wide text-muted">{t("visitor")}</p><TrackCell tr={f.tracks.visitor} /></div>
+                    <div><p className="mb-1 text-xs font-medium uppercase tracking-wide text-muted">{t("host")}</p><TrackCell tr={f.tracks.host} /></div>
+                    <div><p className="mb-1 text-xs font-medium uppercase tracking-wide text-muted">{t("visitor")}</p><TrackCell tr={f.tracks.visitor} /></div>
                   </div>
                 </Card>
               </li>
@@ -96,8 +96,8 @@ export default function VenuePage({ params }: { params: Promise<{ id: string }> 
         </div>
 
         <div className="space-y-4">
-          <Card className="bg-slate-50">
-            <h2 className="font-semibold">{t("google_says")} {g.simulated && <span className="text-xs text-muted">(simulated)</span>}</h2>
+          <Card className="bg-deep">
+            <h2 className="font-medium">{t("google_says")} {g.simulated && <span className="text-xs text-muted">(simulated)</span>}</h2>
             <p className="mb-2 text-xs text-muted">{t("google_note")}</p>
             <ul className="grid grid-cols-2 gap-1 text-sm">
               {gRow("Wheelchair entrance", g.wheelchair_entrance)}
@@ -109,7 +109,7 @@ export default function VenuePage({ params }: { params: Promise<{ id: string }> 
 
           {!!venue.documents_on_file?.length && (
             <Card>
-              <h2 className="font-semibold">📄 {t("v_docs")}</h2>
+              <h2 className="font-medium">📄 {t("v_docs")}</h2>
               <ul className="mt-2 space-y-1 text-sm">
                 {venue.documents_on_file.map((d) => (
                   <li key={d.kind + d.expires_on}>{d.label}{d.expires_on && <span className="text-muted"> · {fill(t("v_valid_until"), { d: d.expires_on })}</span>}</li>
@@ -121,7 +121,7 @@ export default function VenuePage({ params }: { params: Promise<{ id: string }> 
 
           {reports.length > 0 && (
             <Card>
-              <h2 className="font-semibold">{t("v_reports")}</h2>
+              <h2 className="font-medium">{t("v_reports")}</h2>
               <ul className="mt-2 divide-y divide-line">
                 {reports.map((r) => (
                   <li key={r.id} className="space-y-1 py-3 text-sm">
@@ -131,7 +131,7 @@ export default function VenuePage({ params }: { params: Promise<{ id: string }> 
                     </div>
                     <p className="text-xs text-muted">{r.created_at.slice(0, 10)}</p>
                     {r.reasons.map((x) => <p key={x}>• {x}</p>)}
-                    {r.host_reply && <p className="rounded-lg bg-bg p-2">{t("v_host_replied")} {r.host_reply}</p>}
+                    {r.host_reply && <p className="rounded-lg bg-deep p-2">{t("v_host_replied")} {r.host_reply}</p>}
                   </li>
                 ))}
               </ul>
@@ -140,7 +140,7 @@ export default function VenuePage({ params }: { params: Promise<{ id: string }> 
 
           <Card>
             <details className="group">
-              <summary className="flex min-h-11 cursor-pointer list-none items-center text-lg font-semibold">
+              <summary className="flex min-h-11 cursor-pointer list-none items-center text-lg font-medium">
                 📷 {t("help_verify")}<span className="ml-auto text-muted transition group-open:rotate-180" aria-hidden>▾</span>
               </summary>
               <div className="mt-3"><PhotoUpload venueId={venue.id} onSaved={(r) => { setResult(r); load(); }} /></div>

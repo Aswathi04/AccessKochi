@@ -42,7 +42,7 @@ export default function PlanPage() {
 
   const composer = (
     <div className="space-y-5">
-      <h1 className="text-2xl font-bold md:text-3xl">
+      <h1 className="inline-block text-2xl md:text-3xl">
         {settings.name ? `${settings.name}, ` : ""}{t("mind_q")}
       </h1>
       {!plan && <div className="py-4"><MicButton big onText={(s) => { setText(s); run(s); }} /></div>}
@@ -52,20 +52,20 @@ export default function PlanPage() {
           className="min-h-14 flex-1 resize-none rounded-2xl border border-line bg-card px-4 py-3 text-lg"
           onKeyDown={(e) => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); run(); } }} />
         <button type="submit" disabled={busy || !text.trim()} aria-label={t("plan_btn")}
-          className="min-h-14 w-14 shrink-0 rounded-2xl bg-brand text-2xl text-brand-ink disabled:opacity-40">{busy ? "…" : "➜"}</button>
+          className="ui-chip ui-press min-h-14 w-14 shrink-0 rounded-2xl bg-raise text-2xl text-ink disabled:opacity-40">{busy ? "…" : "➜"}</button>
       </form>
       <div className="no-scrollbar -mx-4 flex gap-2 overflow-x-auto px-4 md:mx-0 md:flex-wrap md:px-0">
         {examples.map((ex) => (
           <button key={ex} type="button" onClick={() => { setText(ex); run(ex); }}
-            className="min-h-11 shrink-0 rounded-full border border-line bg-card px-4 py-2 text-left text-sm md:shrink">{ex}</button>
+            className="ui-chip ui-press min-h-11 shrink-0 rounded-full bg-card px-4 py-2 text-left text-sm font-medium md:shrink">{ex}</button>
         ))}
       </div>
       {busy && <p className="text-muted" aria-live="polite">{t("planning")}</p>}
-      {error && <p className="text-red-700" role="alert">{error}</p>}
+      {error && <p className="text-bad" role="alert">{error}</p>}
       {plan && (
         <div className="flex items-center gap-3">
           <MicButton onText={(s) => { setText(s); run(s); }} />
-          <button type="button" onClick={() => { setPlan(null); setTurns([]); setText(""); }} className="min-h-12 rounded-xl border border-line px-4 font-semibold">
+          <button type="button" onClick={() => { setPlan(null); setTurns([]); setText(""); }} className="min-h-12 rounded-xl border border-line px-4 font-medium">
             {t("new_plan")}
           </button>
         </div>
@@ -80,17 +80,17 @@ export default function PlanPage() {
     <div className="grid gap-6 md:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] md:items-start">
       <div className="contents md:col-start-1 md:block md:space-y-6">
         {plan.stops.length > 0 && (
-          <Card className="order-1 border-emerald-200 bg-emerald-50">
+          <Card className="order-1 bg-card">
             <ul className="mb-3 space-y-1 text-sm">
-              {turns.map((x, i) => <li key={i} className="rounded-xl bg-white/70 px-3 py-2"><strong>{t("you_said")}:</strong> {x}</li>)}
+              {turns.map((x, i) => <li key={i} className="rounded-xl bg-deep px-3 py-2"><strong>{t("you_said")}:</strong> {x}</li>)}
             </ul>
-            <h2 className="mb-1 text-lg font-bold">{t("your_plan")}</h2>
+            <h2 className="mb-1 text-lg font-medium">{t("your_plan")}</h2>
             <p>{plan.summary}</p>
             {plan.follow_up && (
               <div className="mt-3 space-y-2">
-                <p className="font-semibold">{plan.follow_up}</p>
-                <button type="button" disabled={busy} onClick={() => run(t("followup_ex"))}
-                  className="min-h-11 rounded-full border border-emerald-300 bg-white px-4 text-sm font-semibold">{t("followup_ex")}</button>
+                <p className="font-medium">{plan.follow_up}</p>
+                {turns.length === 1 && <button type="button" disabled={busy} onClick={() => run(t("followup_ex"))}
+                  className="ui-chip ui-press min-h-11 rounded-full bg-lavender text-[#1b1b1b] px-4 text-sm font-medium">{t("followup_ex")}</button>}
               </div>
             )}
           </Card>
@@ -108,9 +108,9 @@ export default function PlanPage() {
                 <li key={s.stop}>
                   <Card className={`border-l-8 ${VERDICT_STRIPE[s.verdict]}`}>
                     <div className="flex items-start gap-3">
-                      <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-ink text-sm font-bold text-white">{s.stop}</span>
+                      <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-lavender text-sm font-medium text-[#1b1b1b]">{s.stop}</span>
                       <div className="min-w-0 flex-1">
-                        <h3 className="text-lg font-semibold leading-tight">{s.name}</h3>
+                        <h3 className="text-lg font-medium leading-tight">{s.name}</h3>
                         <p className="text-sm text-muted">
                           {s.area}
                           {s.distance_from_prev_km != null && ` · ~${s.distance_from_prev_km} ${t("km")} ${t("from_prev")}`}
@@ -122,12 +122,12 @@ export default function PlanPage() {
                         </div>
                       </div>
                     </div>
-                    {s.reasons.length > 0 && <ul className="mt-3 space-y-0.5">{s.reasons.map((r) => <li key={r} className="text-red-800">✕ {r}</li>)}</ul>}
-                    {s.highlights.length > 0 && <ul className="mt-2 space-y-0.5">{s.highlights.map((h) => <li key={h} className="text-emerald-800">✓ {h}</li>)}</ul>}
-                    {s.flags.map((f) => <p key={f.detail} className="mt-1 text-sm text-orange-800">⚑ {f.detail}</p>)}
+                    {s.reasons.length > 0 && <ul className="mt-3 space-y-0.5">{s.reasons.map((r) => <li key={r} className="text-bad">✕ {r}</li>)}</ul>}
+                    {s.highlights.length > 0 && <ul className="mt-2 space-y-0.5">{s.highlights.map((h) => <li key={h} className="text-good">✓ {h}</li>)}</ul>}
+                    {s.flags.map((f) => <p key={f.detail} className="mt-1 text-sm text-flag">⚑ {f.detail}</p>)}
                     {s.alternatives.length > 0 && (
-                      <div className="mt-3 rounded-xl bg-bg p-3">
-                        <p className="mb-1 text-sm font-semibold">{t("other_options")}</p>
+                      <div className="mt-3 rounded-xl bg-deep p-3">
+                        <p className="mb-1 text-sm font-medium">{t("other_options")}</p>
                         <ul className="space-y-1">
                           {s.alternatives.map((a) => (
                             <li key={a.venue_id}>
@@ -142,15 +142,15 @@ export default function PlanPage() {
                       </div>
                     )}
                     {s.unconfirmed.length > 0 && (
-                      <p className="mt-3 rounded-xl bg-amber-50 p-3 text-sm text-amber-900">⚠ {t("unconfirmed")}: {s.unconfirmed.join(", ")}</p>
+                      <p className="mt-3 rounded-xl bg-warn-soft p-3 text-sm text-warn">⚠ {t("unconfirmed")}: {s.unconfirmed.join(", ")}</p>
                     )}
                     <div className="mt-3 flex gap-2">
                       {s.call_ahead && (
-                        <a href={`tel:${s.call_ahead.replace(/[^\d+]/g, "")}`} className="flex min-h-12 flex-1 items-center justify-center rounded-xl bg-amber-100 font-semibold text-amber-900">
+                        <a href={`tel:${s.call_ahead.replace(/[^\d+]/g, "")}`} className="flex min-h-12 flex-1 items-center justify-center rounded-xl bg-warn-soft font-medium text-warn">
                           📞 {t("call")}
                         </a>
                       )}
-                      <Link href={`/venue/${s.venue_id}${q}`} className="flex min-h-12 flex-1 items-center justify-center rounded-xl border border-line font-semibold text-brand">
+                      <Link href={`/venue/${s.venue_id}${q}`} className="flex min-h-12 flex-1 items-center justify-center rounded-xl border border-line font-medium text-brand">
                         {t("view_venue")} →
                       </Link>
                     </div>
@@ -161,7 +161,7 @@ export default function PlanPage() {
 
             {plan.rejected.length > 0 && (
               <Card>
-                <h2 className="mb-2 font-semibold">{t("skipped")}</h2>
+                <h2 className="mb-2 font-medium">{t("skipped")}</h2>
                 <ul className="divide-y divide-line">
                   {plan.rejected.map((r) => (
                     <li key={r.venue_id}>

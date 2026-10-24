@@ -55,7 +55,7 @@ export function MicButton({ onText, big = false }: { onText: (text: string) => v
           disabled={state === "sending"}
           aria-pressed={state === "recording"}
           aria-label={state === "recording" ? t("stop") : t("speak")}
-          className={`flex h-28 w-28 items-center justify-center rounded-full text-5xl shadow-lg transition disabled:opacity-60 ${state === "recording" ? "animate-pulse bg-red-600 text-white ring-8 ring-red-200" : "bg-brand text-brand-ink ring-8 ring-emerald-100"}`}
+          className={`ui-press flex h-28 w-28 items-center justify-center rounded-full text-5xl transition disabled:opacity-60 ${state === "recording" ? "animate-pulse bg-bad text-[#1b1b1b] ring-8 ring-bad/30" : "ui-orb ring-8 ring-brand/15"}`}
         >
           <span aria-hidden>{state === "recording" ? "■" : "🎤"}</span>
         </button>
@@ -71,7 +71,7 @@ export function MicButton({ onText, big = false }: { onText: (text: string) => v
         onClick={state === "recording" ? stop : start}
         disabled={state === "sending"}
         aria-pressed={state === "recording"}
-        className={`min-h-12 rounded-xl px-4 py-3 font-semibold ${state === "recording" ? "animate-pulse bg-red-600 text-white" : "border border-line bg-card"}`}
+        className={`ui-press min-h-12 rounded-md px-4 py-3 font-medium ${state === "recording" ? "animate-pulse bg-bad text-[#1b1b1b]" : "ui-chip bg-card text-ink"}`}
       >
         {state === "recording" ? `■ ${t("stop")}` : `🎤 ${t("speak")}`}
       </button>

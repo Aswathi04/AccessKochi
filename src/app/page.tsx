@@ -18,28 +18,34 @@ export default function Home() {
   }, [loaded, loading, session, settings.onboarded, router]);
   if (!loaded || loading || skip) return null;
 
-  const big = "flex min-h-14 w-full flex-col items-center justify-center rounded-2xl px-5 py-3 text-center text-lg font-semibold";
+  const big = "flex min-h-14 w-full flex-col items-center justify-center rounded-md px-5 py-4 text-center text-lg font-medium";
   return (
     <div className="mx-auto max-w-md space-y-6 pt-6">
-      <div>
-        <h1 className="text-4xl font-bold">{t("app")}</h1>
-        <p className="mt-1 text-xl text-muted">{t("tagline")}</p>
+      <div className="relative pt-24">
+        {/* bioluminescent data orb (decorative) */}
+        <div aria-hidden className="pointer-events-none absolute right-0 top-0 h-20 w-20">
+          <div className="ui-orb h-full w-full rounded-full opacity-90 blur-[1px]" />
+          <div className="absolute inset-0 rounded-full bg-[radial-gradient(circle_at_70%_75%,rgba(250,209,255,0.55),transparent_55%)]" />
+        </div>
+        <p className="ui-kicker">Kochi · accessible trips</p>
+        <h1 className="mt-3 text-[2.6rem] sm:text-5xl">{t("app")}</h1>
+        <p className="mt-2 inline-block text-xl font-medium">{t("tagline")}</p>
       </div>
       <div className="grid grid-cols-2 gap-3" role="group" aria-label={t("lang_label")}>
         {(["ml", "en"] as const).map((l) => (
           <button key={l} type="button" onClick={() => save({ language: l })} aria-pressed={settings.language === l}
-            className={`min-h-12 rounded-2xl border-2 font-semibold ${settings.language === l ? "border-brand bg-emerald-50" : "border-line"}`}>
+            className={`ui-press min-h-12 rounded-full border font-medium ${settings.language === l ? "ui-chip border-brand bg-raise" : "border-line bg-card"}`}>
             {l === "ml" ? "മലയാളം" : "English"}
           </button>
         ))}
       </div>
       {hostConfigured && (
-        <Link href="/signin" className={`${big} bg-brand text-brand-ink`}>
+        <Link href="/signin" className={`${big} ui-press ui-aurora`}>
           {t("welcome_signin")}
-          <span className="text-sm font-normal opacity-90">{t("welcome_signin_d")}</span>
+          <span className="text-sm font-normal text-[#3a3a3a]">{t("welcome_signin_d")}</span>
         </Link>
       )}
-      <Link href="/setup" className={`${big} border-2 border-line bg-card`}>
+      <Link href="/setup" className={`${big} ui-card ui-press bg-card text-ink`}>
         {t("welcome_guest")}
         <span className="text-sm font-normal text-muted">{t("welcome_guest_d")}</span>
       </Link>

@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import { Inter, Noto_Sans_Malayalam } from "next/font/google";
 import "./globals.css";
 import { SettingsProvider } from "@/lib/settings";
 import { BottomNav, Header } from "@/components/Header";
@@ -9,11 +10,15 @@ export const metadata: Metadata = {
   appleWebApp: { capable: true, title: "AccessKochi", statusBarStyle: "default" },
 };
 
-export const viewport: Viewport = { width: "device-width", initialScale: 1, viewportFit: "cover", themeColor: "#0f6e5f" };
+export const viewport: Viewport = { width: "device-width", initialScale: 1, viewportFit: "cover", themeColor: "#012624" };
+
+// Inter (a close match for Matter) at 400/500 only; Malayalam falls back to Noto Sans Malayalam.
+const body = Inter({ weight: ["400", "500"], subsets: ["latin"], variable: "--font-body", display: "swap" });
+const ml = Noto_Sans_Malayalam({ subsets: ["malayalam"], variable: "--font-ml", display: "swap" });
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" className={`${body.variable} ${ml.variable}`}>
       <body className="min-h-dvh antialiased">
         <SettingsProvider>
           <Header />

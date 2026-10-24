@@ -30,7 +30,7 @@ export default function DiscoverPage() {
 
   return (
     <div className="space-y-4">
-      <h1 className="text-2xl font-bold">{t("browse_title")}</h1>
+      <h1 className="text-2xl font-medium">{t("browse_title")}</h1>
       <div className="no-scrollbar -mx-4 flex gap-2 overflow-x-auto px-4 md:mx-0 md:flex-wrap md:px-0">
         {chip(t("all"), cat === null, () => setCat(null))}
         {CATS.map((c) => chip(t(`cat_${c}` as const), cat === c, () => setCat(c)))}
@@ -46,14 +46,14 @@ export default function DiscoverPage() {
               <Link href={`/venue/${r.venue_id}`} className="block h-full">
                 <Card className={`h-full border-l-8 hover:border-brand ${VERDICT_STRIPE[r.verdict]}`}>
                   <div className="flex flex-wrap items-center gap-2">
-                    <h2 className="mr-auto font-semibold">{r.name}</h2>
+                    <h2 className="mr-auto font-medium">{r.name}</h2>
                     <VerdictBadge verdict={r.verdict} size="sm" />
                     <DummyBadge />
                     {r.distance_km != null && <span className="text-sm text-muted">{r.distance_km} {t("km")}</span>}
                   </div>
-                  {r.reasons[0] && <p className="mt-1 text-sm text-red-800">✕ {r.reasons[0]}</p>}
-                  {r.unconfirmed.length > 0 && <p className="mt-1 text-sm text-amber-800">⚠ {r.unconfirmed.slice(0, 3).join(", ")}</p>}
-                  {r.flags[0] && <p className="mt-1 text-sm text-orange-800">⚑ {r.flags[0].detail}</p>}
+                  {r.reasons[0] && <p className="mt-1 text-sm text-bad">✕ {r.reasons[0]}</p>}
+                  {r.unconfirmed.length > 0 && <p className="mt-1 text-sm text-warn">⚠ {r.unconfirmed.slice(0, 3).join(", ")}</p>}
+                  {r.flags[0] && <p className="mt-1 text-sm text-flag">⚑ {r.flags[0].detail}</p>}
                 </Card>
               </Link>
             </li>

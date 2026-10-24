@@ -97,7 +97,7 @@ export function PhotoUpload({ venueId, onSaved }: { venueId: string; onSaved: (r
             <p>{t("tilt")}</p>
             <p className="text-xs text-muted">{t("tilt_help")}</p>
             <button type="button" onClick={readTilt} className="mt-1 min-h-11 rounded-lg border border-line px-4">{t("tilt_read")}</button>
-            {tilt != null && <span className="ml-2 font-semibold">{tilt}°</span>}
+            {tilt != null && <span className="ml-2 font-medium">{tilt}°</span>}
           </div>
         )}
       </div>
@@ -119,10 +119,10 @@ export function PhotoUpload({ venueId, onSaved }: { venueId: string; onSaved: (r
         {t("save_evidence")}
       </label>
       <PrimaryButton onClick={submit} disabled={!file || busy}>{busy ? t("reading") : t("read_photo")}</PrimaryButton>
-      {error && <p className="text-red-700" role="alert">{error}</p>}
+      {error && <p className="text-bad" role="alert">{error}</p>}
 
       {out && (
-        <div className="rounded-xl bg-bg p-3 text-sm" aria-live="polite">
+        <div className="rounded-xl bg-deep p-3 text-sm" aria-live="polite">
           <div className="mb-1 flex items-center gap-2"><ConfidenceTag c={out.output.reading_confidence} /><span className="text-xs text-muted">{out.provider}</span></div>
           <ul>
             {Object.entries(out.output.attributes).map(([k, v]) => (
@@ -130,8 +130,8 @@ export function PhotoUpload({ venueId, onSaved }: { venueId: string; onSaved: (r
             ))}
           </ul>
           {out.output.reasons.length > 0 && <p className="mt-1 text-muted">{out.output.reasons.join(" · ")}</p>}
-          {out.raise_hint && <p className="mt-2 font-medium text-sky-800">↑ {out.raise_hint}</p>}
-          {out.saved && <p className="mt-2 font-medium text-emerald-800">✓ {t("saved")}</p>}
+          {out.raise_hint && <p className="mt-2 font-medium text-brand">↑ {out.raise_hint}</p>}
+          {out.saved && <p className="mt-2 font-medium text-good">✓ {t("saved")}</p>}
         </div>
       )}
     </div>
