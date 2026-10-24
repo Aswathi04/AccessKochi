@@ -1,27 +1,54 @@
 @import "tailwindcss";
 
-/* Auros-inspired: abyssal teal canvas, teal surface stack for depth (no shadows), white headings,
-   silver/mist body text, lavender for highlights, aurora gradient only on primary actions.
-   All text/background pairs meet WCAG AA on the dark surfaces. */
+/* AccessKochi redesign: warm paper canvas, punchy red, cobalt blue.
+   Brand tokens follow ACCESS_KOCHI_REDESIGN_BRIEF.md. Measured contrast (WCAG):
+   ink on paper 14.0:1 · muted on paper 5.2:1 · blue on paper 6.9:1 · white on blue 7.9:1 ·
+   white on red-strong 5.2:1. The brief's red #F12636 is only 3.6:1 on paper and 4.1:1 with white,
+   so it is used for large display type and shapes; buttons and red text use --ak-red-strong.
+   Card borders (#D9D4C9) are decorative; controls use --ak-control (3.2:1) for non-text contrast. */
 :root {
-  color-scheme: dark; /* native selects, date pickers and scrollbars follow the dark theme */
-  --bg: #012624; /* Liquid Abyss: canvas */
-  --deep: #011d1c; /* Liquid Deep: recessed */
-  --card: #003734; /* Liquid Kelp: raised */
-  --raise: #0a4642; /* one step above kelp: selected / hover */
-  --ink: #ffffff; /* headings, primary text */
-  --mist: #edfffe; /* body text */
-  --muted: #bbc7c6; /* secondary text */
-  --line: rgba(255, 255, 255, 0.14);
-  --brand: #8ff0e8; /* aqua: links, selected fills (with dark text) */
-  --brand-ink: #012624;
-  --lavender: #fde9ff;
-  --good: #7ee2c5;
-  --warn: #ffd98a;
-  --bad: #ffa3b1;
-  --flag: #ffc08a;
-  --aurora: linear-gradient(90deg, #cbfffc 0%, #edfffe 26%, #fffdfa 48%, #fad1ff 89%);
-  --bio: linear-gradient(90deg, #00827c 0%, #cbfffc 100%);
+  color-scheme: light;
+
+  /* brand */
+  --ak-paper: #f4f0e7;
+  --ak-red: #f12636;
+  --ak-red-strong: #d7192a;
+  --ak-red-deep: #b9121f; /* small red text on light tints (5.6:1 on soft-red) */
+  --ak-blue: #174ea6;
+  --ak-blue-strong: #113d84;
+  --ak-ink: #17213a;
+  --ak-white: #ffffff;
+  --ak-muted: #5d6472;
+  --ak-border: #d9d4c9;
+  --ak-control: #8c8576;
+  --ak-soft-red: #fce7e8;
+  --ak-soft-blue: #e7eef9;
+  --ak-success: #216e4a;
+  --ak-warning: #8a4b08;
+  --ak-danger: #b4232c;
+  --ak-flag: #8f3f0a;
+
+  --ak-radius-sm: 0.5rem;
+  --ak-radius-md: 1rem;
+  --ak-radius-lg: 1.5rem;
+  --ak-radius-pill: 999px;
+
+  /* semantic names the components already use (kept so markup and logic don't change) */
+  --bg: var(--ak-paper); /* page canvas */
+  --deep: #ece6d9; /* recessed areas */
+  --card: var(--ak-white); /* raised surfaces */
+  --raise: var(--ak-soft-blue); /* selected / hover */
+  --ink: var(--ak-ink); /* headings, primary text */
+  --mist: var(--ak-ink); /* body text */
+  --muted: var(--ak-muted); /* secondary text */
+  --line: var(--ak-border);
+  --brand: var(--ak-blue); /* links, selected fills (with white text) */
+  --brand-ink: var(--ak-white);
+  --lavender: var(--ak-soft-red); /* highlight fills (dark text) */
+  --good: var(--ak-success);
+  --warn: var(--ak-warning);
+  --bad: var(--ak-danger);
+  --flag: var(--ak-flag);
 }
 
 @theme inline {
@@ -33,84 +60,101 @@
   --color-mist: var(--mist);
   --color-muted: var(--muted);
   --color-line: var(--line);
+  --color-control: var(--ak-control);
   --color-brand: var(--brand);
+  --color-brand-strong: var(--ak-blue-strong);
   --color-brand-ink: var(--brand-ink);
   --color-lavender: var(--lavender);
+  --color-red: var(--ak-red);
+  --color-red-strong: var(--ak-red-strong);
+  --color-red-deep: var(--ak-red-deep);
+  --color-soft-red: var(--ak-soft-red);
+  --color-soft-blue: var(--ak-soft-blue);
   --color-good: var(--good);
-  --color-good-soft: rgb(126 226 197 / 0.14);
+  --color-good-soft: #e2f1e8;
   --color-warn: var(--warn);
-  --color-warn-soft: rgb(255 217 138 / 0.13);
+  --color-warn-soft: #fbefd9;
   --color-bad: var(--bad);
-  --color-bad-soft: rgb(255 163 177 / 0.14);
+  --color-bad-soft: #fce7e8;
   --color-flag: var(--flag);
-  --color-flag-soft: rgb(255 192 138 / 0.13);
-  --font-sans: var(--font-body), ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, var(--font-ml), "Noto Sans Malayalam", sans-serif;
-  --font-display: var(--font-body), var(--font-ml), "Noto Sans Malayalam", ui-sans-serif, system-ui, sans-serif;
-  --font-logo: var(--font-body), ui-sans-serif, system-ui, sans-serif;
+  --color-flag-soft: #fbe8db;
+  --radius-card: var(--ak-radius-lg);
+  --font-sans: var(--font-body), var(--font-ml), "Noto Sans Malayalam", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-display: var(--font-display-latin), var(--font-ml-display), var(--font-ml), system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-logo: var(--font-display-latin), system-ui, sans-serif;
 }
 
 body {
   color: var(--mist);
+  background-color: var(--bg);
   font-family: var(--font-sans);
-  font-size: 17px;
-  line-height: 1.5;
+  font-size: 1.0625rem; /* 17px */
+  line-height: 1.55; /* room for Malayalam ascenders/descenders */
   -webkit-tap-highlight-color: transparent;
   overscroll-behavior-y: none;
-  background-color: var(--bg);
-  /* bioluminescent glow at the top edge, teal into faint pink (decorative) */
-  background-image:
-    radial-gradient(60rem 28rem at 85% -8rem, rgba(250, 209, 255, 0.10), transparent 70%),
-    radial-gradient(50rem 30rem at 10% -10rem, rgba(0, 130, 124, 0.35), transparent 70%);
-  background-attachment: fixed;
-  background-repeat: no-repeat;
 }
 
 h1, h2, h3 {
   font-family: var(--font-display);
-  font-weight: 500;
-  color: var(--ink);
-  letter-spacing: -0.02em;
+  font-weight: 600;
+  color: var(--ak-blue);
+  letter-spacing: -0.01em;
+  line-height: 1.15;
 }
-h1 { letter-spacing: -0.035em; line-height: 1.05; }
+h1 { font-weight: 700; line-height: 1.08; }
 
-::placeholder { color: #8fa6a4; opacity: 1; }
+a { text-underline-offset: 0.18em; }
+
+::placeholder { color: var(--ak-muted); opacity: 1; }
 
 /* horizontal chip rows: swipe, no visible scrollbar */
 .no-scrollbar { scrollbar-width: none; }
 .no-scrollbar::-webkit-scrollbar { display: none; }
 
-/* in the components layer so utilities (e.g. coloured border-l stripes) can override them */
 @layer components {
-  /* surfaces: depth from the teal stack, no shadows */
-  .ui-card { border: 1px solid rgba(255, 255, 255, 0.06); }
-  .ui-chip { border: 1px solid var(--line); }
-  .ui-press:active:not(:disabled) { opacity: 0.85; }
+  /* surfaces: visible border, no reliance on shadows */
+  .ui-card { border: 1px solid var(--ak-border); }
+  /* chips and other small controls need a border users can see (3:1) */
+  .ui-chip { border: 1.5px solid var(--ak-control); }
+  .ui-press { transition: transform 120ms ease, background-color 120ms ease; }
+  .ui-press:active:not(:disabled) { transform: translateY(1px); }
 
-  /* uppercase tracked eyebrow, the instrument-label look */
+  /* short eyebrow label above a heading */
   .ui-kicker {
-    font-size: 12px;
-    font-weight: 500;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--muted);
+    font-size: 0.875rem;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    color: var(--ak-red-deep);
   }
 
-  /* primary action: the aurora gradient, dark text */
+  /* primary action: solid red, white text (5.2:1) */
   .ui-aurora {
-    background-image: var(--aurora);
-    color: #1b1b1b;
+    background-color: var(--ak-red-strong);
+    color: var(--ak-white);
+  }
+  .ui-aurora:hover:not(:disabled) { background-color: var(--ak-red-deep); }
+
+  /* round brand mark (logo dot, big mic button) */
+  .ui-orb {
+    background-color: var(--ak-red-strong);
+    color: var(--ak-white);
   }
 
-  /* the bioluminescent orb (mic button, logo mark) */
-  .ui-orb {
-    background: radial-gradient(circle at 35% 30%, #edfffe 0%, #8ff0e8 28%, #00827c 62%, #003734 100%);
-    color: #012624;
+  /* friendly rounded blob used as a decorative accent (never behind essential text) */
+  .ui-blob { border-radius: 58% 42% 55% 45% / 48% 56% 44% 52%; }
+
+  /* form fields: visible label above, strong border, clear focus */
+  .ui-field {
+    border: 1.5px solid var(--ak-control);
+    background-color: var(--ak-white);
+    color: var(--ak-ink);
   }
 }
 
 :focus-visible {
-  outline: 2px solid var(--brand);
+  outline: 3px solid var(--ak-blue);
   outline-offset: 3px;
+  border-radius: 6px;
 }
 
 @media (prefers-reduced-motion: reduce) {
