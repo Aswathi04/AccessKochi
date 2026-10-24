@@ -12,16 +12,16 @@ export default function ProfilePage() {
   const router = useRouter();
   if (!loaded) return null;
   const uses = usesOf(session);
-  const link = "flex min-h-12 items-center justify-center rounded-xl border border-line px-4 text-center font-medium text-brand";
+  const link = "flex min-h-12 items-center justify-center rounded-full border-2 border-brand px-4 text-center font-bold text-brand hover:bg-soft-blue";
   return (
     <div className="space-y-4">
-      <h1 className="text-2xl font-medium">{t("nav_profile")}</h1>
+      <h1 className="text-2xl font-bold">{t("nav_profile")}</h1>
       <ProfileForm />
       {hostConfigured && (session ? (
         <Card className="space-y-3">
           <p>{t("signed_in_as")} <strong className="break-all">{session.user.email}</strong></p>
           <Link href="/host" className={link}>{uses === "host" || uses === "both" ? t("open_host") : t("host_link")} →</Link>
-          <button type="button" onClick={() => signOut(router)} className="min-h-12 w-full rounded-xl border border-line font-medium">{t("sign_out")}</button>
+          <button type="button" onClick={() => signOut(router)} className="min-h-12 w-full rounded-full border-2 border-brand font-bold text-brand hover:bg-soft-blue">{t("sign_out")}</button>
         </Card>
       ) : (
         <Card className="space-y-3">
