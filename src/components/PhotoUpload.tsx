@@ -78,7 +78,7 @@ export function PhotoUpload({ venueId, onSaved }: { venueId: string; onSaved: (r
     }
   };
 
-  const sel = "mt-1 min-h-12 w-full rounded-xl border border-line bg-card px-3";
+  const sel = "mt-1 min-h-12 w-full ui-field rounded-xl px-3";
   return (
     <div className="space-y-3">
       <div className="grid gap-3 sm:grid-cols-2">
@@ -95,15 +95,15 @@ export function PhotoUpload({ venueId, onSaved }: { venueId: string; onSaved: (r
         {feature === "ramp" && (
           <div className="text-sm">
             <p>{t("tilt")}</p>
-            <p className="text-xs text-muted">{t("tilt_help")}</p>
-            <button type="button" onClick={readTilt} className="mt-1 min-h-11 rounded-lg border border-line px-4">{t("tilt_read")}</button>
-            {tilt != null && <span className="ml-2 font-medium">{tilt}°</span>}
+            <p className="text-sm text-muted">{t("tilt_help")}</p>
+            <button type="button" onClick={readTilt} className="mt-1 min-h-11 rounded-full border-2 border-brand px-4 font-bold text-brand">{t("tilt_read")}</button>
+            {tilt != null && <span className="ml-2 font-bold">{tilt}°</span>}
           </div>
         )}
       </div>
 
-      <label className="block cursor-pointer rounded-xl border-2 border-dashed border-line p-6 text-center">
-        <span className="font-medium">📷 {t("take_photo")}</span>
+      <label className="block cursor-pointer rounded-xl border-2 border-dashed border-control bg-card p-6 text-center hover:bg-soft-blue has-[:focus-visible]:outline-3 has-[:focus-visible]:outline-offset-3 has-[:focus-visible]:outline-brand">
+        <span className="font-bold">📷 {t("take_photo")}</span>
         <input type="file" accept="image/*" className="sr-only"
           onChange={(e) => {
             const f = e.target.files?.[0] ?? null;
@@ -114,8 +114,8 @@ export function PhotoUpload({ venueId, onSaved }: { venueId: string; onSaved: (r
       {/* eslint-disable-next-line @next/next/no-img-element */}
       {preview && <img src={preview} alt="" className="max-h-64 rounded-xl" />}
 
-      <label className="flex items-center gap-2 text-sm">
-        <input type="checkbox" checked={save} onChange={(e) => setSave(e.target.checked)} className="h-5 w-5" />
+      <label className="flex min-h-11 cursor-pointer items-center gap-3 text-sm">
+        <input type="checkbox" checked={save} onChange={(e) => setSave(e.target.checked)} className="h-6 w-6 shrink-0 accent-brand" />
         {t("save_evidence")}
       </label>
       <PrimaryButton onClick={submit} disabled={!file || busy}>{busy ? t("reading") : t("read_photo")}</PrimaryButton>
@@ -123,15 +123,15 @@ export function PhotoUpload({ venueId, onSaved }: { venueId: string; onSaved: (r
 
       {out && (
         <div className="rounded-xl bg-deep p-3 text-sm" aria-live="polite">
-          <div className="mb-1 flex items-center gap-2"><ConfidenceTag c={out.output.reading_confidence} /><span className="text-xs text-muted">{out.provider}</span></div>
+          <div className="mb-1 flex items-center gap-2"><ConfidenceTag c={out.output.reading_confidence} /><span className="text-sm text-muted">{out.provider}</span></div>
           <ul>
             {Object.entries(out.output.attributes).map(([k, v]) => (
               <li key={k}><span className="text-muted">{k}:</span> {v === null ? t("cant_tell") : String(v)}</li>
             ))}
           </ul>
           {out.output.reasons.length > 0 && <p className="mt-1 text-muted">{out.output.reasons.join(" · ")}</p>}
-          {out.raise_hint && <p className="mt-2 font-medium text-brand">↑ {out.raise_hint}</p>}
-          {out.saved && <p className="mt-2 font-medium text-good">✓ {t("saved")}</p>}
+          {out.raise_hint && <p className="mt-2 font-bold text-brand">↑ {out.raise_hint}</p>}
+          {out.saved && <p className="mt-2 font-bold text-good">✓ {t("saved")}</p>}
         </div>
       )}
     </div>

@@ -55,11 +55,11 @@ export function MicButton({ onText, big = false }: { onText: (text: string) => v
           disabled={state === "sending"}
           aria-pressed={state === "recording"}
           aria-label={state === "recording" ? t("stop") : t("speak")}
-          className={`ui-press flex h-28 w-28 items-center justify-center rounded-full text-5xl transition disabled:opacity-60 ${state === "recording" ? "animate-pulse bg-bad text-[#1b1b1b] ring-8 ring-bad/30" : "ui-orb ring-8 ring-brand/15"}`}
+          className={`ui-press flex h-28 w-28 items-center justify-center rounded-full text-5xl transition disabled:opacity-60 ${state === "recording" ? "animate-pulse bg-bad text-white ring-8 ring-bad/25" : "ui-orb ring-8 ring-soft-red"}`}
         >
           <span aria-hidden>{state === "recording" ? "■" : "🎤"}</span>
         </button>
-        <span className="min-h-6 text-base font-medium text-muted" aria-live="polite">{status || t("tap_speak")}</span>
+        <span className="min-h-6 text-base font-bold text-muted" aria-live="polite">{status || t("tap_speak")}</span>
       </div>
     );
   }
@@ -71,7 +71,7 @@ export function MicButton({ onText, big = false }: { onText: (text: string) => v
         onClick={state === "recording" ? stop : start}
         disabled={state === "sending"}
         aria-pressed={state === "recording"}
-        className={`ui-press min-h-12 rounded-md px-4 py-3 font-medium ${state === "recording" ? "animate-pulse bg-bad text-[#1b1b1b]" : "ui-chip bg-card text-ink"}`}
+        className={`ui-press min-h-12 rounded-full px-5 py-3 font-bold ${state === "recording" ? "animate-pulse bg-bad text-white" : "border-2 border-brand bg-card text-brand"}`}
       >
         {state === "recording" ? `■ ${t("stop")}` : `🎤 ${t("speak")}`}
       </button>

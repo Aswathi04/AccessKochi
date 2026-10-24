@@ -37,21 +37,21 @@ export function AuthForm() {
 
   return (
     <Card className="mx-auto max-w-md">
-      <h1 className="text-2xl font-medium">{t("signin_title")}</h1>
+      <h1 className="text-2xl font-bold">{t("signin_title")}</h1>
       <p className="mt-1 text-muted">{t("signin_d")}</p>
       <form className="mt-4 space-y-3" onSubmit={(e) => { e.preventDefault(); if (sent) verify(); else send(); }}>
         {!sent ? (
           <>
-            <label className="block text-sm font-medium" htmlFor="auth-email">{t("email")}</label>
+            <label className="block text-sm font-bold" htmlFor="auth-email">{t("email")}</label>
             <input id="auth-email" type="email" required autoComplete="email" value={email} onChange={(e) => setEmail(e.target.value)}
-              className="min-h-12 w-full rounded-xl border border-line px-4 text-lg" />
+              className="min-h-12 w-full ui-field rounded-xl px-4 text-lg" />
           </>
         ) : (
           <>
             <p role="status">{t("code_sent")} <strong className="break-all">{email.trim()}</strong></p>
-            <label className="block text-sm font-medium" htmlFor="auth-code">{t("code_label")}</label>
+            <label className="block text-sm font-bold" htmlFor="auth-code">{t("code_label")}</label>
             <input id="auth-code" inputMode="numeric" autoComplete="one-time-code" required autoFocus value={code} onChange={(e) => setCode(e.target.value.replace(/\D/g, ""))}
-              className="min-h-12 w-full rounded-xl border border-line px-4 text-2xl tracking-widest" />
+              className="min-h-12 w-full ui-field rounded-xl px-4 text-2xl tracking-widest" />
           </>
         )}
         {error && <p className="text-bad" role="alert">{error}</p>}
@@ -60,8 +60,8 @@ export function AuthForm() {
         </PrimaryButton>
         {sent && (
           <div className="grid grid-cols-2 gap-2">
-            <button type="button" className="min-h-11 text-sm font-medium text-brand" onClick={() => { setSent(false); setCode(""); setError(null); }}>{t("edit_email")}</button>
-            <button type="button" className="min-h-11 text-sm font-medium text-brand disabled:text-muted" disabled={busy || wait > 0} onClick={send}>
+            <button type="button" className="min-h-11 text-sm font-bold text-brand" onClick={() => { setSent(false); setCode(""); setError(null); }}>{t("edit_email")}</button>
+            <button type="button" className="min-h-11 text-sm font-bold text-brand disabled:text-muted" disabled={busy || wait > 0} onClick={send}>
               {wait > 0 ? `${t("resend_in")} ${wait}s` : t("resend")}
             </button>
           </div>

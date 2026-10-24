@@ -31,31 +31,31 @@ export function ProfileForm({ next = "/plan", wizard = false }: { next?: string;
 
   const sections = [
     <Card key="lang">
-      <h2 className="mb-3 text-xl font-medium">{t("lang_label")}</h2>
+      <h2 className="mb-3 text-xl font-bold">{t("lang_label")}</h2>
       <div className="grid grid-cols-2 gap-3">
         {(["ml", "en"] as const).map((l) => (
           <button key={l} type="button" onClick={() => save({ language: l })} aria-pressed={settings.language === l}
-            className={`min-h-16 rounded-2xl border-2 px-4 text-xl font-medium ${settings.language === l ? "ui-chip border-brand bg-raise" : "border-line"}`}>
+            className={`min-h-16 rounded-2xl border-2 px-4 text-xl font-bold ${settings.language === l ? "border-brand bg-soft-blue ring-2 ring-brand" : "border-control bg-card"}`}>
             {l === "ml" ? "മലയാളം" : "English"}
           </button>
         ))}
       </div>
-      <label htmlFor="name" className="mt-6 mb-2 block text-xl font-medium">{t("name_q")}</label>
+      <label htmlFor="name" className="mt-6 mb-2 block text-xl font-bold">{t("name_q")}</label>
       <input id="name" value={settings.name} onChange={(e) => save({ name: e.target.value })} placeholder={t("name_ph")}
-        className="min-h-14 w-full rounded-xl border border-line px-4 text-lg" autoComplete="given-name" />
+        className="min-h-14 w-full ui-field rounded-xl px-4 text-lg" autoComplete="given-name" />
     </Card>,
 
     <Card key="profile">
-      <h2 className="mb-3 text-xl font-medium">{t("profile_q")}</h2>
+      <h2 className="mb-3 text-xl font-bold">{t("profile_q")}</h2>
       <div className="grid gap-3" role="radiogroup" aria-label={t("profile_q")}>
         {PROFILES.map((p) => {
           const on = settings.profile === p.id;
           return (
             <button key={p.id} type="button" role="radio" aria-checked={on} onClick={() => save({ profile: p.id })}
-              className={`flex min-h-20 items-center gap-4 rounded-2xl border-2 p-4 text-left ${on ? "ui-chip border-brand bg-raise" : "border-line bg-card"}`}>
+              className={`flex min-h-20 items-center gap-4 rounded-2xl border-2 p-4 text-left ${on ? "border-brand bg-soft-blue ring-2 ring-brand" : "border-control bg-card"}`}>
               <span className="text-4xl" aria-hidden>{p.icon}</span>
               <span>
-                <span className="block text-lg font-medium">{t(`p_${p.id}` as const)}</span>
+                <span className="block text-lg font-bold">{t(`p_${p.id}` as const)}</span>
                 <span className="block text-sm text-muted">{t(`p_${p.id}_d` as const)}</span>
               </span>
             </button>
@@ -70,15 +70,15 @@ export function ProfileForm({ next = "/plan", wizard = false }: { next?: string;
     </Card>,
 
     <Card key="loc">
-      <h2 className="mb-3 text-xl font-medium">{t("location_q")}</h2>
-      <button type="button" onClick={useMyLocation} className="min-h-12 w-full rounded-xl border-2 border-brand px-4 font-medium text-brand">📍 {t("use_location")}</button>
+      <h2 className="mb-3 text-xl font-bold">{t("location_q")}</h2>
+      <button type="button" onClick={useMyLocation} className="min-h-12 w-full rounded-xl border-2 border-brand px-4 font-bold text-brand">📍 {t("use_location")}</button>
       {geoMsg && <p className="mt-2 text-sm text-muted">{geoMsg}</p>}
       <p className="mt-4 mb-2 text-sm text-muted">{t("or_pick_area")}</p>
       <div className="flex flex-wrap gap-2">
         {AREA_LIST.map((a) => (
           <button key={a.name} type="button" aria-pressed={settings.area === a.name}
             onClick={() => save({ area: a.name, location: { lat: a.lat, lng: a.lng } })}
-            className={`min-h-11 rounded-full border px-4 text-sm font-medium ${settings.area === a.name ? "border-brand bg-brand text-brand-ink" : "border-line bg-card"}`}>
+            className={`min-h-11 rounded-full border-2 px-4 text-[0.9375rem] font-bold ${settings.area === a.name ? "border-brand bg-brand text-brand-ink" : "border-control bg-card text-brand hover:bg-soft-blue"}`}>
             {settings.language === "ml" ? a.ml : a.name}
           </button>
         ))}
@@ -106,7 +106,7 @@ export function ProfileForm({ next = "/plan", wizard = false }: { next?: string;
       {sections[step]}
       <div className="flex gap-3">
         {step > 0 && (
-          <button type="button" onClick={() => setStep(step - 1)} className="min-h-12 rounded-xl border border-line px-5 font-medium">{t("back")}</button>
+          <button type="button" onClick={() => setStep(step - 1)} className="min-h-12 rounded-full border-2 border-brand px-5 font-bold text-brand hover:bg-soft-blue">{t("back")}</button>
         )}
         <PrimaryButton className="flex-1 text-lg" onClick={() => (last ? finish() : setStep(step + 1))}>
           {last ? t("start") : t("continue")}
