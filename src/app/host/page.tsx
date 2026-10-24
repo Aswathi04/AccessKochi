@@ -41,14 +41,14 @@ export default function HostHome() {
   return (
     <div className="space-y-6">
       <div className="flex flex-wrap items-center gap-3">
-        <h1 className="mr-auto text-2xl font-medium md:text-3xl">{t("h_dash")}</h1>
-        <button type="button" onClick={() => signOut(router)} className="min-h-11 rounded-full border border-line px-4 text-sm font-medium">{t("sign_out")}</button>
+        <h1 className="mr-auto text-2xl font-bold md:text-3xl">{t("h_dash")}</h1>
+        <button type="button" onClick={() => signOut(router)} className="min-h-11 rounded-full border-2 border-brand px-4 text-[0.9375rem] font-bold text-brand hover:bg-soft-blue">{t("sign_out")}</button>
       </div>
       <p className="text-muted">{fill(t("h_signed_in"), { e: session.user.email ?? "" })}</p>
       {error && <p className="text-bad" role="alert">{error}</p>}
 
       <section className="space-y-3">
-        <h2 className="text-lg font-medium">{t("h_your_venues")}</h2>
+        <h2 className="text-lg font-bold">{t("h_your_venues")}</h2>
         {me.claims.length === 0 ? <p className="text-muted">{t("h_no_venues")}</p> : (
           <ul className="grid gap-3 md:grid-cols-2">
             {me.claims.map((c) => {
@@ -56,13 +56,13 @@ export default function HostHome() {
                 <li key={c.id}>
                   <Card className="h-full">
                     <div className="flex flex-wrap items-center gap-2">
-                      <h3 className="mr-auto font-medium">{c.venue_name}</h3>
-                      <span className={`rounded-full px-3 py-1 text-xs font-medium ${STATUS_CLS[c.status]}`}>{t(`h_cs_${c.status as ClaimStatus}`)}</span>
+                      <h3 className="mr-auto font-bold">{c.venue_name}</h3>
+                      <span className={`rounded-full px-3 py-1 text-sm font-bold ${STATUS_CLS[c.status]}`}>{t(`h_cs_${c.status as ClaimStatus}`)}</span>
                     </div>
                     <p className="text-sm text-muted">{t("h_you")} {t(`h_role_${c.role as Role}`)}{c.dispute && ` · ${t("h_dispute")}`}</p>
                     {c.admin_note && <p className="mt-2 rounded-xl bg-deep p-3 text-sm">{t("h_admin_says")} {c.admin_note}</p>}
                     {c.status !== "rejected" && (
-                      <Link href={`/host/${c.venue_id}`} className="mt-3 flex min-h-12 items-center justify-center rounded-xl bg-brand font-medium text-brand-ink">
+                      <Link href={`/host/${c.venue_id}`} className="mt-3 flex min-h-12 items-center justify-center rounded-xl bg-brand font-bold text-brand-ink">
                         {c.status === "approved" ? t("h_manage") : t("h_fill_draft")}
                       </Link>
                     )}
@@ -104,38 +104,38 @@ function ClaimForm({ onDone, taken }: { onDone: () => void; taken: Set<string> }
     setBusy(false);
   };
 
-  const field = "mt-1 min-h-12 w-full rounded-xl border border-line bg-card px-3";
+  const field = "mt-1 min-h-12 w-full ui-field rounded-xl px-3";
   return (
     <Card>
-      <h2 className="text-lg font-medium">{t("h_claim")}</h2>
+      <h2 className="text-lg font-bold">{t("h_claim")}</h2>
       <p className="text-sm text-muted">{t("h_claim_d")}</p>
       <form className="mt-4 grid gap-3 md:grid-cols-2" onSubmit={(e) => { e.preventDefault(); submit(); }}>
-        <label className="block text-sm font-medium md:col-span-2">{t("h_venue")}
+        <label className="block text-sm font-bold md:col-span-2">{t("h_venue")}
           <select required className={field} value={venueId} onChange={(e) => setVenueId(e.target.value)}>
             <option value="">{t("h_choose")}</option>
             {venues.filter((v) => !taken.has(v.id)).map((v) => <option key={v.id} value={v.id}>{v.name} · {v.area}</option>)}
           </select>
         </label>
-        <label className="block text-sm font-medium">{t("h_full_name")}
+        <label className="block text-sm font-bold">{t("h_full_name")}
           <input required className={field} value={name} onChange={(e) => setName(e.target.value)} autoComplete="name" />
         </label>
-        <label className="block text-sm font-medium">{t("h_your_role")}
+        <label className="block text-sm font-bold">{t("h_your_role")}
           <select className={field} value={role} onChange={(e) => setRole(e.target.value)}>
             {(["owner", "manager", "staff"] as const).map((r) => <option key={r} value={r}>{t(`h_role_${r}`)}</option>)}
           </select>
         </label>
-        <label className="block text-sm font-medium">{t("h_proof")}
+        <label className="block text-sm font-bold">{t("h_proof")}
           <select className={field} value={proofType} onChange={(e) => setProofType(e.target.value)}>
             {(["trade_licence", "gst", "fssai", "video", "other"] as const).map((k) => <option key={k} value={k}>{t(`h_pr_${k}`)}</option>)}
           </select>
         </label>
-        <label className="block text-sm font-medium">{t("h_claim_file")}
+        <label className="block text-sm font-bold">{t("h_claim_file")}
           <input required type="file" accept="image/*,application/pdf,video/*" className={`${field} py-2`} onChange={(e) => setFile(e.target.files?.[0] ?? null)} />
         </label>
-        <label className="block text-sm font-medium md:col-span-2">{t("h_claim_note")}
+        <label className="block text-sm font-bold md:col-span-2">{t("h_claim_note")}
           <textarea className={`${field} py-2`} rows={2} value={note} onChange={(e) => setNote(e.target.value)} />
         </label>
-        <p className="text-xs text-muted md:col-span-2">{t("h_claim_rule")}</p>
+        <p className="text-sm text-muted md:col-span-2">{t("h_claim_rule")}</p>
         {msg && <p className={`md:col-span-2 ${msg.ok ? "text-good" : "text-bad"}`} role="status">{msg.text}</p>}
         <PrimaryButton type="submit" className="md:col-span-2" disabled={busy || !venueId || !name || !file}>{busy ? t("h_sending") : t("h_send_claim")}</PrimaryButton>
       </form>
